@@ -3,6 +3,7 @@ from playwright_stealth import stealth_sync
 from datetime import datetime
 from PIL import Image
 from PIL import ImageDraw
+import json
 
 # tor网络的代理端口
 #sockshost = '127.0.0.1'
@@ -37,12 +38,12 @@ def get_website(url,group_name,proxy_path = proxy_path):
             stealth_sync(page)
             page.goto(url, wait_until='load', timeout = 120000)
             page.bring_to_front()
-            page.wait_for_timeout(5000)
+            page.wait_for_timeout(10000)
             page.mouse.move(x=500, y=400)
             page.wait_for_load_state('networkidle')
             page.mouse.wheel(delta_y=2000, delta_x=0)
             page.wait_for_load_state('networkidle')
-            page.wait_for_timeout(5000)
+            page.wait_for_timeout(10000)
 
             # 保存快照
             current_datetime = datetime.now()
@@ -63,6 +64,8 @@ def get_website(url,group_name,proxy_path = proxy_path):
             with open(name, 'w', encoding='utf-8') as sitesource:
                 sitesource.write(page.content())
                 sitesource.close()
+
+            # TODO 转换成新的输出格式
 
             return page.content()
         except PlaywrightTimeoutError:
