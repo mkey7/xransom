@@ -4,7 +4,7 @@ from playwright_stealth import stealth_sync
 from datetime import datetime
 from PIL import Image
 from PIL import ImageDraw
-import json
+from commen import openjson
 
 class webScrapy:
     def __init__(self,ip='115.160.185.148',port=12908) -> None:
@@ -15,6 +15,9 @@ class webScrapy:
             'http':  'http://' + str(self.ip) + ':' + str(self.port),
             'https': 'https://' + str(self.ip) + ':' + str(self.port)
         } 
+        self.sites = openjson('sites.json')
+        self.posts = openjson('posts.json')
+        self.pages = openjson('pages.json')
 
     def torBrowser(self,ip,port):
         self.ip = ip
@@ -48,7 +51,7 @@ class webScrapy:
             page.wait_for_load_state('networkidle')
             page.wait_for_timeout(10000)
 
-            # ¿¿tor¿¿¿¿¿¿¿¿
+            # æµ‹è¯•torç½‘ç»œ
             if "503 - Forwarding failure (Privoxy@localhost.localdomain)" == page.title():
                 print(page.content())
                 print("failed to get :" + url)
@@ -83,7 +86,7 @@ class webScrapy:
     def close(self):
         self.browser.close()
 
-# NOTE ¿¿
+# æµ‹è¯•
 if __name__ == "__main__":
     scrape = webScrapy()
     scrape.browser()
