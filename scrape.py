@@ -5,6 +5,7 @@ from datetime import datetime
 from PIL import Image
 from PIL import ImageDraw
 from commen import openjson
+import json
 
 class webScrapy:
     def __init__(self,ip='115.160.185.148',port=12908) -> None:
@@ -19,7 +20,7 @@ class webScrapy:
         self.posts = openjson('posts.json')
         self.pages = openjson('pages.json')
 
-    def torBrowser(self,ip,port):
+    def torBrowser(self,ip='127.0.0.1',port=9150):
         self.ip = ip
         self.port = port
         self.proxy_path = "socks5://"+self.ip+":"+str(self.port)
@@ -35,14 +36,27 @@ class webScrapy:
         except:
             print("failed to launch playwright!")
 
-    def scrape(self,url,group_name):
-        print("start scraping : " + group_name + " : " + url)
+
+
+    def scrape(self,site):
+        print("start scraping : " + site['label']['name'] + " : " + site['url'])
         try:
             context = self.browser.new_context(ignore_https_errors= True)
             page = context.new_page()
             stealth_sync(page)
 
-            page.goto(url, wait_until='load', timeout = 120000)
+            try:
+                page.goto(site['url'], wait_until='domcontentloaded', timeout = 120000)
+            except PlaywrightTimeoutError:
+                print(f"Attempt  failed: Timeout while loading the page {site['url']}")
+                return None
+            except Exception as e:
+                print(f"Attempt  failed: {e}")
+                return None
+            except:
+                print("playwright fiald in page.goto")
+                return None
+
             page.bring_to_front()
             page.wait_for_timeout(10000)
             page.mouse.move(x=500, y=400)
@@ -54,14 +68,14 @@ class webScrapy:
             # 测试tor网络
             if "503 - Forwarding failure (Privoxy@localhost.localdomain)" == page.title():
                 print(page.content())
-                print("failed to get :" + url)
+                print("503 Error failed to get :" + site['url'])
                 return None
 
             current_datetime = datetime.now()
             current_timestamp = current_datetime.timestamp()
-            name = 'screenshots/' + group_name + '-' + str(current_timestamp) + '.png'
-            page.screenshot(path=name, full_page=True)
-            image = Image.open(name)
+            screenshots_name = 'screenshots/' + site['label']['name'] + '-' + str(current_timestamp) + '.png'
+            page.screenshot(path=screenshots_name, full_page=True)
+            image = Image.open(screenshots_name)
             
             # Format it in ISO format
             iso_formatted = current_datetime.isoformat()
@@ -69,27 +83,50 @@ class webScrapy:
             draw = ImageDraw.Draw(image)
             draw.text((10, 10), iso_formatted, fill=(0, 0, 0))
             
-            image.save(name)
+            image.save(screenshots_name)
             
             # save page content
-            filename = 'source/' + group_name + '-' + str(current_timestamp) + '.html'
+            filename = 'source/' + site['label']['name'] + '-' + str(current_timestamp) + '.html'
             with open(filename, 'w', encoding='utf-8') as sitesource:
                 sitesource.write(page.content())
                 sitesource.close()
 
-            return page.content()
+            apage = {
+                'platform' : site['label']['name'] ,
+                'uuid' : str(current_timestamp),
+                'crawl_time' : str(current_timestamp),
+                'domain' : site['domain'],
+                'content_encode' : None,
+                'lang' : 'english',
+                'meta' : None,
+                'net_type' : 'tor',
+                'page_source' : page.content(),
+                'title' : page.title(),
+                'url' : site['url'],
+                'images' : None,
+                'publish_time' : str(current_timestamp),
+                'subject' : '勒索',
+                'content' : page.content(),
+                'simhash_values' : None,
+                'label' : {'type':'勒索','group_name':'group_name'},
+                'threaten_level' : '中危',
+                'snapshot' : None,
+                'name' : screenshots_name,
+                'path' : screenshots_name,
+                'image_id' : None
+            }
+
+            self.pages.append(apage)
+
+            with open("pages.json", "w", encoding='utf-8') as jsonfile:
+                json.dump(self.pages, jsonfile, indent=4, ensure_ascii=False)
+
+            return apage
 
         except:
-            print("failed to get :" + url)
+            print("failed to get :" + site['url'])
             return None
 
     def close(self):
         self.browser.close()
 
-# 测试
-if __name__ == "__main__":
-    scrape = webScrapy()
-    scrape.browser()
-    content = scrape.scrape("http://dkgn45pinr7nwvdaehemcrpgcjqf4fooit3c4gjw6dhzrp443ctvnoad.onion/leaks.html","mogilevich")
-    print(content)
-    scrape.close()
