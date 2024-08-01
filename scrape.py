@@ -4,11 +4,17 @@ from playwright_stealth import stealth_sync
 from datetime import datetime
 from PIL import Image
 from PIL import ImageDraw
-from commen import openjson
+from commen import openjson,existingpost
 import json
 
 class webScrapy:
+    """
+    爬虫模块：tor网络代理、爬虫、保存json数据
+    """
     def __init__(self,ip='115.160.185.148',port=12908) -> None:
+        """
+        初始化，设置代理，读取数据表
+        """
         self.ip = ip
         self.port = port
         self.proxy_path = "http://"+self.ip+":"+str(self.port)
@@ -21,6 +27,9 @@ class webScrapy:
         self.pages = openjson('pages.json')
 
     def torBrowser(self,ip='127.0.0.1',port=9150):
+        """
+        将代理设置为torBrowser
+        """
         self.ip = ip
         self.port = port
         self.proxy_path = "socks5://"+self.ip+":"+str(self.port)
@@ -30,6 +39,9 @@ class webScrapy:
         } 
 
     def browser(self):
+        """
+        初始化playwright
+        """
         try:
             self.play = sync_playwright().start()
             self.browser = self.play.chromium.launch(proxy={"server": self.proxy_path}, args=["--headless=new"])
@@ -38,15 +50,19 @@ class webScrapy:
 
 
 
-    def scrape(self,site):
-        print("start scraping : " + site['label']['name'] + " : " + site['url'])
+    def scrape(self,site,post_url=""):
+        """
+        爬取网页，并将其添加到pages表中
+        """
+        url = post_url if post_url else site["url"]
+        print("start scraping : " + site['label']['name'] + " : " + url)
         try:
             context = self.browser.new_context(ignore_https_errors= True)
             page = context.new_page()
             stealth_sync(page)
 
             try:
-                page.goto(site['url'], wait_until='domcontentloaded', timeout = 120000)
+                page.goto(url, wait_until='domcontentloaded', timeout = 120000)
             except PlaywrightTimeoutError:
                 print(f"Attempt  failed: Timeout while loading the page {site['url']}")
                 return None
@@ -102,7 +118,7 @@ class webScrapy:
                 'net_type' : 'tor',
                 'page_source' : page.content(),
                 'title' : page.title(),
-                'url' : site['url'],
+                'url' : url,
                 'images' : None,
                 'publish_time' : str(current_timestamp),
                 'subject' : '勒索',
@@ -128,5 +144,41 @@ class webScrapy:
             return None
 
     def close(self):
+        """
+        playwright运行完毕后关闭
+        """
         self.browser.close()
 
+    def appender(self,post_title="", group_name="", description="", website="", published="", post_url="",email="",price="",pay="", download="", country="",screenPath='', sourcePath=""):
+        """
+        将提取到的post添加到posts表中
+        """
+        post = {
+            "platform" : group_name,
+            "ransom_name" : group_name,
+            "uuid" : None,
+            "user_name" : group_name,
+            "publish_time" : published,
+            "content" : description,
+            "url" : post_url,
+            "title" : post_title,
+            "crawl_time" : None,
+            "source" : "tor",
+            "images" : [],
+            "attachments" : download,
+            "email" : email,
+            "bitcoin_addresses" : pay,
+            "eth_addresses" : pay,
+            "lang" : "english",
+            "label" : {
+                "country" : country,
+                "victim" : website,
+            },
+            "extract_entity" : [],
+            "threaten_level" : "中危"
+        }
+        if not existingpost(post,self.posts):
+            self.posts.append(post)
+
+            with open("posts.json", "w", encoding='utf-8') as jsonfile:
+                json.dump(self.posts, jsonfile, indent=4, ensure_ascii=False)

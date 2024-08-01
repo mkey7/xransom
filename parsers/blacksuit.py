@@ -10,36 +10,27 @@ Rappel : def appender(post_title, group_name, description="", website="", publis
 import os
 from bs4 import BeautifulSoup
 from sharedutils import errlog, find_slug_by_md5, extract_md5_from_filename
-from parse import appender
-import re
-from datetime import datetime
 
-def main():
-    for filename in os.listdir('source'):
-        try:
-            if filename.startswith('blacksuit-'):
-                html_doc='source/'+filename
-                file=open(html_doc,'r')
-                soup=BeautifulSoup(file,'html.parser')
-                divs=soup.find_all('div', {"class": "card"})
-                for article in divs:
-                    # Extract the title
-                    title = article.find('div', class_='title').text.strip()
+def main(scrapy,page,site):
+    url_site = page["domain"]
+    try:
+        soup=BeautifulSoup(page["page_source"],'html.parser')
+        divs=soup.find_all('div', {"class": "card"})
+        for article in divs:
+            # Extract the title
+            title = article.find('div', class_='title').text.strip()
 
-                    # Extract the URL
-                    url_site = find_slug_by_md5('blacksuit', extract_md5_from_filename(html_doc))
-                    #url_site = "weg7sdx54bevnvulapqu6bpzwztryeflq3s23tegbmnhkbpqz637f2yd"
-                    url = article.find('div', class_='title').a['href']
-                    post_url = url_site + '/' +  url
+            # Extract the URL
+            url = article.find('div', class_='title').a['href']
+            post_url = url_site + '/' +  url
 
-                    website= article.find('div', class_='url').a['href']
-                    try:
-                        description = article.find('p').text.strip().replace('\n', ' ')
-                    except:
-                        description = ''
-                    appender(title, 'blacksuit', description,website,'',post_url)
+            website= article.find('div', class_='url').a['href']
+            try:
+                description = article.find('p').text.strip().replace('\n', ' ')
+            except:
+                description = ''
+            scrapy.appender(title, 'blacksuit', description,website,'',post_url)
 
-                file.close()
-        except:
-            errlog('blacksuit : ' + 'parsing fail')
-            pass
+    except:
+        print('blacksuit: ' + 'parsing fail: '+url_site)
+        pass

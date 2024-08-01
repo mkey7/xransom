@@ -7,27 +7,15 @@
 +------------------------------+------------------+----------+
 """
 
-import os, hashlib
 from bs4 import BeautifulSoup
-from sharedutils import stdlog,errlog,get_website
-from parse import appender,existingpost
 
-def get_description(post,title,published):
+def get_description(scrapy,site,url,title,published):
+    page = scrapy.scrape(site,url)
 
-    hash_object = hashlib.md5()
-    hash_object.update(post.encode('utf-8'))
-    hex_digest = hash_object.hexdigest()
-    filename = 'bianlian-' + hex_digest + '.html'
-    
-    if os.path.exists(filename):
-        return True 
-
-    name = os.path.join(os.getcwd(), 'source', filename)
-    page = get_website(post,'bianlian')
-    stdlog("fetching bianlian-"+title)
+    print("fetching bianlian-"+title)
     
     # todo 提取相关字段
-    soup=BeautifulSoup(page,'html.parser')
+    soup=BeautifulSoup(page["page_source"],'html.parser')
     post_title = soup.title.string
 
     body = soup.section
@@ -37,7 +25,6 @@ def get_description(post,title,published):
     else:
         website = ''
         description =  body.contents[0].string
-    screenshot_path = 'docs/screenshots/posts/' + hex_digest + '.png'
     email = 'deepmind@onionmail.org'
     
     target_paragraphs = body.find_all('p')
@@ -52,32 +39,25 @@ def get_description(post,title,published):
     for b in downloads:
         if 'zip' in b['href']:
             download.append(b['href'])
-    appender(title, 'bianlian', description,website,published,post,email,price,'',download)
+    scrapy.appender(title, 'bianlian', description,website,published,url,email,"",'',download)
 
 
 
 
-def main():
-    url = "http://bianlivemqbawcco4cx4a672k2fip3guyxudzurfqvdszafam3ofqgqd.onion"
-    for filename in os.listdir('source'):
-        try:
-            if filename.startswith('bianlian-'):
-                html_doc='source/'+filename
-                file=open(html_doc,'r')
-                soup=BeautifulSoup(file,'html.parser')
-                if soup.title.string != "Companies - BianLian":
-                    continue
-                divs_name=soup.select('li')
-                for div in divs_name:
-                    post = url+div.a['href']
-                    title = div.a.string
-                    published = div.span.string
-                    
-                    try:
-                        if existingpost(title,'bianlian'):
-                            get_description(post,title,published)
-                    except:
-                        errlog('failed to get : '+post)
-                file.close()
-        except:
-            errlog("Failed during : " + filename)
+def main(scrapy,page,site):
+    url = page["domain"]
+    try:
+        soup=BeautifulSoup(page["page_source"],'html.parser')
+        divs_name=soup.select('li')
+        for div in divs_name:
+            post = "http://"+url+div.a['href']
+            title = div.a.string
+            published = div.span.string
+            
+            try:
+                #TODO 爬取具体网页
+                get_description(scrapy,site,post,title,published)
+            except:
+                print('failed to get : '+post)
+    except:
+        print("Failed during : " + url)
