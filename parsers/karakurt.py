@@ -1,35 +1,29 @@
-import os
 from bs4 import BeautifulSoup
-from sharedutils import errlog
-from parse import appender 
 
-# TODO 该这个网站了
-def main():
-    for filename in os.listdir('source'):
-        try:
-            if filename.startswith('karakurt-'):
-                html_doc='source/'+filename
-                file=open(html_doc,'r')
-                soup=BeautifulSoup(file,'html.parser')
-                divs_name=soup.find_all('article', {"class": "ciz-post"})
-                for div in divs_name:
-                    title = div.h3.a.text.strip()
-                    try:
-                        description = div.find('div', {'class': 'post-des'}).p.text.strip()
-                    except:
-                        pass 
-                        #errlog('karakurt: ' + 'parsing fail')
-                    appender(title, 'karakurt', description.replace('\nexpand',''))
-                divs_name=soup.find_all('div', {"class": "category-mid-post-two"})
-                for div in divs_name:
-                    title = div.h2.a.text.strip()
-                    try:
-                        description = div.find('div', {'class': 'post-des dropcap'}).p.text.strip()
-                    except:
-                        pass
-                    #    errlog('karakurt: ' + 'parsing fail')
-                    appender(title, 'karakurt', description.replace('\nexpand',''))
-                file.close()
-        except:
-            errlog('karakurt: ' + 'parsing fail')
-            pass 
+def get_url(scrapy,site,post_url):
+    try:
+        page = scrapy.scrape(site,post_url)
+        soup=BeautifulSoup(page["page_source"],'html.parser')
+        title = soup.find("h1")
+        post_date = soup.find("span",{"class":"post-date"})
+        # 行业
+        industry= soup.find("span",{"class":"post-category"})
+        description = soup.find("article",{"class":"detail"}).p.get_text()
+
+        scrapy.appender(title, 'karakurt', description,published=post_date,post_url=post_url,page=page)
+    except:
+        print('karakurt: ' + 'parsing fail: '+post_url)
+        
+
+def main(scrapy,page,site):
+    url = page["domain"]
+    try:
+        soup=BeautifulSoup(page["page_source"],'html.parser')
+        divs_name=soup.find_all('article', {"class": "ciz-post"})
+        for div in divs_name:
+            title = div.h3.a.text.strip()
+            link = url + div.find("h3").a['href']
+            print(title+" : "+link)
+            get_url(scrapy,site,link)
+    except:
+        print('karakurt: ' + 'parsing fail: '+url)

@@ -4,7 +4,7 @@ from playwright_stealth import stealth_sync
 from datetime import datetime
 from PIL import Image
 from PIL import ImageDraw
-from commen import openjson,existingpost
+from commen import openjson
 import json
 
 class webScrapy:
@@ -149,14 +149,16 @@ class webScrapy:
         """
         self.browser.close()
 
-    def appender(self,post_title="", group_name="", description="", website="", published="", post_url="",email="",price="",pay="", download="", country="",screenPath='', sourcePath=""):
+    def appender(self,post_title="", group_name="", description="", website="", published="", post_url="",email="",price="",pay="", download="", country="",screenPath='', sourcePath="",page=None):
         """
         将提取到的post添加到posts表中
         """
+        if page:
+            uuid = page["uuid"]
         post = {
             "platform" : group_name,
             "ransom_name" : group_name,
-            "uuid" : None,
+            "uuid" : uuid if page else None,
             "user_name" : group_name,
             "publish_time" : published,
             "content" : description,
