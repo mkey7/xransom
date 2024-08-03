@@ -44,6 +44,6 @@ def main(scrapy,page,site):
             
             down = url + h5[1].find('a')['id']
 
-            scrapy.appender(title, 'ciphbit', description,website,published,url,download=down)
+            scrapy.appender(title, 'ciphbit', description,website,published,url,download=down,page=page)
     except:
         print('ciphbit: ' + 'parsing fail: '+url)

@@ -31,7 +31,7 @@ def main(scrapy,page,site):
             if len(highlight_divs) >= 2:
                 post = highlight_divs[0].get_text(strip=True)
                 website = highlight_divs[1].get_text(strip=True)
-                scrapy.appender(post, 'arvinclub', '', website, str(date))
+                scrapy.appender(post, 'arvinclub', '', website, str(date),page=page)
     except:
         print('arvinclub: ' + 'parsing fail')
         pass    

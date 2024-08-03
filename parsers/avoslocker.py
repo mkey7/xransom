@@ -8,7 +8,7 @@ def main(scrapy,page,site):
         for div in divs_name:
             title = div.find('h5', {"class": "card-brand"}).text.strip()
             description = div.find('div', {"class": "card-desc"}).text.strip()
-            scrapy.appender(title, 'avoslocker',description.replace('\n',' '))
+            scrapy.appender(title, 'avoslocker',description.replace('\n',' '),page=page)
     except:
         print('avoslocker: ' + 'parsing fail')
         pass

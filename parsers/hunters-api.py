@@ -66,33 +66,33 @@ def convert_text(txt):
     else:
         return "no"
 
-def main():
-    stdlog('Fetching :'+onion_url) 
-    return None
-    json_data = fetch_json_from_onion_url(onion_url)
-    stdlog(onion_url+" Fetched")
-    if json_data is not None:
-        for item in json_data:
-            id = item['id']
-            title = item['title'].strip()
-            country = get_country(item['country'])
-            website = item['website']
-            revenue = item['revenue']
-            exfiltration = item['exfiltrated_data']
-            encryption = item['encrypted_data']
-            published = item['updated_at']
-            description = "Country : " +  country + " - Exfiltraded data : " + convert_text(exfiltration) +  " - Encrypted data : " + convert_text(encryption)
-            post_url = "https://hunters55rdxciehoqzwv7vgyv6nt37tbwax2reroyzxhou7my5ejyid.onion/companies/" + id 
-            try:
-                get_website(post_url,'hunters')
-                hex_digest = hex_url(post_url)
-                screenpath =  'docs/screenshots/posts/hunters-' + hex_digest + '.png'
-            except:
-                screenpath = ""
-            #print('-- ' + title + ' --> ' + post_url)
-           
-            """
-                def appender(post_title, group_name, description="", website="", published="", post_url=""):
-            """
-            appender(title, 'hunters', description,website, convert_date(published),post_url,price=revenue,country=country,screenPath=screenpath)
-            stdlog("get hunters :" + title)
+def main(scrapy,page,site):
+    url = page["domain"]
+    try:
+        json_data = fetch_json_from_onion_url(onion_url)
+        if json_data is not None:
+            for item in json_data:
+                id = item['id']
+                title = item['title'].strip()
+                country = get_country(item['country'])
+                website = item['website']
+                revenue = item['revenue']
+                exfiltration = item['exfiltrated_data']
+                encryption = item['encrypted_data']
+                published = item['updated_at']
+                description = "Country : " +  country + " - Exfiltraded data : " + convert_text(exfiltration) +  " - Encrypted data : " + convert_text(encryption)
+                post_url = "https://hunters55rdxciehoqzwv7vgyv6nt37tbwax2reroyzxhou7my5ejyid.onion/companies/" + id 
+                try:
+                    apage = scrapy.scrape(site,post_url)
+                except:
+                    screenpath = ""
+                    apage = None
+                #print('-- ' + title + ' --> ' + post_url)
+               
+                """
+                    def appender(post_title, group_name, description="", website="", published="", post_url=""):
+                """
+                scrapy.appender(title, 'hunters', description,website, convert_date(published),post_url,price=revenue,country=country,screenPath=screenpath,page=apage)
+    except:
+        print('hunters: ' + 'parsing fail: '+url)
+        

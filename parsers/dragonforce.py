@@ -24,7 +24,7 @@ def main(scrapy,page,site):
             description = div.find("p", class_="list-publication__description").text.strip()
             date = div.find("span", class_="publication-footer__date").text.strip()
             publication_date = datetime.strptime(date, "%d %B %Y").strftime("%Y-%m-%d %H:%M:%S.%f")
-            scrapy.appender(title, 'dragonforce',description,link,publication_date,'')
+            scrapy.appender(title, 'dragonforce',description,link,publication_date,'',page=page)
     except:
         print('dragonforce: ' + 'parsing fail: '+url)
 

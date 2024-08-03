@@ -30,7 +30,7 @@ def main(scrapy,page,site):
             combined_datetime = datetime.datetime.combine(dt_object.date(), current_time)
             published = combined_datetime.strftime("%Y-%m-%d %H:%M:%S.%f")
             #published = dt_object.strftime("%Y-%m-%d %H:%M:%S.%f")
-            scrapy.appender(title.replace('\n',''), 'akira', description.replace('\n',''),'',published,post_url)
+            scrapy.appender(title.replace('\n',''), 'akira', description.replace('\n',''),'',published,post_url,page=page)
     except:
         print('akira: ' + 'parsing fail')
         pass    

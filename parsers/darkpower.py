@@ -21,6 +21,6 @@ def main(scrapy,page,site):
             website = div.find('a')
             website = website.attrs['href']
             post_url = 'http://' + url + '.onion/' + website
-            scrapy.appender(title,'darkpower','','', '', post_url)
+            scrapy.appender(title,'darkpower','','', '', post_url,page=page)
     except:
         print('darkpower: ' + 'parsing fail: '+url)

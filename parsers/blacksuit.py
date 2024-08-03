@@ -29,7 +29,7 @@ def main(scrapy,page,site):
                 description = article.find('p').text.strip().replace('\n', ' ')
             except:
                 description = ''
-            scrapy.appender(title, 'blacksuit', description,website,'',post_url)
+            scrapy.appender(title, 'blacksuit', description,website,'',post_url,page=page)
 
     except:
         print('blacksuit: ' + 'parsing fail: '+url_site)

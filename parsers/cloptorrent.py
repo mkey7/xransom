@@ -22,6 +22,6 @@ def main(scrapy,page,site):
             #description = tds[2].text.strip()
             #appender(victim, 'clop','_URL_')
             download = tds[2].text.strip()
-            scrapy.appender(victim,'clop',download=download)
+            scrapy.appender(victim,'clop',download=download,page=page)
     except:
         print('clop: ' + 'parsing fail: '+url)

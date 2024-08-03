@@ -29,7 +29,7 @@ def main(scrapy,page,site):
                 if 'SITE:' in desc.get_text():
                     website = desc.get_text()
                     website = website[website.find('w'):]
-            scrapy.appender(title, 'blackbasta', description.replace('\n',' ').replace('ADDRESS',' Address '),website,'',post)
+            scrapy.appender(title, 'blackbasta', description.replace('\n',' ').replace('ADDRESS',' Address '),website,'',post,page=page)
     except:
         print('blackbasta: ' + 'parsing fail')
         pass    

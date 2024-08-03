@@ -27,6 +27,6 @@ def main(scrapy,page,site):
                 if  "FULL LEAK" in i.text:
                     download = i.get('href')
             
-            scrapy.appender(title, 'daixin', description, website,download=download,country=matched_text)
+            scrapy.appender(title, 'daixin', description, website,download=download,country=matched_text,page=page)
     except:
         print('daixin: ' + 'parsing fail: '+url)

@@ -59,7 +59,7 @@ def main(scrapy,page,site):
             download = content[content.rfind('Mirror')+8:]
             description = content[content.find("#1")+2:content.rfind('Download link #1')]
 
-            scrapy.appender(victim,'cactus',description,website,postdate,post_url,'',price,'',download,country)
+            scrapy.appender(victim,'cactus',description,website,postdate,post_url,'',price,'',download,country,page=page)
     except:
         print('cactus: ' + 'parsing fail: '+url)
         pass

@@ -21,6 +21,6 @@ def main(scrapy,page,site):
                 if item in blacklist:
                     continue
                 post_url= url + str.lower(item.replace(".","-"))
-                scrapy.appender(item, 'clop','_URL_','','',post_url)
+                scrapy.appender(item, 'clop','_URL_','','',post_url,page=page)
     except:
         print('clop: ' + 'parsing fail: '+url)

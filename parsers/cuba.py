@@ -10,6 +10,6 @@ def main(scrapy,page,site):
             title = div.a['href'].split('/')[2]
             if '.onion' not in title: 
                 description = div.a.text.strip()
-                scrapy.appender(title, 'cuba', description)
+                scrapy.appender(title, 'cuba', description,page=page)
     except:
         print('cuda: ' + 'parsing fail: '+url)

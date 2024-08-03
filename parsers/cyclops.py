@@ -37,6 +37,6 @@ def main(scrapy,page,site):
             #descriptions = re.findall(r'<strong>(.*?)</strong>', str(div), re.DOTALL)
             #description = BeautifulSoup(descriptions[0], "html.parser").get_text().replace('\t', '').replace('\n', '')
 
-            scrapy.appender(title, 'cyclops',description,'',formatted_date)
+            scrapy.appender(title, 'cyclops',description,'',formatted_date,page=page)
     except:
         print('cyclops: ' + 'parsing fail: '+url)

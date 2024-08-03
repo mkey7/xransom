@@ -61,6 +61,6 @@ def main(scrapy,page,site):
             # Extract description
             description = article.find("p", class_="post-excerpt").text.strip()
 
-            scrapy.appender(title, 'donutleaks', description.replace('|','-'),'',date_formatted,post_url)
+            scrapy.appender(title, 'donutleaks', description.replace('|','-'),'',date_formatted,post_url,page=page)
     except:
         print('donutleaks: ' + 'parsing fail: '+url)

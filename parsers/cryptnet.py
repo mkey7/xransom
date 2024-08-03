@@ -19,7 +19,7 @@ def main(scrapy,page,site):
         for div in divs_name:
             title = div.find('h2').text.strip()
             description = div.find("div",{"class":"head-info-body blog-head-info-body"}).find('a').text.strip()
-            scrapy.appender(title, 'cryptnet', description)
+            scrapy.appender(title, 'cryptnet', description,page=page)
     except:
         print('cryptnet: ' + 'parsing fail: '+url)
 

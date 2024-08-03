@@ -38,7 +38,7 @@ def main(scrapy,page,site):
             link = page["domain"] +str(link)
             print(link)
             downloads = get_download(scrapy,link,site)
-            scrapy.appender(title, '0mega', description,"",pubdate,link,download=downloads)
+            scrapy.appender(title, '0mega', description,"",pubdate,link,download=downloads,page=page)
     except:
         print('0mega: ' + 'parsing fail')
         pass

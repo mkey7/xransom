@@ -25,7 +25,7 @@ def main(scrapy,page,site):
             except: 
                 published = datetime.strptime(date_string, "%d.%m.%y").strftime("%Y-%m-%d %H:%M:%S.%f")
             description = div.find('div', class_='small opacity-50').text.strip()
-            scrapy.appender(name, '8base', description.replace('\n',' '),"",published,link)
+            scrapy.appender(name, '8base', description.replace('\n',' '),"",published,link,page=page)
     except:
        print('8base : ' + 'parsing fail')
        pass    

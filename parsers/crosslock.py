@@ -20,7 +20,7 @@ def main(scrapy,page,site):
             description=''
             for p in descriptions:
                 description +=p.text.strip()
-            scrapy.appender(title, 'crosslock', description)
+            scrapy.appender(title, 'crosslock', description,page=page)
     except:
         print('crosslock: ' + 'parsing fail: '+url)
 

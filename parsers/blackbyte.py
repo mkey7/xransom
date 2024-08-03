@@ -19,7 +19,7 @@ def main(scrapy,page,site):
             description = div.find('p').text.strip().replace("\n", "")
             website = div.find('a')
             website = website.attrs['href']
-            scrapy.appender(title, 'blackbyte', description,website)
+            scrapy.appender(title, 'blackbyte', description,website,page=page)
     except:
         print('blackbyte: ' + 'parsing fail')
         pass

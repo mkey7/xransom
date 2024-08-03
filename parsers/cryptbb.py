@@ -30,6 +30,6 @@ def main(scrapy,page,site):
             formatted_date = datetime.strptime(downloaded_date, '%d.%m.%Y').strftime('%Y-%m-%d 00:00:00.000000')
 
             # def appender(post_title, group_name, description="", website="", published="", post_url=""):
-            scrapy.appender(victim, 'cryptbb', description, '', formatted_date, post_url)
+            scrapy.appender(victim, 'cryptbb', description, '', formatted_date, post_url,page=page)
     except:
         print('cryptbb: ' + 'parsing fail: '+url)

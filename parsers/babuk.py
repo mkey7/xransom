@@ -20,7 +20,7 @@ def main(scrapy,page,site):
             publication_date = div.find('div', class_='published').text.strip() +  '.000000'
             description = div.find('div', class_='col-12').text.strip()
             link = 'http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion'+div.find('a')['href']
-            scrapy.appender(title, 'babuk',description,'',publication_date,link)
+            scrapy.appender(title, 'babuk',description,'',publication_date,link,page=page)
     except:
         print("Babuk - Failed during : " + url)
 

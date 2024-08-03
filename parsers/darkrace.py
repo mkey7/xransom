@@ -24,7 +24,7 @@ def main(scrapy,page,site):
             description = div.find("div").text
             link = div.find("a", {"class": "read-more"})["href"]
             post_url = url + link
-            scrapy.appender(title, 'darkrace', description, '', published, post_url)
+            scrapy.appender(title, 'darkrace', description, '', published, post_url,page=page)
     except:
         print('darkrace: ' + 'parsing fail: '+url)
 

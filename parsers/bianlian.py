@@ -39,7 +39,7 @@ def get_description(scrapy,site,url,title,published):
     for b in downloads:
         if 'zip' in b['href']:
             download.append(b['href'])
-    scrapy.appender(title, 'bianlian', description,website,published,url,email,"",'',download)
+    scrapy.appender(title, 'bianlian', description,website,published,url,email,"",'',download,page=page)
 
 
 

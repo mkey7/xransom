@@ -38,7 +38,7 @@ def main(scrapy,page,site):
             downloads = []
             for i in pdownload:
                 downloads.append("http"+i[:i.find('\"')])
-            scrapy.appender(title, 'abyss', description,title,"","http://3ev4metjirohtdpshsqlkrqcmxq6zu3d7obrdhglpy5jpbr7whmlfgqd.onion/",download=downloads)
+            scrapy.appender(title, 'abyss', description,title,"","http://3ev4metjirohtdpshsqlkrqcmxq6zu3d7obrdhglpy5jpbr7whmlfgqd.onion/",download=downloads,page=page)
 
         # data = json.loads(predata)
         # print(data)

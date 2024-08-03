@@ -23,7 +23,7 @@ def main(scrapy,page,site):
                 link = link_element['href'] 
                 if link_element:
                     post_url =  post_url + link
-            scrapy.appender(victim, 'cloak',description,'','',post_url)
+            scrapy.appender(victim, 'cloak',description,'','',post_url,page=page)
     except:
         print('cloak: ' + 'parsing fail: '+url)
         pass
