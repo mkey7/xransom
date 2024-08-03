@@ -1,0 +1,9 @@
+screenshots/
+source/
+venv/
+__pycache__/
+parsers/__pycache__/
+rabbitMQ/__pycache__/
+*.pyc
+*.png
+*.html

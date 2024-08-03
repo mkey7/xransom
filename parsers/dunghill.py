@@ -6,20 +6,16 @@
 +------------------------------+------------------+----------+
 Rappel : def appender(post_title, group_name, description="", website="", published="", post_url=""):
 """
-import os
 from bs4 import BeautifulSoup
-from sharedutils import errlog, get_website, stdlog
-from parse import appender, existingpost
 
 # TODO 爬取更详细的网页 还么有完成
-def get_url(url):
+def get_url(scrapy,site,url,title,published):
     try:
-        page = get_website(url,'dunghill_leak')
-        soup=BeautifulSoup(page,'html.parser')
+        page = scrapy.scrape(site,url)
+        soup=BeautifulSoup(page["page_source"],'html.parser')
         head_tag = soup.find('div',class_='block-heading text-left')
         title = head_tag.get_text().strip()
         print('title:'+title+'!')
-        
         
         div_tag = soup.find_next('div')
         print(div_tag)
@@ -34,50 +30,50 @@ def get_url(url):
 
 
     except:
-        errlog("failed to get : "+ url)
+        print("failed to get : "+ url)
 
 
-def main():
-    group_name = 'dunghill_leak'
-    for filename in os.listdir('source'):
-        try:
-            if filename.startswith('dunghill_leak-'):
-                html_doc='source/'+filename
-                file=open(html_doc,'r')
-                soup=BeautifulSoup(file,'html.parser')
-                divs = soup.find_all('div',class_="news-container")
-                if not divs:
-                    continue
-                stdlog('find dunghill_leak index.html')
-                divs = soup.find_all('div',{"class": "custom-container2"})
-                for div in divs:
-                    title = div.find('div', {"class": "ibody_title"}).text.strip()
-                    if existingpost(title,group_name):
-                        print(group_name + ' - ' + title +' is existed!')
-                        continue
-                    description = div.find("div", {"class": "ibody_body"}).find_all('p')
-                    description = description[2].text.strip()
-                    link = "http://p66slxmtum2ox4jpayco6ai3qfehd5urgrs4oximjzklxcol264driqd.onion/" + div.find('div', {"class": "ibody_ft_right"}).a['href']
-                    print(link)
-                    get_url(link)
-                    # appender(title, 'dunghill', description,'','',link)
-                divs = soup.find_all('div',{"class": "custom-container"})
-                for div in divs:
-                    title = div.find('div', {"class": "ibody_title"}).text.strip()
-                    
-                    if existingpost(title,group_name):
-                        print(group_name + ' - ' + title +' is existed!')
-                        continue
+def main(scrapy,page,site):
+    url = page["domain"]
+    try:
+        soup=BeautifulSoup(page["page_source"],'html.parser')
+        divs = soup.find_all('div',{"class": "custom-container2"})
+        for div in divs:
+            title = div.find('div', {"class": "ibody_title"}).text.strip()
+            
+            # 判断该勒索是否已被爬取
+            p = {}
+            p['ransom_name'] = page["platform"]
+            p['title'] = title
+            if scrapy.existingpost(p):
+                print( page["platform"] + ' - ' + title +' is existed!')
+                continue
 
-                    description = div.find("div", {"class": "ibody_body"}).find_all('p')
-                    description = description[2].text.strip()
-                    link = "http://p66slxmtum2ox4jpayco6ai3qfehd5urgrs4oximjzklxcol264driqd.onion/" + div.find('div', {"class": "ibody_ft_right"}).a['href']
-                    print(link)
+            description = div.find("div", {"class": "ibody_body"}).find_all('p')
+            description = description[2].text.strip()
+            link = url + div.find('div', {"class": "ibody_ft_right"}).a['href']
+            print(link)
+            get_url(link)
+            # appender(title, 'dunghill', description,'','',link)
+        divs = soup.find_all('div',{"class": "custom-container"})
+        for div in divs:
+            title = div.find('div', {"class": "ibody_title"}).text.strip()
+            
+            # 判断该勒索是否已被爬取
+            p = {}
+            p['ransom_name'] = page["platform"]
+            p['title'] = title
+            if scrapy.existingpost(p):
+                print( page["platform"] + ' - ' + title +' is existed!')
+                continue
 
-                    # get_url(link)
-                    
-                    # appender(title, 'dunghill', description,'','',link)
-                file.close()
-        except:
-            errlog('dunghill_leak: ' + 'parsing fail')
-            pass    
+            description = div.find("div", {"class": "ibody_body"}).find_all('p')
+            description = description[2].text.strip()
+            link = url + div.find('div', {"class": "ibody_ft_right"}).a['href']
+            print(link)
+
+            # get_url(link)
+            
+            # appender(title, 'dunghill', description,'','',link)
+    except:
+        print('dunghill: ' + 'parsing fail: '+url)

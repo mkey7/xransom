@@ -177,8 +177,19 @@ class webScrapy:
             "extract_entity" : [],
             "threaten_level" : "中危"
         }
-        if not existingpost(post,self.posts):
+        if not self.existingpost(post):
             self.posts.append(post)
 
             with open("posts.json", "w", encoding='utf-8') as jsonfile:
                 json.dump(self.posts, jsonfile, indent=4, ensure_ascii=False)
+
+def existingpost(self,post):
+    '''
+    check if a post already exists in posts.json
+    '''
+    for p in self.posts:
+        if p['ransom_name'].lower() == post["ransom_name"].lower() and post['title'] == p['title']:
+            #dbglog('post already exists: ' + post_title)
+            return True
+    print('post does not exist: ' + post["title"])
+    return False

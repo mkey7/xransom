@@ -61,4 +61,5 @@ def main(scrapy,page,site):
 
             scrapy.appender(victim,'cactus',description,website,postdate,post_url,'',price,'',download,country)
     except:
+        print('cactus: ' + 'parsing fail: '+url)
         pass
