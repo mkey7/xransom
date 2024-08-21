@@ -1,6 +1,6 @@
 [
     {
-        "uuid": 10000,
+        "uuid": "60dc22646c0129292b1684cbe138a72ba6326ff2",
         "net_type": "tor",
         "description": "https://www.digitalshadows.com/blog-and-research/marketo-a-return-to-simple-extortionhttps://securityaffairs.co/wordpress/121617/cyber-crime/puma-available-marketo.htmlhttps://t.me/marketo_leakshttps://t.me/marketocloud",
         "lang": "english",
@@ -29,7 +29,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10001,
+        "uuid": "36481c9ed9473831aef69cc2bcb54498080fdf1f",
         "net_type": "tor",
         "description": "https://www.zdnet.com/article/synack-ransomware-group-releases-decryption-keys-as-they-rebrand-to-el-cometa",
         "lang": "english",
@@ -58,7 +58,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10002,
+        "uuid": "a1ee22c9a8c857086b1c1cf9d90cf4a8a4113bfe",
         "net_type": "tor",
         "description": "https://www.tetradefense.com/incident-response-services/cause-and-effect-suncrypt-ransomware-analysishttps://www.intezer.com/blog/malware-analysis/when-viruses-mutate-did-suncrypt-ransomware-evolve-from-qnapcrypthttps://medium.com/s2wblog/case-analysis-of-suncrypt-ransomware-negotiation-and-bitcoin-transaction-43a2194ac0bc",
         "lang": "english",
@@ -87,7 +87,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10003,
+        "uuid": "1df21e90752e7ea01a0d21d227d8e4df99951138",
         "net_type": "tor",
         "description": "https://www.secureworks.com/research/lv-ransomwarehttps://securityaffairs.co/wordpress/119306/malware/lv-ransomware-repurposed-revil-binary.html",
         "lang": "english",
@@ -116,7 +116,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10004,
+        "uuid": "7d7677232f08fbc51e1de6f9523eb5bd294a5347",
         "net_type": "tor",
         "description": "https://www.zdnet.com/article/lorenz-ransomware-attack-victims-can-now-retrieve-their-files-for-free-with-this-decryption-toolhttps://www.cybertalk.org/the-worst-outcomes-lorenz-ransomware-a-new-double-extortion-strategy",
         "lang": "english",
@@ -145,7 +145,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10005,
+        "uuid": "5f8250f59e446dbee13db57fd0ab74247be9c908",
         "net_type": "tor",
         "description": "https://threatpost.com/lockbit-ransomware-proliferates-globally/168746https://www.trendmicro.com/en_us/research/21/h/lockbit-resurfaces-with-version-2-0-ransomware-detections-in-chi.htmlhttps://www.cyber.gov.au/acsc/view-all-content/advisories/2021-006-acsc-ransomware-profile-lockbit-20",
         "lang": "english",
@@ -174,7 +174,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10006,
+        "uuid": "58d44d112cb76e22170ee767656ca49212879546",
         "net_type": "tor",
         "description": "https://inf.news/en/tech/c28d9382ab78a5ac3d8fc802f3f0f1e0.htmlhttps://www.healthcareitnews.com/news/fbi-issues-alert-about-hive-ransomwarehttps://blogs.blackberry.com/en/2021/07/threat-thursday-hive-ransomware",
         "lang": "english",
@@ -203,7 +203,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10007,
+        "uuid": "c03dc00cbdbc68be9a9771f985f3edddbea609fb",
         "net_type": "tor",
         "description": "http://t.me/arvin_clubhttps://sosintel.co.uk/a-special-investigation-exposing-a-ransomware-groups-clear-web-ip-and-their-duplicate-identities/D6164C90642CD93D9D3F353511B4BDBD1428309C90CDE13D3D7088AA5BE3010A52E485834E84",
         "lang": "english",
@@ -232,7 +232,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10008,
+        "uuid": "0505d789873d2fee466e1c5359bbcd5fc19b3efa",
         "net_type": "tor",
         "description": "https://blog.cyble.com/2021/07/23/deep-dive-analysis-avoslocker-ransomwarehttps://blog.malwarebytes.com/threat-intelligence/2021/07/avoslocker-enters-the-ransomware-scene-asks-for-partnersprevious parser: c2VkIC1uIC1lICdzL14uKmFyaWEtaGlkZGVuPSJ0cnVlIj48XC9pPiAvL3AnIHNvdXJjZS9hdm9zbG9ja2VyLSouaHRtbCB8IGN1dCAtZCAiPCIgLWYxprevious parser: ZWdyZXAgLW8gJ3RpdGxlPSIoW1s6YWxudW06XV18IHxcLikrIicgc291cmNlL2F2b3Nsb2NrZXItKi5odG1sIHwgY3V0IC1kICciJyAtZjI=",
         "lang": "english",
@@ -261,7 +261,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10009,
+        "uuid": "1a427e17e89f175d124e6ea3844d4895e5ae6e87",
         "net_type": "tor",
         "description": "https://heimdalsecurity.com/blog/doppelpaymer-gets-a-rebrandinghttps://www.bleepingcomputer.com/news/security/nra-no-comment-on-russian-ransomware-gang-attack-claims/",
         "lang": "english",
@@ -290,7 +290,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10010,
+        "uuid": "072e53600bf8f4088bc11ecb1ec4d86d34412ee3",
         "net_type": "tor",
         "description": "https://www.acronis.com/en-us/articles/avaddon-ransomwarehttps://www.cyber.gov.au/sites/default/files/2021-05/2021-003%20Ongoing%20campaign%20using%20Avaddon%20Ransomware%20-%2020210508.pdf",
         "lang": "english",
@@ -319,7 +319,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10011,
+        "uuid": "72ae95f595fc22c6b90e5a5afdb8f98e2ed3f437",
         "net_type": "tor",
         "description": "v-society.official@onionmail.orgViceSociety@onionmail.orghttps://blog.talosintelligence.com/2021/08/vice-society-ransomware-printnightmare.html",
         "lang": "english",
@@ -348,7 +348,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10012,
+        "uuid": "d1dab817f86fc022789be0592511914896af0c86",
         "net_type": "tor",
         "description": "https://www.izoologic.com/2021/06/19/xing-locker-team-ransomgroup-is-on-a-roll-they-recently-hit-sharafi-group-investmentshttps://itsecuritywire.com/quick-bytes/xinglocker-spreading-worm-using-mountlocker",
         "lang": "english",
@@ -377,7 +377,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10013,
+        "uuid": "57d0b8ec3d89ac622b3826ea8c66c38df6089524",
         "net_type": "tor",
         "description": "https://blog.qualys.com/vulnerabilities-threat-research/2021/06/09/darkside-ransomwarehttps://www.varonis.com/blog/darkside-ransomwarehttps://github.com/advanced-threat-research/DarkSide-Config-Extract",
         "lang": "english",
@@ -406,7 +406,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10014,
+        "uuid": "6a03c1e297e81c3c0afd890c23d24877fd404a0e",
         "net_type": "tor",
         "description": "https://news.sophos.com/en-us/2020/05/21/ragnar-locker-ransomware-deploys-virtual-machine-to-dodge-securityhttps://www.bleepingcomputer.com/news/security/ransomware-gang-threatens-to-leak-data-if-victim-contacts-fbi-police",
         "lang": "english",
@@ -435,7 +435,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10015,
+        "uuid": "95e83c2f919854821998976b1a72d4199b693679",
         "net_type": "tor",
         "description": "https://blog.malwarebytes.com/malwarebytes-news/2021/02/clop-targets-execs-ransomware-tactics-get-another-new-twisthttps://unit42.paloaltonetworks.com/clop-ransomware",
         "lang": "english",
@@ -464,7 +464,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10016,
+        "uuid": "6bf0f1cd6ffd900e99f2fc566e7bdfda8d2da992",
         "net_type": "tor",
         "description": "https://threatpost.com/netwalker-ransomware-suspect-charged/163405https://www.cybereason.com/blog/cybereason-vs.-netwalker-ransomwarehttps://www.ncsc.org/trends/monthly-trends-articles/2020/netwalker-ransomware",
         "lang": "english",
@@ -493,7 +493,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10017,
+        "uuid": "82938a75bc705abaaed17ac96b5501fd422b7819",
         "net_type": "tor",
         "description": "https://aithority.com/security/doppelpaymer-ransomware-attack-sinks-a-global-motor-companys-20-millionhttps://www.zscaler.com/blogs/security-research/doppelpaymer-continues-cause-grief-through-rebranding",
         "lang": "english",
@@ -522,7 +522,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10018,
+        "uuid": "955ac958c92084891806637cdf46d353c122671c",
         "net_type": "tor",
         "description": "https://www.zdnet.com/article/revil-ransomware-group-resurfaces-after-brief-hiatushttps://www.macrumors.com/2021/04/26/revil-delists-stolen-apple-schematics-threathttps://www.theverge.com/2021/7/22/22589643/ransomware-kaseya-vsa-decryptor-revil",
         "lang": "english",
@@ -551,7 +551,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10019,
+        "uuid": "afaa728128f45ddfede017b7eb45691974132a2c",
         "net_type": "tor",
         "description": "https://www.reuters.com/article/us-usa-products-colonial-pipeline-ransom/more-ransomware-websites-disappear-in-aftermath-of-colonial-pipeline-hack-idUSKCN2CX0KT",
         "lang": "english",
@@ -580,7 +580,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10020,
+        "uuid": "f29e7b29109f78635d36334039ee593a6b74112f",
         "net_type": "tor",
         "description": "https://techcrunch.com/2021/08/30/ragnarok-ransomware-gang-shuts-down-and-releases-its-decryption-keyhttps://www.cpomagazine.com/cyber-security/ragnarok-ransomware-gang-closes-up-shop-leaves-master-decryptor-key-behindhttps://www.sababasecurity.com/cheese-shortage-in-dutch-supermarkets-after-a-ransomware-attackprevious parser: Z3JlcCAndmFyIHBvc3RfbGlua3MgPScgc291cmNlL3JhZ25hcm9rLSouaHRtbCAtLW5vLWZpbGVuYW1lIHwgY3V0IC1kICc9JyAtZiAyIHwgc2VkICdzL14gKi8vZycgfCBzZWQgLWUgJ3MvLiQvLycgLWUgJ3MvLiQvLycgIC1lICdzLy4kLy8nIHwgIGpxIC1yICcuW10udGl0bGUn",
         "lang": "english",
@@ -609,7 +609,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10021,
+        "uuid": "4c985240cae3f7b374c505ed20bb14c6b185d946",
         "net_type": "tor",
         "description": "https://threatpost.com/affiliate-leaks-conti-ransomware-playbook/168442https://unit42.paloaltonetworks.com/conti-ransomware-gang",
         "lang": "english",
@@ -638,7 +638,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10022,
+        "uuid": "002127e75b55641c0b126d697a30a95fe2a9dc52",
         "net_type": "tor",
         "description": "https://www.ic3.gov/Media/News/2021/210316.pdfhttps://blog.malwarebytes.com/threat-spotlight/2021/03/pysa-the-ransomware-attacking-schools",
         "lang": "english",
@@ -667,7 +667,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10023,
+        "uuid": "b0d0ff5e73bb22cfd79b51b967c7609c8509655a",
         "net_type": "tor",
         "description": "https://www.zdnet.com/article/a-deep-dive-into-nefilim-a-double-extortion-ransomware-grouphttps://www.trendmicro.com/en_nz/research/21/f/nefilim-modern-ransomware-attack-story.html",
         "lang": "english",
@@ -696,7 +696,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10024,
+        "uuid": "140ae90cf15691e9924a5d7d3f6694f173788b58",
         "net_type": "tor",
         "description": "https://techcrunch.com/2020/11/02/maze-ransomware-group-shutting-downhttps://www.fireeye.com/blog/threat-research/2020/05/tactics-techniques-procedures-associated-with-maze-ransomware-incidents.html",
         "lang": "english",
@@ -725,7 +725,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10025,
+        "uuid": "e612e8e88face34c29d717c174a80646f991d454",
         "net_type": "tor",
         "description": "https://www.bleepingcomputer.com/news/security/mount-locker-ransomware-joins-the-multi-million-dollar-ransom-gamehttps://www.securitymagazine.com/articles/94954-sophos-identifies-connection-between-mount-locker-and-astro-locker-team-ransomware",
         "lang": "english",
@@ -754,7 +754,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10026,
+        "uuid": "a7f87560c62b611f1f5cfaa17ed7011925cd3fa5",
         "net_type": "tor",
         "description": "https://www.bleepingcomputer.com/news/security/leaked-babuk-locker-ransomware-builder-used-in-new-attackshttps://www.bleepingcomputer.com/news/security/babuk-ransomwares-full-source-code-leaked-on-hacker-forumhttps://blog.cyberint.com/babuk-locker",
         "lang": "english",
@@ -783,7 +783,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10027,
+        "uuid": "717686268042735cf59e933f715877719ea2b05f",
         "net_type": "tor",
         "description": "https://www.bleepingcomputer.com/news/security/computer-hardware-giant-gigabyte-hit-by-ransomexx-ransomwarehttps://www.cybereason.com/blog/cybereason-vs.-ransomexx-ransomwarehttps://www.infosecurity-magazine.com/news/aerospace-giant-embraer-hit",
         "lang": "english",
@@ -812,7 +812,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10028,
+        "uuid": "75dc849a55cf3d3a16c2d00f2b2515f156f41ab3",
         "net_type": "tor",
         "description": "https://www.mcafee.com/enterprise/en-us/assets/reports/rp-cuba-ransomware.pdfhttps://digital.nhs.uk/cyber-alerts/2021/cc-3855https://www.ic3.gov/Media/News/2021/211203-2.pdf",
         "lang": "english",
@@ -841,7 +841,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10029,
+        "uuid": "e11fbaa723200f0a56bd13c792f255446639615f",
         "net_type": "tor",
         "description": "https://research.checkpoint.com/2020/ransomware-alert-pay2keyhttps://www.twitter.com/p2ktwtacchttps://keybase.io/pay2keypay2key@tuta.io",
         "lang": "english",
@@ -870,7 +870,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10030,
+        "uuid": "72cf2ca935bc605a273d070561e97c53dadfbc22",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -899,7 +899,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10031,
+        "uuid": "a7b72f4ccbf207b1ef841fcdd588d46e0a52d6d9",
         "net_type": "tor",
         "description": "https://www.telekom.com/en/blog/group/article/lockdata-auction-631300https://twitter.com/darktracer_int/status/1418318232885153792",
         "lang": "english",
@@ -928,7 +928,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10032,
+        "uuid": "64fe51a3c86684bbcf9466ba70e085735b92a1d7",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -957,7 +957,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10033,
+        "uuid": "b7b74bbc0d1d06ff2e2eb116edf8c6d504c39921",
         "net_type": "tor",
         "description": "https://therecord.media/new-haron-ransomware-gang-emerges-borrowing-from-avaddon-and-thanoshttps://threatpost.com/ransomware-gangs-haron-blackmatter/168212",
         "lang": "english",
@@ -986,7 +986,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10034,
+        "uuid": "531b947da3d4048dbc522bcc232a9e91058eef32",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -1015,7 +1015,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10035,
+        "uuid": "2b56b02854d4b27fe45440e4895ba804c312696c",
         "net_type": "tor",
         "description": "https://therecord.media/decryptor-released-for-prometheus-ransomware-victimshttps://unit42.paloaltonetworks.com/prometheus-ransomwar",
         "lang": "english",
@@ -1044,7 +1044,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10036,
+        "uuid": "52b5cf907fbd926c6f32092cc830f67728ec40dd",
         "net_type": "tor",
         "description": "https://www.tripwire.com/state-of-security/featured/blackmatter-pose-new-ransomware-threathttps://venturebeat.com/2021/08/23/sophoslabs-research-shows-blackmatter-ransomware-is-closely-acquainted-with-darkside",
         "lang": "english",
@@ -1073,7 +1073,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10037,
+        "uuid": "0534766e45e4c9e42d89eaef8e5b2ed5f7a9a3a4",
         "net_type": "tor",
         "description": "https://cyberintelmag.com/malware-viruses/payloadbin-ransomware-attributed-to-evil-corp",
         "lang": "english",
@@ -1102,7 +1102,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10038,
+        "uuid": "420f19138c31154c05e8ddf660990d43de22b5ee",
         "net_type": "tor",
         "description": "https://intel471.com/blog/groove-gang-ransomware-babuk-revil-blackmatterhttps://www.mcafee.com/blogs/enterprise/mcafee-enterprise-atr/how-groove-gang-is-shaking-up-the-ransomware-as-a-service-market-to-empower-affiliates",
         "lang": "english",
@@ -1131,7 +1131,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10039,
+        "uuid": "4da245cd5ecfe9d06a7716179dad6e187e555a54",
         "net_type": "tor",
         "description": "https://digital.nhs.uk/cyber-alerts/2020/cc-3345https://www.bleepingcomputer.com/news/security/ako-ransomware-another-day-another-infection-attacking-businesses/https://malwiki.org/index.php?title=Ako",
         "lang": "english",
@@ -1160,7 +1160,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10040,
+        "uuid": "43434cc5cb1019aa0916fab91342aa8fd49d1258",
         "net_type": "tor",
         "description": "https://www.cyfirma.com/outofband/malware-research-on-atomsilo-ransomware/https://www.zscaler.com/blogs/security-research/atomsilo-ransomware-enters-league-double-extortionhttps://twitter.com/vinopaljiri/status/1449550289204391940",
         "lang": "english",
@@ -1189,7 +1189,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10041,
+        "uuid": "ca34c58f04754749f515b5a86e570820be84de47",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -1218,7 +1218,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10042,
+        "uuid": "4993eb289a643fa62141026d69625b7be7d6cac6",
         "net_type": "tor",
         "description": "61141FCA047691D0E47CFD84717B59D3BEDF822442B5E907BE147FD6B8A11B723A48DF7FCA47BlackByteSupp0rt@onionmail.orghttps://www.zdnet.com/article/blackbyte-ransomware-decryptor-released/https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/blackbyte-ransomware-pt-1-in-depth-analysis/https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/blackbyte-ransomware-pt-2-code-obfuscation-analysis/https://www.techtarget.com/searchsecurity/news/252510334/BlackByte-ransomware-attacks-exploiting-ProxyShell-flaws",
         "lang": "english",
@@ -1247,7 +1247,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10043,
+        "uuid": "112b709d53b80b0a934c53c16f927d442636a878",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -1276,7 +1276,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10044,
+        "uuid": "18727cb69dabc4506595317c7b962f7218213f32",
         "net_type": "tor",
         "description": "previous parser: ZWdyZXAgLW8gJ19zZWxmIj4oW1s6YWxudW06XV18IHxcLikrPC9hPicgIHNvdXJjZS9ibGFja3NoYWRvdy1ibGFja3NoYWRvdy5odG1sIHwgY3V0IC1kICc+JyAtZiAyIHwgY3V0IC1kICc8JyAtZiAxIHwgc2VkIC1lICcvRG9uYXRlL2QnIC1lICcvSG9tZS9kJyAtZSAnL0NvbnRhY3QgVVMvZCcgLWUgJy9UZWxlZ3JhbSBjaGFubmVsL2QnIHwgc29ydCAtdQ==",
         "lang": "english",
@@ -1305,7 +1305,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10045,
+        "uuid": "c96c1544ffbaab997704e43f6daf3a6fb729bf4d",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -1334,7 +1334,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10046,
+        "uuid": "190a72a5817b399fcb589d501d9e80f720aff751",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -1363,7 +1363,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10047,
+        "uuid": "b181ea4e85063afe2b64bf99d497f0fffbd2dcd1",
         "net_type": "tor",
         "description": "https://www.anomali.com/blog/the-ech0raix-ransomwarehttps://www.bleepingcomputer.com/news/security/qnap-nas-devices-hit-in-surge-of-ech0raix-ransomware-attacks/",
         "lang": "english",
@@ -1392,7 +1392,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10048,
+        "uuid": "0fadf11cd744339023ad7295c7a2efcdebc1e8ac",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -1421,7 +1421,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10049,
+        "uuid": "63252049d18d18de39ecccdbef764b7f4906114f",
         "net_type": "tor",
         "description": "https://medium.com/@velasco.l.n/exorcist-ransomware-from-triaging-to-deep-dive-5b7da4263d81",
         "lang": "english",
@@ -1450,7 +1450,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10050,
+        "uuid": "935955c6addc456cde48180bd36f0210e9bdad50",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -1479,7 +1479,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10051,
+        "uuid": "579e2b4eb25ba36db0794d3c2289c4669ef8dbd1",
         "net_type": "tor",
         "description": "https://www.ic3.gov/Media/News/2021/211029.pdfhttps://www.cisa.gov/uscert/ncas/analysis-reports/ar21-126ahttps://research.nccgroup.com/2021/06/15/handy-guide-to-a-new-fivehands-ransomware-variant/https://www.mandiant.com/resources/unc2447-sombrat-and-fivehands-ransomware-sophisticated-financial-threat",
         "lang": "english",
@@ -1508,7 +1508,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10052,
+        "uuid": "3fa9dcf834db8b37935809ce6498e274748e4a9f",
         "net_type": "tor",
         "description": "https://www.bleepingcomputer.com/news/security/ransomware-gang-hacks-ecuadors-largest-private-bank-ministry-of-finance/",
         "lang": "english",
@@ -1537,7 +1537,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10053,
+        "uuid": "2fb5dceb557721fb304b938b2a3d1d65f9cc4260",
         "net_type": "tor",
         "description": "https://www.sentinelone.com/labs/karma-ransomware-an-emerging-threat-with-a-hint-of-nemty-pedigree/https://blogs.blackberry.com/en/2021/11/threat-thursday-karma-ransomwarehttps://www.bleepingcomputer.com/news/security/new-karma-ransomware-group-likely-a-nemty-rebrand/https://blog.cyble.com/2021/08/24/a-deep-dive-analysis-of-karma-ransomware/https://securityaffairs.co/wordpress/123568/malware/karma-ransomware-nemty-similarities.html",
         "lang": "english",
@@ -1566,7 +1566,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10054,
+        "uuid": "cd879b08cfa0d5981375e3763347229df0ad9d6f",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -1595,7 +1595,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10055,
+        "uuid": "76519146bf7ae40302b73c8d40b820770a3d6e75",
         "net_type": "tor",
         "description": "https://www.thenationalnews.com/business/2021/08/21/mbc-ransomware-group-claims-responsibility-for-cyber-attack-on-irans-railway-network/",
         "lang": "english",
@@ -1624,7 +1624,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10056,
+        "uuid": "2663a1f6052c52cc021451e39c470d7248f32e93",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -1653,7 +1653,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10057,
+        "uuid": "aec45c2e78652cf35f2ebc8853a629ef9c7200f8",
         "net_type": "tor",
         "description": "https://www.bleepingcomputer.com/news/security/n3tw0rm-ransomware-emerges-in-wave-of-cyberattacks-in-israel/https://www.haaretz.com/israel-news/tech-news/.premium-iranian-hackers-hit-h-m-israel-amid-new-wave-of-cyberattacks-1.9766404",
         "lang": "english",
@@ -1682,7 +1682,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10058,
+        "uuid": "a8d468b9097858b7248673e914aec3b258c9c22a",
         "net_type": "tor",
         "description": "https://www.mcafee.com/blogs/other-blogs/mcafee-labs/nemty-ransomware-learning-by-doing/https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/nemty-ransomware-trik-botnethttps://www.zdnet.com/article/nemty-ransomware-operation-shuts-down/https://www.acronis.com/en-eu/blog/posts/threat-analysis-nemty-ransomware-and-fake-paypal-site/https://www.infoblox.com/wp-content/uploads/threat-intelligence-report-nemty-ransomware-loves-you.pdf",
         "lang": "english",
@@ -1711,7 +1711,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10059,
+        "uuid": "956043719dc5662ed173b81c9e2fa2a0ff1dd3bd",
         "net_type": "tor",
         "description": "https://www.ic3.gov/Media/News/2021/210823.pdfhttps://www.csoonline.com/article/3630635/onepercent-ransomware-group-hits-companies-via-iceid-banking-trojan.html",
         "lang": "english",
@@ -1740,7 +1740,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10060,
+        "uuid": "a2a924a680e0f0f5a70955e2ac605551f8d4f3d0",
         "net_type": "tor",
         "description": "https://www.zdnet.com/article/prolock-ransomware-everything-you-need-to-know/https://news.sophos.com/en-us/2020/07/27/prolock-ransomware-gives-you-the-first-8-kilobytes-of-decryption-for-free/https://www.bleepingcomputer.com/news/security/pwndlocker-ransomware-gets-pwned-decryption-now-available/https://www.bleepingcomputer.com/news/security/fbi-warns-of-prolock-ransomware-decryptor-not-working-properly/https://iacc.memberclicks.net/assets/docs/COVID19/FBI%20-%20FLASH%20TLP%20Green%20-%20Indicators%20of%20Compromise%20Associated%20with%20ProLock....pdf",
         "lang": "english",
@@ -1769,7 +1769,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10061,
+        "uuid": "21bedc1e340c2d2e55e75ae46eaf46e2aabc9fc4",
         "net_type": "tor",
         "description": "https://www.qnap.com/en/security-advisory/QSA-21-13https://www.qnap.com/static/landing/2021/qlocker/response/da-dk/https://www.bleepingcomputer.com/news/security/qlocker-ransomware-shuts-down-after-extorting-hundreds-of-qnap-users/",
         "lang": "english",
@@ -1798,7 +1798,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10062,
+        "uuid": "a8aeebb07e13c30c0eff95d1b0953527a0f766f6",
         "net_type": "tor",
         "description": "https://blog.malwarebytes.com/ransomware/2021/10/threat-profile-ranzy-locker-ransomware/https://www.picussecurity.com/resource/blog/a-detailed-walkthrough-of-ranzy-locker-ransomware-ttpshttps://www.sentinelone.com/labs/ranzy-ransomware-better-encryption-among-new-features-of-thunderx-derivative/https://www.ic3.gov/Media/News/2021/211026.pdf",
         "lang": "english",
@@ -1827,7 +1827,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10063,
+        "uuid": "52976e2cc4457c14ba5473df9e22491615dc6fcc",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -1856,7 +1856,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10064,
+        "uuid": "aa74e7a106effa3de187f7e012a6c858c7b4d29c",
         "net_type": "tor",
         "description": "https://www.bleepingcomputer.com/news/security/fonix-ransomware-shuts-down-and-releases-master-decryption-key/https://www.sentinelone.com/labs/the-fonix-raas-new-low-key-threat-with-unnecessary-complexities/",
         "lang": "english",
@@ -1885,7 +1885,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10065,
+        "uuid": "91e516633234cdd2c8a13da644ba8f1124f59b94",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -1914,7 +1914,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10066,
+        "uuid": "86ffe237da6bdf0c9b027f9386cdc7b16a1c47b7",
         "net_type": "tor",
         "description": "https://ke-la.com/new-russian-speaking-forum-a-new-place-for-raas/https://www.toolbox.com/tech/security/news/russian-darknet-forum-ramp-reemerges-with-chinese-speaking-hackers-at-the-wheel/https://www.linkedin.com/pulse/am-i-new-admin-cybercrime-forum-ramp-ayesha-prakash",
         "lang": "english",
@@ -1943,7 +1943,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10067,
+        "uuid": "5ea9be9246bf2471fd586717120e32116e089d9e",
         "net_type": "tor",
         "description": "https://www.mandiant.com/resources/sabbath-ransomware-affiliate",
         "lang": "english",
@@ -1972,7 +1972,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10068,
+        "uuid": "c30a2437875c34ca986226e1978de6c8c028f2d9",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2001,7 +2001,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10069,
+        "uuid": "034a52fc60c4d3977f65f43b91683632f9ec73e2",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2030,7 +2030,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10070,
+        "uuid": "7b8e8a23c084af9a1b53389432dba21854f7999b",
         "net_type": "tor",
         "description": "https://t.me/snatch_newshttps://lifars.com/wp-content/uploads/2020/07/Snatch-Ransomware-Malware-Analysis-Case-Study.pdfhttps://news.sophos.com/en-us/2019/12/09/snatch-ransomware-reboots-pcs-into-safe-mode-to-bypass-protection/https://thedfirreport.com/2020/06/21/snatch-ransomware/",
         "lang": "english",
@@ -2059,7 +2059,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10071,
+        "uuid": "4241aef9e5d030c0b9d7c5c85853fc841d2a458d",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2088,7 +2088,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10072,
+        "uuid": "0a2f7d46965f538994d1ac670261a5a5612e8d5c",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2117,7 +2117,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10073,
+        "uuid": "8d3f77a0e3e7fc1dca0b05a72cb95d4579585841",
         "net_type": "tor",
         "description": "https://www.sentinelone.com/labs/robinhood-ransomware-coolmaker-functions-not-so-cool/https://blog.malwarebytes.com/threat-spotlight/2020/02/threat-spotlight-robbinhood-ransomware-takes-the-drivers-seat/previous parser: Z3JlcCAnPGgyIGNsYXNzPSJ0aXRsZSInIHNvdXJjZS9yb2Jpbmhvb2QtKi5odG1sIC0tbm8tZmlsZW5hbWUgfCBjdXQgLWQgJz4nIC1mIDMgfCBjdXQgLWQgJzwnIC1mIDE=",
         "lang": "english",
@@ -2146,7 +2146,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10074,
+        "uuid": "5926ae0b3a3466f61aa6c646b18a8d882aec7765",
         "net_type": "tor",
         "description": "https://twitter.com/moses_staff_sehttps://t.me/moses_staff_linkshttps://t.me/moses_staff_se_8https://www.zdnet.com/article/mosesstaff-attackers-deploy-ransomware-on-your-systems-no-payment-no-decryption-possible/https://research.checkpoint.com/2021/mosesstaff-targeting-israeli-companies/",
         "lang": "english",
@@ -2175,7 +2175,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10075,
+        "uuid": "7039d652ba045a18775adb08f6a8ba0bb2a10743",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2204,7 +2204,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10076,
+        "uuid": "e9c19cdda6b47c7582ae0b077145d66347877fa5",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2233,7 +2233,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10077,
+        "uuid": "56e1678823ffb2daf661273501004fcf5d240d52",
         "net_type": "tor",
         "description": "https://www.sentinelone.com/labs/new-rook-ransomware-feeds-off-the-code-of-babuk/https://www.bleepingcomputer.com/news/security/rook-ransomware-is-yet-another-spawn-of-the-leaked-babuk-code/",
         "lang": "english",
@@ -2262,7 +2262,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10078,
+        "uuid": "7fb0ef25839303804626449270ccc25f94b5de64",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2291,7 +2291,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10079,
+        "uuid": "061750c60024cd6ca545a5a00602ae62ccad42e1",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2320,7 +2320,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10080,
+        "uuid": "a7cab2b263d782d2a94c6f83cd7a71e7a7aad071",
         "net_type": "tor",
         "description": "https://twitter.com/PolarToffee/status/1445873002801889280?s=20",
         "lang": "english",
@@ -2349,7 +2349,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10081,
+        "uuid": "43e39eab2d4e4c365283eca40668b6b39bd597af",
         "net_type": "tor",
         "description": "https://therecord.media/alphv-blackcat-is-the-first-professional-ransomware-gang-to-use-rust/https://www.bleepingcomputer.com/news/security/alphv-blackcat-this-years-most-sophisticated-ransomware/https://securityaffairs.co/wordpress/126022/cyber-crime/inetum-hit-by-blackcat-ransomware.htmlhttps://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/noberus-blackcat-alphv-rust-ransomware",
         "lang": "english",
@@ -2378,7 +2378,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10082,
+        "uuid": "cdd507d1b5f45a87c384d719fd19fc096473e2bd",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2407,7 +2407,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10083,
+        "uuid": "b930cce9040b7e9fcff8d212bb5250a0e57da5fc",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2436,7 +2436,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10084,
+        "uuid": "1c0f1c45556df5c28c9fdc51667342663acc1a5b",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2465,7 +2465,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10085,
+        "uuid": "341b6dc3bd4a6a421b2917f43bf98de919202d14",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2494,7 +2494,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10086,
+        "uuid": "ba6b88dd44452e3b6ce44c5410733dbe343f2155",
         "net_type": "tor",
         "description": "https://t.me/arvin_club/5081https://twitter.com/malwrhunterteam/status/1477381209147723788?s=20",
         "lang": "english",
@@ -2523,7 +2523,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10087,
+        "uuid": "950d08930a34d009cc53f97fef11480d3ba5c877",
         "net_type": "tor",
         "description": "https://t.me/arvin_club/5075https://twitter.com/i/web/status/1476488238521065476",
         "lang": "english",
@@ -2552,7 +2552,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10088,
+        "uuid": "c41b5cfdb9d82f74025e994db0c74e548585c1ae",
         "net_type": "tor",
         "description": "http://t.me/dotADMINbot",
         "lang": "english",
@@ -2581,7 +2581,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10089,
+        "uuid": "152255d5f3204ec28141bc4a4fdb8207bf7b8c03",
         "net_type": "tor",
         "description": "https://tria.ge/211112-lbfz1adab7https://medium.com/walmartglobaltech/sugar-ransomware-a-new-raas-a5d94d58d9fbhttps://www.bleepingcomputer.com/news/security/a-look-at-the-new-sugar-ransomware-demanding-low-ransoms/",
         "lang": "english",
@@ -2610,7 +2610,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10090,
+        "uuid": "f4b3990e8a45330ff0f745d77c1279d0cecb8a06",
         "net_type": "tor",
         "description": "https://id-ransomware.blogspot.com/2022/02/",
         "lang": "english",
@@ -2639,7 +2639,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10091,
+        "uuid": "2fd6537e208d84efe9984f436eaf871c280d79af",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2668,7 +2668,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10092,
+        "uuid": "cfb6876ec5bb69b82f0bfaf47eef65a52b8c89c6",
         "net_type": "tor",
         "description": "contact@pandoraxyz.xyz",
         "lang": "english",
@@ -2697,7 +2697,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10093,
+        "uuid": "7cbe62ff20f834ffa0918f1e3f791c3427b3b837",
         "net_type": "tor",
         "description": "stormouss21@dnmx.org",
         "lang": "english",
@@ -2726,7 +2726,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10094,
+        "uuid": "eb281e0624fcb881a20dc92c8e25813065480dc9",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2755,7 +2755,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10095,
+        "uuid": "87c320634a856d389d9dc5b5af92536586b6e505",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2784,7 +2784,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10096,
+        "uuid": "08b27678721a161b8f811376fd9d96def8f1451d",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2813,7 +2813,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10097,
+        "uuid": "4233686398e0b12467f24cf61bf2d86e6237abbe",
         "net_type": "tor",
         "description": "https://twitter.com/Ksecureteamlab",
         "lang": "english",
@@ -2842,7 +2842,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10098,
+        "uuid": "2f5e765fa8789c09e5f925fcee7225682f425c6d",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2871,7 +2871,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10099,
+        "uuid": "e2144cfb66227d1c6ffd488558ddeedac9d1c67c",
         "net_type": "tor",
         "description": "vsop@onionmail.org",
         "lang": "english",
@@ -2900,7 +2900,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10100,
+        "uuid": "1653b5582b21b91e25617b983b29c1f9e90eacc0",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2929,7 +2929,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10101,
+        "uuid": "8d0704bbd7dcc20684ff636663bef871721cdfb9",
         "net_type": "tor",
         "description": "https://t.me/ransom_house",
         "lang": "english",
@@ -2958,7 +2958,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10102,
+        "uuid": "e78d905fcffa31f0954adf7665c33f582413b716",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -2987,7 +2987,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10103,
+        "uuid": "3ba7f45ab6390cc98aa9d600829eb5c205308bfd",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3016,7 +3016,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10104,
+        "uuid": "c597a92b16064a0201875002e86faca2881bee1f",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3045,7 +3045,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10105,
+        "uuid": "406a705413fb0cd31c946ddd1edb830cf0615dc9",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3074,7 +3074,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10106,
+        "uuid": "b9d80e05c61b6ce4d52b17dff4f13edb374ede8d",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3103,7 +3103,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10107,
+        "uuid": "08e14d387c03eee200fa841a6a1a2487e22835c7",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3132,7 +3132,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10108,
+        "uuid": "b20b583c66e66a71a9c26494c894bae13940ca09",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3161,7 +3161,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10109,
+        "uuid": "bf38d72742ea0080738cc0909c4d6fe82403ff9a",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3190,7 +3190,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10110,
+        "uuid": "761cb57e2f526bd491cae9f99acd4b8cb66f6932",
         "net_type": "tor",
         "description": "https://www.bleepingcomputer.com/news/security/new-redalert-ransomware-targets-windows-linux-vmware-esxi-servers/",
         "lang": "english",
@@ -3219,7 +3219,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10111,
+        "uuid": "8a253139224feb81ed28a4c372319f70866b7006",
         "net_type": "tor",
         "description": "A4B3B0845DA242A64BF17E0DB4278EDF85855739667D3E2AE8B89D5439015F07E81D12D767FCSWikipedia@mail2tor.comdeepmind@onionmail.org",
         "lang": "english",
@@ -3248,7 +3248,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10112,
+        "uuid": "dbf05701c4d650c256612f2aa0d2211241b23763",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3277,7 +3277,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10113,
+        "uuid": "ffd218af68f6c43ca413a48f051b437e968974b0",
         "net_type": "tor",
         "description": "BAC01607F29EC417FB4106AEAB5BDF79CD948F9120C8D889E8785ADFDCE88C00F08429E092EC",
         "lang": "english",
@@ -3306,7 +3306,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10114,
+        "uuid": "bdbb83da5aa66c8d46ab61efda09305442db1c76",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3335,7 +3335,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10115,
+        "uuid": "0c97a8c6ce92ecae39227575c6330d7d621ac10f",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3364,7 +3364,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10116,
+        "uuid": "d2cac66173c45ed654e9d9071ba4e612eccc2324",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3393,7 +3393,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10117,
+        "uuid": "a9afe036553f57866efcd514bf7367ad6c3da3eb",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3422,7 +3422,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10118,
+        "uuid": "a0df0bb154c4f241d85ef1a192ecb03087ef9571",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3451,7 +3451,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10119,
+        "uuid": "2b28b5c5ba8cd60eaf27f90774922a67c521841a",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3480,7 +3480,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10120,
+        "uuid": "4844dd3aa80f7c10bb216555109dca8fd41dd3c5",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3509,7 +3509,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10121,
+        "uuid": "aeb10f8f47ed94d63258f3a899c07cdae591145d",
         "net_type": "tor",
         "description": "spartaprogroup@strong.pm",
         "lang": "english",
@@ -3538,7 +3538,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10122,
+        "uuid": "e8c7f8d3b9cc537549f95bc0ae2ff8e24f823c4e",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3567,7 +3567,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10123,
+        "uuid": "f874ba2aa4b04de191375d654c392cc6dce1ebc6",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3596,7 +3596,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10124,
+        "uuid": "eefe0317ebe8463b8ef70bd385bd2df5cb185aad",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3625,7 +3625,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10125,
+        "uuid": "ab5739155fbb4c5affe6a34a68d2eb1d93463261",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3654,7 +3654,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10126,
+        "uuid": "c80c06e01c604596dacdabfc8fcdce57f5e9cd33",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3683,7 +3683,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10127,
+        "uuid": "856da3f9528fe20bd1b40143df1626808d5dcf04",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3712,7 +3712,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10128,
+        "uuid": "5fae0f3b0ece1d7fddf5e4b5ca24357d80d00859",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3741,7 +3741,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10129,
+        "uuid": "3998834f36c6e573153e15551ecf86dd08286b8f",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3770,7 +3770,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10130,
+        "uuid": "5b6fc3ada7ceb7e0f5ae9eb852cbc80779da7727",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3799,7 +3799,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10131,
+        "uuid": "c742b553d24d073d452b3d55d3e60fa1844c8cbf",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3828,7 +3828,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10132,
+        "uuid": "ed73c1da39259d8c0309d2e73128f520db94a960",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3857,7 +3857,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10133,
+        "uuid": "2cb48edd81888d79a68bada91f4a5650527fb48e",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3886,7 +3886,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10134,
+        "uuid": "f70ace02af9980601fb052badd2185f7b6b17071",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3915,7 +3915,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10135,
+        "uuid": "b476596878a5662327499123b060ce4a9b028982",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3944,7 +3944,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10136,
+        "uuid": "6e7ac8caffa0d3718bda5eff681a9fb64a61bc20",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -3973,7 +3973,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10137,
+        "uuid": "f8f1e2e5ca378b9d22fc8c37f0550865791d73b1",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4002,7 +4002,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10138,
+        "uuid": "9407c4060485b943ecb113f6b0b35f21f393b115",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4031,7 +4031,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10139,
+        "uuid": "a7d42a537dd3d615865bf09cee9f85e852d34db6",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4060,7 +4060,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10140,
+        "uuid": "3b0c041a5a44905af70bf72fec979af2c118880f",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4089,7 +4089,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10141,
+        "uuid": "81c2587f57dbe8c9def72b45b14b8ae65fb04ea2",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4118,7 +4118,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10142,
+        "uuid": "b26a77a6ac625bb94cbd45bfe46a155bd0e6acb4",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4147,7 +4147,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10143,
+        "uuid": "ff0b94b44f8b50c3db487fc4277636b31d3719cb",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4176,7 +4176,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10144,
+        "uuid": "0e05eee3c26a5d21d73ac4572c0d2a8553df1617",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4205,7 +4205,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10145,
+        "uuid": "1b4f086d0e954e98627870c93cbef5f4eb338c6c",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4234,7 +4234,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10146,
+        "uuid": "b67f557189726a1009b928b5fffb5ac212a46fe2",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4263,7 +4263,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10147,
+        "uuid": "308fbec26de44a59ff2b95a3366a0da2455477eb",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4292,7 +4292,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10148,
+        "uuid": "f29731e85c77678a8db5b9dc71da743b89331d78",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4321,7 +4321,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10149,
+        "uuid": "74aae994103c68e78b12d99db587c994953bac2f",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4350,7 +4350,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10150,
+        "uuid": "36a89cab799428dc9b8dfe3cc5c66c87850f0d0e",
         "net_type": "tor",
         "description": "https://github.com/threatlabz/ransomware_notes/blob/main/shadow/%5Brand%5D.README.txt",
         "lang": "english",
@@ -4379,7 +4379,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10151,
+        "uuid": "2777542566e0fd05989e8a278d7d9a541a92a2c7",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4408,7 +4408,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10152,
+        "uuid": "09f849d127a867ab9415b9021fa54bf45973b363",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4437,7 +4437,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10153,
+        "uuid": "3bcd9bc4fc68d29a1b3a17c5bf14f1aa6719323a",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4466,7 +4466,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10154,
+        "uuid": "7e23ecb75814e2150a80ff75d152ebfa50594257",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4495,7 +4495,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10155,
+        "uuid": "3cc8d56a44997f97e42e23f9f55ff188c32bdb7e",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4524,7 +4524,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10156,
+        "uuid": "8a1b82812c6fe7078baef91eff4fbb5628318245",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4553,7 +4553,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10157,
+        "uuid": "76e984b00967b052c0d4ad748f68228d9f1bd4d6",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4582,7 +4582,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10158,
+        "uuid": "96c9298e52cc930d6e0d88e8e481d1345ea42769",
         "net_type": "tor",
         "description": "@RansomedVC on x.com@RansomedSupport on x.comadmin @ ransomed.vc192D52C7C18F3D2693ED2453E64C53EC0CCF0255AB2291F019B65BA84442B313C410DE132E59GodGreatSave @ cocaine.ninjaaka Raznatovicraznatovic @ cocaine.ninja.@RaznatovicAdmin on telegram18443E33B57E5C399A1FAF138E02B4382DF387A4BE5BD4B7C21CBD7392671F7CB829022548C5",
         "lang": "english",
@@ -4611,7 +4611,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10159,
+        "uuid": "44e41ba5efd3411a80d82ba7879804ddc3e14911",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4640,7 +4640,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10160,
+        "uuid": "ff4ddb5e47eca4956e198ea7b3ffcb226be05d69",
         "net_type": "tor",
         "description": "threeam@onionmail.org",
         "lang": "english",
@@ -4669,7 +4669,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10161,
+        "uuid": "cc69b4171e842279bf072d7b7eb21271b4f26141",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4698,7 +4698,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10162,
+        "uuid": "26581218d6dd0fdd7b7ec47a8b76b96b93c78c78",
         "net_type": "tor",
         "description": "https://www.bleepingcomputer.com/forums/t/786045/ransomware-hit-vmware/",
         "lang": "english",
@@ -4727,7 +4727,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10163,
+        "uuid": "c8e05faf7c42ad0777faa1f71154937ceeb39ebe",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4756,7 +4756,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10164,
+        "uuid": "b3ae600de55623158bfa4818f1426bd1bbf79e83",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4785,7 +4785,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10165,
+        "uuid": "55b5e82d887902b2588c94fa99846578206759a9",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4814,7 +4814,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10166,
+        "uuid": "b757ea689841f1286e0177d6f26185069f75d17d",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4843,7 +4843,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10167,
+        "uuid": "6306139498105ef1c272cf3ae2e0ee7ba36cf297",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4872,7 +4872,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10168,
+        "uuid": "d06ddcee63883494021d3b8ea15fe11bd4e07f33",
         "net_type": "tor",
         "description": "20350A8BB9B1C79DA0D6DF7FC384F824839D406F6181FD338019CC74261F42D65903E199FEE501",
         "lang": "english",
@@ -4901,7 +4901,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10169,
+        "uuid": "1c2b9cdd5be9e53083f7f82ed79ee6b8ecc06451",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4930,7 +4930,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10170,
+        "uuid": "93a28620254bbc360ff2849d4239f63e608556f2",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -4959,7 +4959,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10171,
+        "uuid": "bdd8cf61e85d64a1cb674b167b1cd69281ab6d59",
         "net_type": "tor",
         "description": "nonamehack2023 @ gmail.comF1D0F45DBC3F4CA784D5D0D0DD8ADCD31AB5645BE00293FE6302CD0381F6527AC647A61CB08D",
         "lang": "english",
@@ -4988,7 +4988,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10172,
+        "uuid": "766304145eb090febc0fac9290704c04c764553b",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -5017,7 +5017,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10173,
+        "uuid": "5080dfa64588b2de0d1c18007cd5e9cd78366853",
         "net_type": "tor",
         "description": "4D598799696AD5399FABF7D40C4D1BE9F05D74CFB311047D7391AC0BF64BED47B56EEE66A528",
         "lang": "english",
@@ -5046,7 +5046,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10174,
+        "uuid": "7ac26503ac218503eb2dc65111c8a5b12dc4546b",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -5075,7 +5075,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10175,
+        "uuid": "d1f353adaed3d2b7f4bbcb14ef90fcd1f0e3f9a1",
         "net_type": "tor",
         "description": "https://t.me/MogilevichRansom",
         "lang": "english",
@@ -5104,7 +5104,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10176,
+        "uuid": "ea4c570ede827d2926ffdf7a93506adb42cd63c9",
         "net_type": "tor",
         "description": "",
         "lang": "english",
@@ -5133,7 +5133,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10177,
+        "uuid": "b0e746c2a5ca8d44391a811ba33179fad4110d79",
         "net_type": "tor",
         "description": "https://www.europol.europa.eu/media-press/newsroom/news/law-enforcement-disrupt-worlds-biggest-ransomware-operation",
         "lang": "english",
@@ -5162,7 +5162,7 @@
         "goods_user_count": 0
     },
     {
-        "uuid": 10178,
+        "uuid": "c69ecfe86e85c3ed36d353d7d4f0dfefbf919d9c",
         "net_type": "tor",
         "description": "",
         "lang": "english",

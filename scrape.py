@@ -131,7 +131,7 @@ class webScrapy:
                 'subject' : '勒索',
                 'content' : page.content(),
                 'simhash_values' : None,
-                'label' : {'type':'勒索','group_name':'group_name'},
+                'label' : {'type':'勒索','group_name':site["label"]["name"]},
                 'threaten_level' : '中危',
                 'snapshot' : None,
                 'name' : screenshots_name,
@@ -153,7 +153,7 @@ class webScrapy:
         """
         self.browser.close()
 
-    def appender(self,post_title="", group_name="", content="", website="", published="", post_url="",email="", download="", country="",btc="",eth="",price="",page=None):
+    def appender(self,post_title="", group_name="", content="", website="", published="", post_url="",email="", download="", country="",btc="",eth="",price="",industry="",page=None):
         """
         将提取到的post添加到posts表中
         """
@@ -161,10 +161,14 @@ class webScrapy:
         e = group_name + post_title
         self.hash_object.update(e.encode())
         uuid = self.hash_object.hexdigest()
+
+        self.hash_object.update(group_name.encode())
+        user_id = self.hash_object.hexdigest()
         post = {
             "platform" : group_name,
             "ransom_name" : group_name,
             "uuid" : uuid,
+            "user_id" : user_id,
             "user_name" : group_name,
             "publish_time" : published,
             "content" : content,
@@ -183,6 +187,7 @@ class webScrapy:
                 "victim" : website,
                 "pageid" : page["uuid"] if page else None,
                 "price" : price,
+                "industry" : industry,
             },
             "extract_entity" : [],
             "threaten_level" : "中危"
