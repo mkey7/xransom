@@ -4,8 +4,9 @@ from playwright_stealth import stealth_sync
 from datetime import datetime
 from PIL import Image
 from PIL import ImageDraw
-from commen import openjson
 import json
+import hashlib #sha1
+
 
 class webScrapy:
     """
@@ -22,9 +23,10 @@ class webScrapy:
             'http':  'http://' + str(self.ip) + ':' + str(self.port),
             'https': 'https://' + str(self.ip) + ':' + str(self.port)
         } 
-        self.sites = openjson('sites.json')
-        self.posts = openjson('posts.json')
-        self.pages = openjson('pages.json')
+        self.sites = self.openjson('sites.json')
+        self.posts = self.openjson('posts.json')
+        self.pages = self.openjson('pages.json')
+        self.hash_object = hashlib.sha1()
 
     def torBrowser(self,ip='127.0.0.1',port=9150):
         """
@@ -106,10 +108,15 @@ class webScrapy:
             with open(filename, 'w', encoding='utf-8') as sitesource:
                 sitesource.write(page.content())
                 sitesource.close()
+                
+            # uuid
+            e = url+page.title()
+            self.hash_object.update(e.encode())
+            sha1_value = self.hash_object.hexdigest()
 
             apage = {
                 'platform' : site['label']['name'] ,
-                'uuid' : str(current_timestamp),
+                'uuid' : sha1_value,
                 'crawl_time' : str(current_timestamp),
                 'domain' : site['domain'],
                 'content_encode' : None,
@@ -132,11 +139,8 @@ class webScrapy:
                 'image_id' : None
             }
 
-            self.pages.append(apage)
-
-            with open("pages.json", "w", encoding='utf-8') as jsonfile:
-                json.dump(self.pages, jsonfile, indent=4, ensure_ascii=False)
-
+            self.existingpage(apage)
+            self.writejson("pages.json",self.pages)
             return apage
 
         except:
@@ -149,19 +153,21 @@ class webScrapy:
         """
         self.browser.close()
 
-    def appender(self,post_title="", group_name="", description="", website="", published="", post_url="",email="",price="",pay="", download="", country="",screenPath='', sourcePath="",page=None):
+    def appender(self,post_title="", group_name="", content="", website="", published="", post_url="",email="", download="", country="",btc="",eth="",page=None):
         """
         将提取到的post添加到posts表中
         """
-        if page:
-            uuid = page["uuid"]
+        # uuid
+        e = group_name + post_title
+        self.hash_object.update(e.encode())
+        uuid = self.hash_object.hexdigest()
         post = {
             "platform" : group_name,
             "ransom_name" : group_name,
-            "uuid" : uuid if page else None,
+            "uuid" : uuid,
             "user_name" : group_name,
             "publish_time" : published,
-            "content" : description,
+            "content" : content,
             "url" : post_url,
             "title" : post_title,
             "crawl_time" : None,
@@ -169,29 +175,57 @@ class webScrapy:
             "images" : [],
             "attachments" : download,
             "email" : email,
-            "bitcoin_addresses" : pay,
-            "eth_addresses" : pay,
+            "bitcoin_addresses" : btc,
+            "eth_addresses" : eth,
             "lang" : "english",
             "label" : {
                 "country" : country,
                 "victim" : website,
+                "pageid" : page["uuid"] if page else None,
             },
             "extract_entity" : [],
             "threaten_level" : "中危"
         }
-        if not self.existingpost(post):
-            self.posts.append(post)
+        self.existingpost(post)
+        self.writejson("posts.json",self.posts)
 
-            with open("posts.json", "w", encoding='utf-8') as jsonfile:
-                json.dump(self.posts, jsonfile, indent=4, ensure_ascii=False)
+    def existingpost(self,post):
+        '''
+        check if a post already exists in posts.json
+        '''
+        for p in self.posts:
+            if p['ransom_name'].lower() == post["ransom_name"].lower() and post['title'] == p['title']:
+                print('post already exists: ' + post["title"])
+                p = post
+                return True
+        print('post does not exist: ' + post["title"])
+        self.posts.append(post)
+        return False
 
-def existingpost(self,post):
-    '''
-    check if a post already exists in posts.json
-    '''
-    for p in self.posts:
-        if p['ransom_name'].lower() == post["ransom_name"].lower() and post['title'] == p['title']:
-            #dbglog('post already exists: ' + post_title)
-            return True
-    print('post does not exist: ' + post["title"])
-    return False
+    def existingpage(self,page):
+        '''
+        check if a page already exists in pages.json
+        '''
+        for p in self.pages:
+            if p['uuid'] == page["uuid"]:
+                print('page already exists: ' + page["title"])
+                p = page
+                return True
+        print('page does not exist: ' + page["title"])
+        self.pages.append(page)
+        return False
+
+    def openjson(self,file):
+        '''
+        opens a file and returns the json as a dict
+        '''
+        with open(file, encoding='utf-8') as jsonfile:
+            data = json.load(jsonfile)
+        return data
+
+    def writejson(self,file,data):
+        '''
+        opens a file and write the json to a json file
+        '''
+        with open(file,"w", encoding='utf-8') as jsonfile:
+            json.dump(data, jsonfile, indent=4, ensure_ascii=False)
