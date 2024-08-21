@@ -153,7 +153,7 @@ class webScrapy:
         """
         self.browser.close()
 
-    def appender(self,post_title="", group_name="", content="", website="", published="", post_url="",email="", download="", country="",btc="",eth="",page=None):
+    def appender(self,post_title="", group_name="", content="", website="", published="", post_url="",email="", download="", country="",btc="",eth="",price="",page=None):
         """
         将提取到的post添加到posts表中
         """
@@ -182,6 +182,7 @@ class webScrapy:
                 "country" : country,
                 "victim" : website,
                 "pageid" : page["uuid"] if page else None,
+                "price" : price,
             },
             "extract_entity" : [],
             "threaten_level" : "中危"

@@ -13,7 +13,6 @@ import html
 import datetime
 
 def main(scrapy,page,site):
-    post_url = "https://akiral2iz6a7qgd3ayp3l6yub7xx2uep76idk3u2kollpj5z3z636bad.onion"
     try:
         soup=BeautifulSoup(page["page_source"],'html.parser')
         jsonpart = soup.pre.contents
@@ -30,7 +29,7 @@ def main(scrapy,page,site):
             combined_datetime = datetime.datetime.combine(dt_object.date(), current_time)
             published = combined_datetime.strftime("%Y-%m-%d %H:%M:%S.%f")
             #published = dt_object.strftime("%Y-%m-%d %H:%M:%S.%f")
-            scrapy.appender(title.replace('\n',''), 'akira', description.replace('\n',''),'',published,post_url,page=page)
+            scrapy.appender(title.replace('\n',''), 'akira', description.replace('\n',''),'',published,page["url"],page=page)
     except:
         print('akira: ' + 'parsing fail')
         pass    
