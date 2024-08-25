@@ -27,11 +27,7 @@ class webScrapy:
         self.sites = self.openjson('sites.json')
         self.posts = self.openjson('posts.json')
         self.pages = self.openjson('pages.json')
-<<<<<<< HEAD
-        self.hash_object = hashlib.sha1()
-=======
         self.users = self.openjson('users.json')
->>>>>>> 326597d (parser)
 
     def torBrowser(self,ip='127.0.0.1',port=9150):
         """
