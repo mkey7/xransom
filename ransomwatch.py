@@ -2,6 +2,7 @@ import scrape
 import os
 import importlib
 
+<<<<<<< HEAD
 print("start xransom!")
 
 scrapy = scrape.webScrapy()
@@ -27,3 +28,22 @@ for site in scrapy.sites:
         print(f"The script for organization: {parse_name} does not have a main function.")
     
 scrapy.close()
+=======
+if __name__ == "__main__":
+
+    print("start xransom!")
+
+    scrapy = scrape.webScrapy()
+    scrapy.socks()
+    scrapy.browserInit()
+
+    directory = "parsers/"
+    files_and_dirs = os.listdir(directory)
+
+    for name in files_and_dirs:
+        if name[0:2] == "__":
+            continue
+        scrapy.run(name[0:-3])
+
+    scrapy.close()
+>>>>>>> 326597d (parser)

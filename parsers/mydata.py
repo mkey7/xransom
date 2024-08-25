@@ -10,28 +10,23 @@ Rappel : def appender(post_title, group_name, description="", website="", publis
 
 import os
 from bs4 import BeautifulSoup
-from sharedutils import errlog, find_slug_by_md5, extract_md5_from_filename
-from parse import appender
 
 
-def main():
-    for filename in os.listdir('source'):
-        try:
-            if filename.startswith('mydata-'):
-                html_doc='source/'+filename
-                file=open(html_doc,'r')
-                soup=BeautifulSoup(file,'html.parser')
-                divs_name=soup.find_all('div', class_='b_block')
-                for div in divs_name:
-                    header = div.find('a', class_="a_title")
-                    title = header.text.strip()
-                    url = header.get('href') or header['href'] 
-                    description = div.find('div', style='line-height:20px; padding-top:5px; margin-bottom:30px;').text.strip()
-                    try:
-                        url = find_slug_by_md5('mydata', extract_md5_from_filename(html_doc)) + "/" + str(url)
-                    except:
-                        url = 'http://mydatae2d63il5oaxxangwnid5loq2qmtsol2ozr6vtb7yfm5ypzo6id.onion' +  "/" + str(url)
-                    appender(title, 'mydata', description,"","",url)
-                file.close()
-        except:
-            errlog("Failed during : " + filename)
+def main(scrapy,page,site):
+    url = page["domain"]
+    try:
+        soup=BeautifulSoup(page["page_source"],'html.parser')
+        divs_name=soup.find_all('div', class_='b_block')
+        for div in divs_name:
+            header = div.find('a', class_="a_title")
+            title = header.text.strip()
+            post = header.get('href') or header['href'] 
+            description = div.find('div', style='line-height:20px; padding-top:5px; margin-bottom:30px;').text.strip()
+            try:
+                post_url = url + str(post)
+            except:
+                post_url = 'http://mydatae2d63il5oaxxangwnid5loq2qmtsol2ozr6vtb7yfm5ypzo6id.onion' +  "/" + str(post)
+            scrapy.appender(title, 'mydata', description,"","",url,page=page)
+
+    except:
+        print('mydata: ' + 'parsing fail: '+url)

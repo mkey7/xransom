@@ -52,6 +52,7 @@ print(page)
 group_name = page["platform"]
 parse_name = f"parsers.{group_name}"
 
+<<<<<<< HEAD
 try:
     module = importlib.import_module(parse_name)
     module.main(scrapy,page,site)
@@ -59,5 +60,12 @@ except ModuleNotFoundError:
     print(f"No script found for organization: {parse_name}")
 except AttributeError:
     print(f"The script for organization: {parse_name} does not have a main function.")
+=======
+    # for name in files_and_dirs:
+    #     if name[0:2] == "__":
+    #         continue
+    #     main(scrapy,name[0:-3])
+    scrapy.run("daixin")
+>>>>>>> 326597d (parser)
 
 scrapy.close()

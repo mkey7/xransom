@@ -9,38 +9,26 @@ Rappel : def appender(post_title, group_name, description="", website="", publis
 import os
 import re
 from bs4 import BeautifulSoup
-from sharedutils import errlog
-from parse import appender
 import json
 from datetime import datetime
 
 
-def main():
-    for filename in os.listdir('source'):
-        try:
-            if filename.startswith('ransomhouse-'):
-                date_format = "%d/%m/%Y"
-                desired_format = "%Y-%m-%d %H:%M:%S.%f"
-                html_doc='source/'+filename
-                file=open(html_doc, 'r')
-                soup=BeautifulSoup(file,'html.parser')
-                jsonpart= soup.pre.contents 
-                data = json.loads(jsonpart[0]) 
-                for element in data['data']:
-                    title = element['header']
-                    link = element['id']
-                    url = 'zohlm7ahjwegcedoz7lrdrti7bvpofymcayotp744qhx6gjmxbuo2yid'
-                    post_url = 'http://' + url + '.onion/r/' + link
-                    website = element['url']
-                    try:
-                        date_string = element['actionDate']
-                        datetime_obj = datetime.strptime(date_string, date_format)
-                        formated_date = datetime_obj.strftime(desired_format)
-                    except:
-                        formated_date = ''
-                    description = re.sub(r'<[^>]*>', '',element['info'])
-                    appender(title, 'ransomhouse', description,website,formated_date,post_url)
-                file.close()
-        except:
-            errlog('ransomhouse: ' + 'parsing fail')
-            pass
+def main(scrapy,page,site):
+    url = page["domain"]
+    try:
+        soup=BeautifulSoup(page["page_source"],'html.parser')
+        jsonpart= soup.pre.contents 
+        data = json.loads(jsonpart[0]) 
+        for element in data['data']:
+            title = element['header']
+            link = element['id']
+            post_url = url + link
+            website = element['url']
+            try:
+                date_string = element['actionDate']
+            except:
+                formated_date = ''
+            description = re.sub(r'<[^>]*>', '',element['info'])
+            scrapy.appender(title, 'ransomhouse', description,website,"",post_url,page=page)
+    except:
+        print('ransomhouse: ' + 'parsing fail: '+url)

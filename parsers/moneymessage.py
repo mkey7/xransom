@@ -8,49 +8,40 @@ Rappel : def appender(post_title, group_name, description="", website="", publis
 """
 
 import os
-#import re
-#import json
 from bs4 import BeautifulSoup
-from sharedutils import errlog
-from parse import appender
 from datetime import datetime
 
-def main():
-    for filename in os.listdir('source'):
-        try:
-           if filename.startswith('moneymessage-'):
-                html_doc='source/'+filename
-                file=open(html_doc,'r')
-                soup = BeautifulSoup(file, "html.parser")
+def main(scrapy,page,site):
+    url = page["domain"]
+    try:
+        soup=BeautifulSoup(page["page_source"],'html.parser')
 
-                # Find all <a> elements with the specified class
-                a_elements = soup.find_all("a", class_="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-j1mjqc")
+        # Find all <a> elements with the specified class
+        a_elements = soup.find_all("a", class_="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-j1mjqc")
 
-                # Extract the link, title, and date information and store them in lists
-                links = [a["href"] for a in a_elements]
-                titles = [a.find("p").get_text() for a in a_elements]
+        # Extract the link, title, and date information and store them in lists
+        links = [a["href"] for a in a_elements]
+        titles = [a.find("p").get_text() for a in a_elements]
 
-                # Print the extracted information
-                for link, title in zip(links, titles):
-                    link = "http://blogvl7tjyjvsfthobttze52w36wwiz34hrfcmorgvdzb6hikucb7aqd.onion"+link
-                    linn = ""
-                    appender(title, 'moneymessage', '','','',link)
+        # Print the extracted information
+        for link, title in zip(links, titles):
+            link = url + link
+            linn = ""
+            scrapy.appender(title, 'moneymessage', '','','',link,page=page)
 
-                a_elements = soup.find_all("a", class_="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-xvpw3o")
+        a_elements = soup.find_all("a", class_="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-xvpw3o")
 
-                # Extract the link, title, and date information and store them in lists
-                links = [a["href"] for a in a_elements]
-                titles = [a.find("p").get_text() for a in a_elements]
+        # Extract the link, title, and date information and store them in lists
+        links = [a["href"] for a in a_elements]
+        titles = [a.find("p").get_text() for a in a_elements]
 
-                # Print the extracted information
-                for link, title in zip(links, titles):
-                    link = "http://blogvl7tjyjvsfthobttze52w36wwiz34hrfcmorgvdzb6hikucb7aqd.onion"+link
-                    link = ""
-                    appender(title, 'moneymessage', '','','',link)
-                file.close()
-        except:
-            errlog('moneymessage: ' + 'parsing fail')
-            pass
+        # Print the extracted information
+        for link, title in zip(links, titles):
+            link = url + link
+            link = ""
+            scrapy.appender(title, 'moneymessage', '','','',link,page=page)
 
+    except:
+        print('moneymessage: ' + 'parsing fail: '+url)
 
 

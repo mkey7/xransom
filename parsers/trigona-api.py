@@ -7,20 +7,10 @@
 Rappel : def appender(post_title, group_name, description="", website="", published="", post_url=""):
 """
 import requests
-import socks
-import json
-from sharedutils import stdlog, dbglog, errlog   # , honk
-from sharedutils import openjson,proxies
 from datetime import datetime
-from parse import appender
 import re
 
 
-# Assuming Tor is running on default port 9050.
-# proxies = {
-    # 'http': 'socks5h://localhost:9050',
-    # 'https': 'socks5h://localhost:9050'
-# }
 
 def fetch_json_from_onion_url(onion_url):
     try:
@@ -48,19 +38,22 @@ def convert_date_or_current(date_str):
     # Reformat to the desired format
     return date_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
 
+# TODO 需要修改
+def main(scrapy,page,site):
+    url = page["domain"]
+    try:
+        data = fetch_json_from_onion_url(url)
+        if data is not None:
+            # Extracting the 'data' field
+            leaks_data = data.get('data', {}).get('leaks', [])
 
-def main():
-    url= 'http://krsbhaxbki6jr4zvwblvkaqzjkircj7cxf46qt3na5o5sj2hpikbupqd.onion/api'
-    data = fetch_json_from_onion_url(url)
-    if data is not None:
-        # Extracting the 'data' field
-        leaks_data = data.get('data', {}).get('leaks', [])
-
-        # Iterating through the leaks and printing details
-        for leak in leaks_data:
-            title = leak.get('title')
-            description = remove_html_tags(leak.get('short_descryption', ''))
-            website = leak.get('external_link','')
-            pubdate = convert_date_or_current(leak.get('created_at'))
-            link = url.replace('api','') + 'leak/' +  str(leak['rndid'])
-            appender(title, 'trigona', description.replace('\n',' '),website, pubdate, link)
+            # Iterating through the leaks and printing details
+            for leak in leaks_data:
+                title = leak.get('title')
+                description = remove_html_tags(leak.get('short_descryption', ''))
+                website = leak.get('external_link','')
+                pubdate = convert_date_or_current(leak.get('created_at'))
+                link = url.replace('api','') + 'leak/' +  str(leak['rndid'])
+                scrapy.appender(title, 'trigona', description.replace('\n',' '),website, pubdate, link,page=page)
+    except:
+        print('threeam: ' + 'parsing fail: '+url)

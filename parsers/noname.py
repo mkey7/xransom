@@ -2,8 +2,6 @@ import xml.etree.ElementTree as ET
 import requests
 from io import StringIO
 from datetime import datetime
-from sharedutils import stdlog, dbglog, errlog   # , honk
-from parse import appender
 
 
 # Set up Tor SOCKS proxy
@@ -24,7 +22,7 @@ def convert_pubdate_format(pub_date_str):
     except ValueError:
         return None
 
-
+# TODO 该解析需要重构
 def main():
     try:
         response = requests.get(onion_url, proxies=proxies, verify=False)

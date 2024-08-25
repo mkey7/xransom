@@ -6,6 +6,7 @@ from PIL import Image
 from PIL import ImageDraw
 import json
 import hashlib #sha1
+import importlib
 
 
 class webScrapy:
@@ -14,7 +15,7 @@ class webScrapy:
     """
     def __init__(self,ip='115.160.185.148',port=12908) -> None:
         """
-        初始化，设置代理，读取数据表
+        初始化，设置代理(http)，读取数据表
         """
         self.ip = ip
         self.port = port
@@ -26,11 +27,15 @@ class webScrapy:
         self.sites = self.openjson('sites.json')
         self.posts = self.openjson('posts.json')
         self.pages = self.openjson('pages.json')
+<<<<<<< HEAD
         self.hash_object = hashlib.sha1()
+=======
+        self.users = self.openjson('users.json')
+>>>>>>> 326597d (parser)
 
     def torBrowser(self,ip='127.0.0.1',port=9150):
         """
-        将代理设置为torBrowser
+        将代理协议设置为socks5
         """
         self.ip = ip
         self.port = port
@@ -153,6 +158,50 @@ class webScrapy:
         """
         self.browser.close()
 
+    def run(self,group_name):
+        """
+        爬取指定组织的网站并调用解析模块实行解析
+        """
+        for site in self.sites:
+            if site["label"]["name"] != group_name:
+                continue
+            page = self.scrape(site)
+            if not page:
+                continue
+            # 调用解析模块
+            self.parser(group_name,page,site)
+            
+            # 更新site
+            site["last_publish_time"] = page["publish_time"]
+            if site["first_publish_time"] == "":
+                site["first_publish_time"] = site["last_publish_time"]
+            site["last_status"] = True
+            site["is_recent_online"] = True
+            self.writejson("sites.json",self.sites)
+            
+            # 更新user
+            for user in self.users:
+                if user["platform"] == group_name:
+                    user["last_active_time"] = page["publish_time"] 
+                    user["crawl_time"] = page["publish_time"] 
+                    if user["register_time"] == "":
+                        user["register_time"] = page["publish_time"] 
+            self.writejson("users.json",self.users)
+
+    def parser(self,group_name,page,site):
+        """
+        调用对应勒索组织的解析模块
+        """
+        parse_name = f"parsers.{group_name}"
+
+        try:
+            module = importlib.import_module(parse_name)
+            module.main(self,page,site)
+        except ModuleNotFoundError:
+            print(f"No script found for organization: {parse_name}")
+        except AttributeError:
+            print(f"The script for organization: {parse_name} does not have a main function.")
+
     def appender(self,post_title="", group_name="", content="", website="", published="", post_url="",email="", download="", country="",btc="",eth="",price="",industry="",page=None):
         """
         将提取到的post添加到posts表中
@@ -174,7 +223,7 @@ class webScrapy:
             "content" : content,
             "url" : post_url,
             "title" : post_title,
-            "crawl_time" : None,
+            "crawl_time" : page["crawl_time"],
             "source" : "tor",
             "images" : [],
             "attachments" : download,
