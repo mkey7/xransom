@@ -10,8 +10,6 @@ import os
 import re
 from bs4 import BeautifulSoup
 import json
-from datetime import datetime
-
 
 def main(scrapy,page,site):
     url = page["domain"]

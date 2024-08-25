@@ -1,9 +1,6 @@
-import os
 import re
 from bs4 import BeautifulSoup
 import json
-from sharedutils import errlog
-from parse import appender
 
 def main(scrapy,page,site):
     url = page["domain"]

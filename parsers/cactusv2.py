@@ -9,9 +9,7 @@ Rappel : def appender(post_title, group_name, description="", website="", publis
 
 import os
 from bs4 import BeautifulSoup
-from parse import appender
 from datetime import datetime
-from sharedutils import stdlog, errlog
 import json
 import re
 

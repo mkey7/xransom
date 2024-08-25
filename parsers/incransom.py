@@ -8,9 +8,7 @@ Rappel : def appender(post_title, group_name, description="", website="", publis
 """
 import os
 from bs4 import BeautifulSoup
-from parse import appender
 from datetime import datetime
-from sharedutils import errlog, find_slug_by_md5, extract_md5_from_filename,stdlog, proxies,get_website
 from urllib.parse import urlparse
 import requests
 

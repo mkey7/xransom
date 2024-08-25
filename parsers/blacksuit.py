@@ -9,7 +9,6 @@ Rappel : def appender(post_title, group_name, description="", website="", publis
 """
 import os
 from bs4 import BeautifulSoup
-from sharedutils import errlog, find_slug_by_md5, extract_md5_from_filename
 
 def main(scrapy,page,site):
     url_site = page["domain"]

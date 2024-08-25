@@ -8,8 +8,6 @@ Rappel : def appender(post_title, group_name, description="", website="", publis
 """
 import os
 from bs4 import BeautifulSoup
-from sharedutils import errlog
-from parse import appender
 
 def main(scrapy,page,site):
     url = page["domain"]

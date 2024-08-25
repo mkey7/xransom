@@ -7,7 +7,6 @@
 +------------------------------+------------------+----------+
 """
 
-import os
 from bs4 import BeautifulSoup
 from datetime import datetime
 

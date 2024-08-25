@@ -1,9 +1,5 @@
 import requests
-from sharedutils import stdlog, dbglog, errlog   # , honk
-from sharedutils import openjson, proxies, existingpost
-from sharedutils import get_website, hex_url
 from datetime import datetime
-from parse import appender
 import urllib3
 
 # NOTE 这个网站目前非常复杂，需要重构

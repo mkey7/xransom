@@ -24,14 +24,13 @@ def main(scrapy,page,site):
             post = div.find('a', {'class': 'btn btn-primary btn-sm'})
             try: 
                 post = post.get('href')
-                url = "wtyafjyhwqrgo4a45wdvvwhen3cx4euie73qvlhkhvlrexljoyuklaad"
-                url = 'http://' + url + '.onion' + post
+                post_url = url + post
             except:
-                url = ''
+                post_url = ''
             publish = div.find('span', {'class': 'badge badge-info'}).text.strip()
             date_obj = datetime.strptime(publish, "%d/%m/%Y %H:%M")
             formatted_date = date_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
-            scrapy.appender(title, 'mallox', description,"",formatted_date,url,page=page)
+            scrapy.appender(title, 'mallox', description,"",formatted_date,post_url,page=page)
 
     except:
         print('mallox: ' + 'parsing fail: '+url)
