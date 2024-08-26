@@ -112,8 +112,7 @@ class webScrapy:
                 
             # uuid
             e = url+page.title()
-            self.hash_object.update(e.encode())
-            sha1_value = self.hash_object.hexdigest()
+            sha1_value = self.calculate_sha1(e)
 
             apage = {
                 'platform' : site['label']['name'] ,
@@ -204,11 +203,9 @@ class webScrapy:
         """
         # uuid
         e = group_name + post_title
-        self.hash_object.update(e.encode())
-        uuid = self.hash_object.hexdigest()
+        uuid = self.calculate_sha1(e)
 
-        self.hash_object.update(group_name.encode())
-        user_id = self.hash_object.hexdigest()
+        user_id = self.calculate_sha1(group_name)
         post = {
             "platform" : group_name,
             "ransom_name" : group_name,
@@ -280,3 +277,11 @@ class webScrapy:
         '''
         with open(file,"w", encoding='utf-8') as jsonfile:
             json.dump(data, jsonfile, indent=4, ensure_ascii=False)
+            
+    def calculate_sha1(self,data):
+        # 创建一个新的sha1 hash对象
+        hash_object = hashlib.sha1()
+        # 提供需要散列的数据
+        hash_object.update(data.encode())
+        # 获取十六进制格式的散列值
+        return hash_object.hexdigest()

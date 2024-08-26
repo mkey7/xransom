@@ -1,4 +1,3 @@
-import os
 import scrape
 
 if __name__ == "__main__":
