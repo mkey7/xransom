@@ -8,7 +8,6 @@ import json
 import hashlib #sha1
 import importlib
 
-
 class webScrapy:
     """
     爬虫模块：tor网络代理、爬虫、保存json数据
@@ -51,14 +50,13 @@ class webScrapy:
         except:
             print("failed to launch playwright!")
 
-
-
     def scrape(self,site,post_url=""):
         """
         爬取网页，并将其添加到pages表中
         """
         url = post_url if post_url else site["url"]
         print("start scraping : " + site['label']['name'] + " : " + url)
+
         try:
             context = self.browser.new_context(ignore_https_errors= True)
             page = context.new_page()
@@ -66,6 +64,7 @@ class webScrapy:
 
             try:
                 page.goto(url, wait_until='domcontentloaded', timeout = 120000)
+                status_code = page.status()  # 获取页面状态码
             except PlaywrightTimeoutError:
                 print(f"Attempt  failed: Timeout while loading the page {site['url']}")
                 return None
@@ -85,9 +84,9 @@ class webScrapy:
             page.wait_for_timeout(10000)
 
             # 测试tor网络
-            if "503 - Forwarding failure (Privoxy@localhost.localdomain)" == page.title():
-                print(page.content())
-                print("503 Error failed to get :" + site['url'])
+            if "503 - Forwarding failure (Privoxy@localhost.localdomain)" == page.title() or status_code[0] == "4":
+                # print(page.content())
+                print("failed to get :" + site['url'])
                 return None
 
             current_datetime = datetime.now()
@@ -131,7 +130,10 @@ class webScrapy:
                 'subject' : '勒索',
                 'content' : page.content(),
                 'simhash_values' : None,
-                'label' : {'type':'勒索','group_name':site["label"]["name"]},
+                'label' : {
+                    'type':'勒索',
+                    'group_name':site["label"]["name"]
+                },
                 'threaten_level' : '中危',
                 'snapshot' : None,
                 'name' : screenshots_name,
@@ -160,9 +162,16 @@ class webScrapy:
         for site in self.sites:
             if site["label"]["name"] != group_name:
                 continue
+
             page = self.scrape(site)
+
             if not page:
+                # 更新site
+                site["last_status"] = False
+                site["is_recent_online"] = False
+                self.writejson("sites.json",self.sites)
                 continue
+
             # 调用解析模块
             self.parser(group_name,page,site)
             
@@ -204,8 +213,8 @@ class webScrapy:
         # uuid
         e = group_name + post_title
         uuid = self.calculate_sha1(e)
-
         user_id = self.calculate_sha1(group_name)
+
         post = {
             "platform" : group_name,
             "ransom_name" : group_name,
@@ -234,6 +243,7 @@ class webScrapy:
             "extract_entity" : [],
             "threaten_level" : "中危"
         }
+
         self.existingpost(post)
         self.writejson("posts.json",self.posts)
 
@@ -242,7 +252,7 @@ class webScrapy:
         check if a post already exists in posts.json
         '''
         for p in self.posts:
-            if p['ransom_name'].lower() == post["ransom_name"].lower() and post['title'] == p['title']:
+            if p['uuid'] == post["uuid"]:
                 print('post already exists: ' + post["title"])
                 p = post
                 return True
