@@ -10,6 +10,7 @@ import os
 from bs4 import BeautifulSoup
 
 # TODO 该这个网站了
+# NOTE 网站没能打开
 def main(scrapy,page,site):
     url = page["domain"]
     try:

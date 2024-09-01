@@ -11,6 +11,7 @@ Codé par @JMousqueton pour Ransomware.live
 from bs4 import BeautifulSoup
 from datetime import datetime
 
+# NOTE lockbit3组织改版了，需要验证登录，没法实现了
 def main(scrapy,page,site):
     url = page["domain"]
     try:

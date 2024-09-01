@@ -11,6 +11,7 @@ import os
 from bs4 import BeautifulSoup
 from datetime import datetime
 
+# NOTE site中没有找到该组织的站点
 def main(scrapy,page,site):
     url = page["domain"]
     try:

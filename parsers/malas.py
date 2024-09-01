@@ -13,6 +13,7 @@ import re
 from html import unescape
 
 # TODO 这个网页存在问题，需要重构
+# NOTE 网站打开，时txt
 def main(scrapy,page,site):
     url = page["domain"]
     try:
@@ -30,4 +31,4 @@ def main(scrapy,page,site):
                 encoded_description = unescape(description)
                 clean_description = re.sub(r"<.*?>", "", encoded_description)
                 convert_description = clean_description.replace('&rsquo;','`')
-                appender(title,'malas',convert_description.replace('\n',' '),'',formatted_date,link)
+                scrapy.appender(title,'malas',convert_description.replace('\n',' '),'',formatted_date,link)
