@@ -63,8 +63,8 @@ class webScrapy:
             stealth_sync(page)
 
             try:
-                page.goto(url, wait_until='domcontentloaded', timeout = 120000)
-                status_code = page.status()  # 获取页面状态码
+                response = page.goto(url, wait_until='domcontentloaded', timeout = 120000)
+                http_status_code = str(response.status)  # 获取页面状态码
             except PlaywrightTimeoutError:
                 print(f"Attempt  failed: Timeout while loading the page {site['url']}")
                 return None
@@ -84,7 +84,7 @@ class webScrapy:
             page.wait_for_timeout(10000)
 
             # 测试tor网络
-            if "503 - Forwarding failure (Privoxy@localhost.localdomain)" == page.title() or status_code[0] == "4":
+            if "503 - Forwarding failure (Privoxy@localhost.localdomain)" == page.title() or http_status_code[0] == "4":
                 # print(page.content())
                 print("failed to get :" + site['url'])
                 return None

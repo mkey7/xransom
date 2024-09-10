@@ -8,7 +8,7 @@ if __name__ == "__main__":
     # scrapy.torHttp()
     scrapy.browserInit()
 
-    name = ""
+    name = "0mega"
     scrapy.run(name)
 
     scrapy.close()
