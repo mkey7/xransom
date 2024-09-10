@@ -12,7 +12,7 @@ class webScrapy:
     """
     爬虫模块：tor网络代理、爬虫、保存json数据
     """
-    def __init__(self,ip='127.0.0.1',port=9150) -> None:
+    def __init__(self,ip='43.154.195.176',port=9050) -> None:
         """
         初始化，设置代理(http)，读取数据表
         """
@@ -28,7 +28,7 @@ class webScrapy:
         self.pages = self.openjson('pages.json')
         self.users = self.openjson('users.json')
 
-    def torHttp(self,ip='43.154.195.176',port=9150):
+    def torHttp(self,ip='43.154.195.176',port=9050):
         """
         将代理协议设置为socks5
         """
@@ -40,7 +40,7 @@ class webScrapy:
             'https': 'https://' + str(self.ip) + ':' + str(self.port)
         } 
 
-    def browser(self):
+    def browserInit(self):
         """
         初始化playwright
         """

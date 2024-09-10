@@ -6,7 +6,7 @@ if __name__ == "__main__":
 
     scrapy = scrape.webScrapy()
     # scrapy.torHttp()
-    scrapy.browser()
+    scrapy.browserInit()
 
     name = ""
     scrapy.run(name)

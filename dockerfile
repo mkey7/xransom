@@ -11,9 +11,6 @@ RUN apt-get install -y \
     make curl python3 pip \
     vim cron
 
-
-COPY requirements.txt /home/requirements.txt
-
 RUN pip3 install -r /home/requirements.txt \
 	--break-system-packages
 
