@@ -6,8 +6,8 @@ if __name__ == "__main__":
     print("start xransom!")
 
     scrapy = scrape.webScrapy()
-    scrapy.socks()
-    scrapy.browserInit()
+    # scrapy.torHttp()
+    scrapy.browser()
 
     directory = "parsers/"
     files_and_dirs = os.listdir(directory)

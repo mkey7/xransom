@@ -12,25 +12,9 @@ class webScrapy:
     """
     爬虫模块：tor网络代理、爬虫、保存json数据
     """
-    def __init__(self,ip='115.160.185.148',port=12908) -> None:
+    def __init__(self,ip='127.0.0.1',port=9150) -> None:
         """
         初始化，设置代理(http)，读取数据表
-        """
-        self.ip = ip
-        self.port = port
-        self.proxy_path = "http://"+self.ip+":"+str(self.port)
-        self.proxies = {
-            'http':  'http://' + str(self.ip) + ':' + str(self.port),
-            'https': 'https://' + str(self.ip) + ':' + str(self.port)
-        } 
-        self.sites = self.openjson('sites.json')
-        self.posts = self.openjson('posts.json')
-        self.pages = self.openjson('pages.json')
-        self.users = self.openjson('users.json')
-
-    def torBrowser(self,ip='127.0.0.1',port=9150):
-        """
-        将代理协议设置为socks5
         """
         self.ip = ip
         self.port = port
@@ -38,6 +22,22 @@ class webScrapy:
         self.proxies = {
             'http':  'socks5h://' + str(self.ip) + ':' + str(self.port),
             'https': 'socks5h://' + str(self.ip) + ':' + str(self.port)
+        } 
+        self.sites = self.openjson('sites.json')
+        self.posts = self.openjson('posts.json')
+        self.pages = self.openjson('pages.json')
+        self.users = self.openjson('users.json')
+
+    def torHttp(self,ip='43.154.195.176',port=9150):
+        """
+        将代理协议设置为socks5
+        """
+        self.ip = ip
+        self.port = port
+        self.proxy_path = "http://"+self.ip+":"+str(self.port)
+        self.proxies = {
+            'http':  'http://' + str(self.ip) + ':' + str(self.port),
+            'https': 'https://' + str(self.ip) + ':' + str(self.port)
         } 
 
     def browser(self):
@@ -153,7 +153,10 @@ class webScrapy:
         """
         playwright运行完毕后关闭
         """
-        self.browser.close()
+        if hasattr(self, 'browser') and self.browser:
+            self.browser.close()
+        if hasattr(self, 'play') and self.play:
+            self.play.stop()
 
     def run(self,group_name):
         """
