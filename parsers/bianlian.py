@@ -47,9 +47,7 @@ def get_description(scrapy,site,url,title,published):
 def main(scrapy,page,site):
     url = page["domain"]
     try:
-        file = open(page["page_source"],'r')
-        soup=BeautifulSoup(file,'html.parser')
-        # soup=BeautifulSoup(page["page_source"],'html.parser')
+        soup=BeautifulSoup(page["page_source"],'html.parser')
         divs_name=soup.select('li')
         for div in divs_name:
             post = "http://"+url+div.a['href']
