@@ -141,9 +141,10 @@ class webScrapy:
                     'group_name':site["label"]["name"]
                 },
                 'threaten_level' : '中危',
-                'snapshot' : None,
-                'name' : screenshots_name,
-                'path' : screenshots_name,
+                'snapshot' : {
+                    'name' : sha1_value + '.png',
+                    'path' : 'screenshots/' 
+                },
                 'image_id' : None
             }
 
