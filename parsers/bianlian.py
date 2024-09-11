@@ -15,7 +15,9 @@ def get_description(scrapy,site,url,title,published):
     print("fetching bianlian-"+title)
     
     # todo 提取相关字段
-    soup=BeautifulSoup(page["page_source"],'html.parser')
+    file = open(page["page_source"],'r')
+    soup=BeautifulSoup(file,'html.parser')
+    # soup=BeautifulSoup(page["page_source"],'html.parser')
     post_title = soup.title.string
 
     body = soup.section
@@ -47,7 +49,9 @@ def get_description(scrapy,site,url,title,published):
 def main(scrapy,page,site):
     url = page["domain"]
     try:
-        soup=BeautifulSoup(page["page_source"],'html.parser')
+        file = open(page["page_source"],'r')
+        soup=BeautifulSoup(file,'html.parser')
+        # soup=BeautifulSoup(page["page_source"],'html.parser')
         divs_name=soup.select('li')
         for div in divs_name:
             post = "http://"+url+div.a['href']
