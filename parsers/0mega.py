@@ -12,7 +12,8 @@ from datetime import datetime
 
 def get_download(scrapy,url,site):
     page = scrapy.scrape(site,url)
-    soup=BeautifulSoup(page["page_source"],'html.parser')
+    file = open(page["page_source"],'r')
+    soup=BeautifulSoup(file,'html.parser')
     rows = soup.select('.tdownload') #[1:]
     downloads = []
     for row in rows:
@@ -26,7 +27,8 @@ def get_download(scrapy,url,site):
 
 def main(scrapy,page,site):
     try:
-        soup=BeautifulSoup(page["page_source"],'html.parser')
+        file = open(page["page_source"],'r')
+        soup=BeautifulSoup(file,'html.parser')
         rows = soup.select('.datatable tr.trow') #[1:]
         for row in rows:
             columns = row.find_all('td')
