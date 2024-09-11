@@ -119,8 +119,22 @@ class webScrapy:
             soup = BeautifulSoup(page.content(),'html.parser')
             text = soup.get_text()
 
-            meta = soup.find('meta', attrs={'charset': True})
-            encoding = meta['charset'] if meta else ""
+            metas = soup.find_all('meta')
+            meta_str = ""
+            encoding = ""
+            for meta in metas:
+                meta_str += meta + '\n'
+                    
+            # 查找带有charset的meta标签
+            meta_charset = soup.find('meta', charset=True)
+            if meta_charset:
+                encoding = meta_charset['charset']
+
+            # 查找带有Content-Type的meta标签
+            meta_content_type = soup.find('meta', attrs={'http-equiv': 'Content-Type'})
+            if meta_content_type and 'charset' in meta_content_type['content']:
+                content_type = meta_content_type['content']
+                encoding = content_type.split('charset=')[-1]
             
             hash1 = simhash.Simhash(text.split()).value
 
@@ -158,7 +172,7 @@ class webScrapy:
             return apage
 
         except:
-            print("failed to get :" + site['url'])
+            print("failed to get page:" + site['url'])
             return None
 
     def close(self):
