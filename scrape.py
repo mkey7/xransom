@@ -7,6 +7,7 @@ from PIL import ImageDraw
 import json
 import hashlib #sha1
 import importlib
+from bs4 import BeautifulSoup
 
 class webScrapy:
     """
@@ -89,9 +90,13 @@ class webScrapy:
                 print("failed to get :" + site['url'])
                 return None
 
+            # uuid
+            e = url+page.title()
+            sha1_value = self.calculate_sha1(e)
+
             current_datetime = datetime.now()
             current_timestamp = current_datetime.timestamp()
-            screenshots_name = 'screenshots/' + site['label']['name'] + '-' + str(current_timestamp) + '.png'
+            screenshots_name = 'screenshots/' + sha1_value + '.png'
             page.screenshot(path=screenshots_name, full_page=True)
             image = Image.open(screenshots_name)
             
@@ -104,14 +109,15 @@ class webScrapy:
             image.save(screenshots_name)
             
             # save page content
-            filename = 'source/' + site['label']['name'] + '-' + str(current_timestamp) + '.html'
+            filename = 'source/' + sha1_value + '.html'
             with open(filename, 'w', encoding='utf-8') as sitesource:
                 sitesource.write(page.content())
                 sitesource.close()
                 
-            # uuid
-            e = url+page.title()
-            sha1_value = self.calculate_sha1(e)
+            
+            # content
+            soup = BeautifulSoup(page.content(),'html.parser')
+            text = soup.get_text()
 
             apage = {
                 'platform' : site['label']['name'] ,
@@ -122,13 +128,13 @@ class webScrapy:
                 'lang' : 'english',
                 'meta' : None,
                 'net_type' : 'tor',
-                'page_source' : page.content(),
+                'page_source' : filename,
                 'title' : page.title(),
                 'url' : url,
                 'images' : None,
                 'publish_time' : str(current_timestamp),
                 'subject' : '勒索',
-                'content' : page.content(),
+                'content' : text,
                 'simhash_values' : None,
                 'label' : {
                     'type':'勒索',
