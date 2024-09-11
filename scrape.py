@@ -145,7 +145,7 @@ class webScrapy:
                 'domain' : site['domain'],
                 'content_encode' : encoding,
                 'lang' : 'english',
-                'meta' : meta,
+                'meta' : meta_str,
                 'net_type' : 'tor',
                 'page_source' : page.content(),
                 'title' : page.title(),
