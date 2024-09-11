@@ -1,6 +1,7 @@
 import json
 import os
 import hashlib
+import time
 
 def calculate_sha1(data):
     # 创建一个新的sha1 hash对象
@@ -9,6 +10,8 @@ def calculate_sha1(data):
     hash_object.update(data.encode())
     # 获取十六进制格式的散列值
     return hash_object.hexdigest()
+
+timestamp = str(int(time.time()))
 
 users = []
 sites = []
@@ -45,14 +48,14 @@ for i in data:
             "emails" : "",
             "bitcoin_addresses" : "",
             "eth_addresses" : "",
-            "crawl_time" : "",
+            "crawl_time" : timestamp,
             "user_hazard_level" : "3",
             "topic_counts" : "",
-            "user_related_url_and_address" : "",
-            "user_related_images" : "",
-            "user_related_files" : "",
+            "user_related_url_and_address" : [],
+            "user_related_images" : [],
+            "user_related_files" : [],
             "user_recent_day" : 0,
-            "user_related_crawl_tags" : "",
+            "user_related_crawl_tags" : ["勒索"],
     }
     users.append(user)
     

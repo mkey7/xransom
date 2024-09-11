@@ -64,7 +64,7 @@ class webScrapy:
             stealth_sync(page)
 
             try:
-                response = page.goto(url, wait_until='domcontentloaded', timeout = 120000)
+                response = page.goto(url, wait_until='domcontentloaded', timeout = 10000)
                 http_status_code = str(response.status)  # 获取页面状态码
             except PlaywrightTimeoutError:
                 print(f"Attempt  failed: Timeout while loading the page {site['url']}")
