@@ -15,9 +15,7 @@ def get_description(scrapy,site,url,title,published):
     print("fetching bianlian-"+title)
     
     # todo 提取相关字段
-    file = open(page["page_source"],'r')
-    soup=BeautifulSoup(file,'html.parser')
-    # soup=BeautifulSoup(page["page_source"],'html.parser')
+    soup=BeautifulSoup(page["page_source"],'html.parser')
     post_title = soup.title.string
 
     body = soup.section

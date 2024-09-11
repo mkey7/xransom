@@ -128,7 +128,7 @@ class webScrapy:
                 'lang' : 'english',
                 'meta' : None,
                 'net_type' : 'tor',
-                'page_source' : filename,
+                'page_source' : page.content(),
                 'title' : page.title(),
                 'url' : url,
                 'images' : None,
