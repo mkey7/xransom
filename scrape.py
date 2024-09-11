@@ -122,7 +122,7 @@ class webScrapy:
             meta = soup.find('meta', attrs={'charset': True})
             encoding = meta['charset'] if meta else ""
             
-            hash1 = simhash.simhash(text.split())
+            hash1 = simhash.Simhash(text.split()).value
 
             apage = {
                 'platform' : site['label']['name'] ,
