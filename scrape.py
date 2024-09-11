@@ -8,6 +8,7 @@ import json
 import hashlib #sha1
 import importlib
 from bs4 import BeautifulSoup
+import simhash
 
 class webScrapy:
     """
@@ -85,8 +86,7 @@ class webScrapy:
             page.wait_for_timeout(10000)
 
             # 测试tor网络
-            if "503 - Forwarding failure (Privoxy@localhost.localdomain)" == page.title() or http_status_code[0] == "4":
-                # print(page.content())
+            if http_status_code[0] == "4":
                 print("failed to get :" + site['url'])
                 return None
 
@@ -119,23 +119,28 @@ class webScrapy:
             soup = BeautifulSoup(page.content(),'html.parser')
             text = soup.get_text()
 
+            meta = soup.find('meta', attrs={'charset': True})
+            encoding = meta['charset'] if meta else ""
+            
+            hash1 = simhash.simhash(text.split())
+
             apage = {
                 'platform' : site['label']['name'] ,
                 'uuid' : sha1_value,
                 'crawl_time' : str(current_timestamp),
                 'domain' : site['domain'],
-                'content_encode' : None,
+                'content_encode' : encoding,
                 'lang' : 'english',
-                'meta' : None,
+                'meta' : meta,
                 'net_type' : 'tor',
                 'page_source' : page.content(),
                 'title' : page.title(),
                 'url' : url,
-                'images' : None,
+                'images' : [],
                 'publish_time' : str(current_timestamp),
                 'subject' : '勒索',
                 'content' : text,
-                'simhash_values' : None,
+                'simhash_values' : hash1,
                 'label' : {
                     'type':'勒索',
                     'group_name':site["label"]["name"]
@@ -143,9 +148,9 @@ class webScrapy:
                 'threaten_level' : '中危',
                 'snapshot' : {
                     'name' : sha1_value + '.png',
-                    'path' : 'screenshots/' 
+                    'path' : 'screenshots/' ,
+                    'image_id' : sha1_value
                 },
-                'image_id' : None
             }
 
             self.existingpage(apage)
