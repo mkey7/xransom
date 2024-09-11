@@ -41,9 +41,6 @@ def get_description(scrapy,site,url,title,published):
             download.append(b['href'])
     scrapy.appender(title, 'bianlian', description,website,published,url,email,download,page=page)
 
-
-
-
 def main(scrapy,page,site):
     url = page["domain"]
     try:
