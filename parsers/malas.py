@@ -32,3 +32,7 @@ def main(scrapy,page,site):
                 clean_description = re.sub(r"<.*?>", "", encoded_description)
                 convert_description = clean_description.replace('&rsquo;','`')
                 scrapy.appender(title,'malas',convert_description.replace('\n',' '),'',formatted_date,link)
+    except:
+        print('malas: ' + 'parsing fail')
+        pass    
+        pass
