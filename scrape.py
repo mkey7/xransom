@@ -16,7 +16,7 @@ class webScrapy:
     """
     def __init__(self,ip='43.154.195.176',port=9050) -> None:
         """
-        初始化，设置代理(http)，读取数据表
+        初始化，设置代理(socks5)，读取数据表
         """
         self.ip = ip
         self.port = port
@@ -32,7 +32,7 @@ class webScrapy:
 
     def torHttp(self,ip='43.154.195.176',port=9050):
         """
-        将代理协议设置为socks5
+        将代理协议设置为http
         """
         self.ip = ip
         self.port = port
@@ -54,7 +54,7 @@ class webScrapy:
 
     def scrape(self,site,post_url=""):
         """
-        爬取网页，并将其添加到pages表中
+        爬取网页，并将截图保存到screenshot中，但是抓到的网页并不保存至page.json中
         """
         url = post_url if post_url else site["url"]
         print("start scraping : " + site['label']['name'] + " : " + url)
@@ -87,7 +87,7 @@ class webScrapy:
 
             # 测试tor网络
             if http_status_code[0] == "4":
-                print("failed to get :" + site['url'])
+                print("404 Error to get :" + site['url'])
                 return None
 
             # uuid
@@ -118,13 +118,14 @@ class webScrapy:
             soup = BeautifulSoup(page.content(),'html.parser')
             text = soup.get_text()
 
+            # meta
             metas = soup.find_all('meta')
             meta_str = ""
-            encoding = ""
             for meta in metas:
                 meta_str += meta + '\n'
                     
             # 查找带有charset的meta标签
+            encoding = ""
             meta_charset = soup.find('meta', charset=True)
             if meta_charset:
                 encoding = meta_charset['charset']
@@ -135,6 +136,7 @@ class webScrapy:
                 content_type = meta_content_type['content']
                 encoding = content_type.split('charset=')[-1]
             
+            # simhash
             hash1 = simhash.Simhash(text.split()).value
 
             apage = {
@@ -166,8 +168,6 @@ class webScrapy:
                 },
             }
 
-            self.existingpage(apage)
-            self.writejson("pages.json",self.pages)
             return apage
 
         except:
@@ -182,6 +182,7 @@ class webScrapy:
             self.browser.close()
         if hasattr(self, 'play') and self.play:
             self.play.stop()
+        print("playwright closed! mation complete!")
 
     def run(self,group_name):
         """
@@ -209,6 +210,9 @@ class webScrapy:
                 site["first_publish_time"] = site["last_publish_time"]
             site["last_status"] = True
             site["is_recent_online"] = True
+            site["snapshot"]["name"] = page["snapshot"]["name"] 
+            site["snapshot"]["path"] = page["snapshot"]["path"] 
+            site["snapshot"]["image_id"] = page["snapshot"]["image_id"] 
             self.writejson("sites.json",self.sites)
             
             # 更新user
@@ -274,6 +278,10 @@ class webScrapy:
 
         self.existingpost(post)
         self.writejson("posts.json",self.posts)
+
+        # 当提取到post后，再将其写入到page中
+        self.existingpage(apage)
+        self.writejson("pages.json",self.pages)
 
     def existingpost(self,post):
         '''
