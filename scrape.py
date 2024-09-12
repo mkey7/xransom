@@ -109,11 +109,10 @@ class webScrapy:
             image.save(screenshots_name)
             
             # save page content
-            filename = 'source/' + sha1_value + '.html'
-            with open(filename, 'w', encoding='utf-8') as sitesource:
-                sitesource.write(page.content())
-                sitesource.close()
-                
+            # filename = 'source/' + sha1_value + '.html'
+            # with open(filename, 'w', encoding='utf-8') as sitesource:
+             #    sitesource.write(page.content())
+              #   sitesource.close()
             
             # content
             soup = BeautifulSoup(page.content(),'html.parser')
@@ -299,6 +298,7 @@ class webScrapy:
                 p = page
                 return True
         print('page does not exist: ' + page["title"])
+        del page["page_source"]
         self.pages.append(page)
         return False
 
