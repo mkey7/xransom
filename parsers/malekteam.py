@@ -11,36 +11,40 @@ import os
 from bs4 import BeautifulSoup
 import re
 
-# Function to clean text
-def clean_text(text):
-    # Replace multiple spaces, tabs, and newlines with a single space
-    return re.sub(r'\s+', ' ', text)
+# 单独爬取一个post
+def get_post(scrapy,site,url):
+    page = scrapy.scrape(site,url)
 
+    # todo 提取相关字段
+    soup=BeautifulSoup(page["page_source"],'html.parser')
+    post_title = soup.title.string
+    post_title = post_title.replace("Malek Team:","")
+
+    contents = ""
+    head = soup.find("div",class_="section-timeline-heading")
+    body = soup.find("div",class_="section-timeline")
+    contents += head.get_text()
+    contents += body.get_text()
+
+    download = []
+    downloads = body.find_all('li',class_="list-group-item")
+    for li in downloads:
+        download = site["domain"] + li.a["href"]
+        download.appender(download)
+    scrapy.appender(post_title, 'malekteam', contents,post_url=url,download=download,page=page)
 
 def main(scrapy,page,site):
     url = page["domain"]
     try:
         soup=BeautifulSoup(page["page_source"],'html.parser')
         for item in soup.find_all("div", class_="timeline_item"):
-            # Extract date text
-            date_text_div = item.find("div", class_="timeline_date-text")
-            if date_text_div:
-                # Remove span tags and their contents
-                for span in date_text_div.find_all("span"):
-                    span.decompose()
-                date_text = date_text_div.get_text(strip=True)
-
-
-            # Extract description
-            description_div = item.find("div", class_="timeline_text")
-            description = clean_text(description_div.get_text(strip=True)) if description_div else ''
-
             # Extract 'Read More' link
             read_more_link = item.find("a", text="Read More")
             if read_more_link and read_more_link.has_attr('href'):
                 post_url = read_more_link['href']
-                post_url = url + post_url 
-            scrapy.appender(date_text, 'malekteam', description,"","",post_url,page=page)
+                post_url = site["domain"] + post_url 
+                get_post(scrapy,site,post_url)
+            #   scrapy.appender(date_text, 'malekteam', description,"","",post_url,page=page)
 
     except:
         print('malekteam: ' + 'parsing fail: '+url)
