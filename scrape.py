@@ -168,6 +168,8 @@ class webScrapy:
                 },
             }
 
+            self.existingpage(apage)
+            self.writejson("pages.json",self.pages)
             return apage
 
         except:
@@ -279,9 +281,6 @@ class webScrapy:
         self.existingpost(post)
         self.writejson("posts.json",self.posts)
 
-        # 当提取到post后，再将其写入到page中
-        self.existingpage(apage)
-        self.writejson("pages.json",self.pages)
 
     def existingpost(self,post):
         '''
