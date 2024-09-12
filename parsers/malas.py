@@ -35,4 +35,3 @@ def main(scrapy,page,site):
     except:
         print('malas: ' + 'parsing fail')
         pass    
-        pass
