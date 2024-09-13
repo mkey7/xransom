@@ -212,9 +212,7 @@ class webScrapy:
                 site["first_publish_time"] = site["last_publish_time"]
             site["last_status"] = True
             site["is_recent_online"] = True
-            site["snapshot"]["name"] = page["snapshot"]["name"] 
-            site["snapshot"]["path"] = page["snapshot"]["path"] 
-            site["snapshot"]["image_id"] = page["snapshot"]["image_id"] 
+            site["snapshot"] = page["snapshot"] 
             self.writejson("sites.json",self.sites)
             
             # 更新user
