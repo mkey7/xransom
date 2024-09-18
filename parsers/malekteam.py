@@ -13,25 +13,32 @@ import re
 
 # 单独爬取一个post
 def get_post(scrapy,site,url):
-    page = scrapy.scrape(site,url)
+    try:
+        page = scrapy.scrape(site,url)
 
-    # todo 提取相关字段
-    soup=BeautifulSoup(page["page_source"],'html.parser')
-    post_title = soup.title.string
-    post_title = post_title.replace("Malek Team:","")
+        if page == None:
+            return None
 
-    contents = ""
-    head = soup.find("div",class_="section-timeline-heading")
-    body = soup.find("div",class_="section-timeline")
-    contents += head.get_text()
-    contents += body.get_text()
+        # todo 提取相关字段
+        soup=BeautifulSoup(page["page_source"],'html.parser')
+        post_title = soup.title.string
+        post_title = post_title.replace("Malek Team:","")
 
-    download = []
-    downloads = body.find_all('li',class_="list-group-item")
-    for li in downloads:
-        download = site["domain"] + li.a["href"]
-        download.appender(download)
-    scrapy.appender(post_title, 'malekteam', contents,post_url=url,download=download,page=page)
+        contents = ""
+        head = soup.find("div",class_="section-timeline-heading")
+        body = soup.find("div",class_="section-timeline")
+        contents += head.get_text()
+        contents += body.get_text()
+
+        download = []
+        downloads = body.find_all('li',class_="list-group-item")
+        for li in downloads:
+            download = site["domain"] + li.a["href"]
+            download.appender(download)
+        scrapy.appender(post_title, 'malekteam', contents,post_url=url,download=download,page=page)
+    except:
+        print('malekteam: ' + 'parsing fail: '+url)
+
 
 def main(scrapy,page,site):
     url = page["domain"]

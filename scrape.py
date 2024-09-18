@@ -65,7 +65,7 @@ class webScrapy:
             stealth_sync(page)
 
             try:
-                response = page.goto(url, wait_until='domcontentloaded', timeout = 10000)
+                response = page.goto(url, wait_until='domcontentloaded', timeout = 60000)
                 http_status_code = str(response.status)  # 获取页面状态码
             except PlaywrightTimeoutError:
                 print(f"Attempt  failed: Timeout while loading the page {site['url']}")
@@ -78,12 +78,12 @@ class webScrapy:
                 return None
 
             page.bring_to_front()
-            page.wait_for_timeout(10000)
+            page.wait_for_timeout(15000)
             page.mouse.move(x=500, y=400)
             page.wait_for_load_state('networkidle')
             page.mouse.wheel(delta_y=2000, delta_x=0)
             page.wait_for_load_state('networkidle')
-            page.wait_for_timeout(10000)
+            page.wait_for_timeout(15000)
 
             # 测试tor网络
             if http_status_code[0] == "4":

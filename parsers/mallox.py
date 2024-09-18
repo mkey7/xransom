@@ -13,18 +13,23 @@ from lxml import etree
 
 # 单独爬取一个post
 def get_post(scrapy,site,url):
-    page = scrapy.scrape(site,url)
+    try:
+        page = scrapy.scrape(site,url)
 
-    html = etree.HTML(page["page_source"])
+        if page = None:
+            return None
+        html = etree.HTML(page["page_source"])
 
-    post_title = html.xpath("//div[@class='text-gray-900 fs-2 fw-bold']/text()")
+        post_title = html.xpath("//div[@class='text-gray-900 fs-2 fw-bold']/text()")
 
-    content = html.xpath("//div[@class='fs-5 fw-semibold text-gray-600']/p/span/text()")
-    contents = ""
-    for c in content:
-        contents += c
+        content = html.xpath("//div[@class='fs-5 fw-semibold text-gray-600']/p/span/text()")
+        contents = ""
+        for c in content:
+            contents += c
 
-    scrapy.appender(post_title[0], 'malllox', contents,post_url=url,page=page)
+        scrapy.appender(post_title[0], 'malllox', contents,post_url=url,page=page)
+    except:
+        print('mallox: ' + 'parsing fail: '+url)
 
 def main(scrapy,page,site):
     url = page["domain"]
