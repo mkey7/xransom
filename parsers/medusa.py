@@ -10,6 +10,7 @@ Rappel : def appender(post_title, group_name, description="", website="", publis
 import os
 from bs4 import BeautifulSoup
 
+# 网站有验证码
 def main(scrapy,page,site):
     url = page["domain"]
     try:
