@@ -74,7 +74,7 @@ class webScrapy:
 
             try:
                 response = page.goto(url, wait_until='load',
-                                     timeout=80000)
+                                     timeout=120000)
                 http_status_code = str(response.status)  # 获取页面状态码
 
             except PlaywrightTimeoutError:
