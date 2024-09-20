@@ -39,7 +39,7 @@ def main(scrapy,page,site):
         hrefs = html.xpath("//div[@class='card']/div[2]/div[3]/a/@href")
 
         for href in hrefs:
-            post_url = url + href
+            post_url = "http://" url + href
 
 #        soup=BeautifulSoup(page["page_source"],'html.parser')
 #        divs_name=soup.find_all('div', {"class": "card mb-4 box-shadow"})

@@ -52,8 +52,9 @@ class webScrapy:
         """
         try:
             self.play = sync_playwright().start()
-            self.browser = self.play.chromium.launch(proxy={
-                "server": self.proxy_path},
+            # self.browser = self.play.chromium.launch(
+            self.browser = self.play.firefox.launch(
+                proxy={"server": self.proxy_path},
                 args=["--headless=new"]
                 )
         except Exception as e:
@@ -72,15 +73,21 @@ class webScrapy:
             stealth_sync(page)
 
             try:
-                response = page.goto(url, wait_until='domcontentloaded',
-                                     timeout=60000)
+                response = page.goto(url, wait_until='load',
+                                     timeout=80000)
                 http_status_code = str(response.status)  # 获取页面状态码
-                print(http_status_code)
+
             except PlaywrightTimeoutError:
-                print(f"Attempt  failed: Timeout while loading the page {site['url']}")
+                print(f"Attempt  failed: Timeout while loading the page \
+                {site['url']}")
                 return None
             except Exception as e:
                 print(f"Attempt  failed: {e}")
+                return None
+
+            # 测试tor网络
+            if http_status_code[0] == "4":
+                print("404 Error to get :" + site['url'])
                 return None
 
             page.bring_to_front()
@@ -90,11 +97,6 @@ class webScrapy:
             page.mouse.wheel(delta_y=2000, delta_x=0)
             page.wait_for_load_state('networkidle')
             page.wait_for_timeout(15000)
-
-            # 测试tor网络
-            if http_status_code[0] == "4":
-                print("404 Error to get :" + site['url'])
-                return None
 
             # uuid
             e = url+page.title()
@@ -128,7 +130,7 @@ class webScrapy:
             metas = soup.find_all('meta')
             meta_str = ""
             for meta in metas:
-                meta_str += meta + '\n'
+                meta_str += str(meta) + '\n'
 
             # 查找带有charset的meta标签
             encoding = ""
@@ -174,6 +176,8 @@ class webScrapy:
                     'image_id': sha1_value
                 },
             }
+
+            context.close()
 
             self.existingpage(apage)
             self.writejson("pages.json", self.pages)
@@ -248,8 +252,8 @@ class webScrapy:
 
     def appender(self, post_title="", group_name="", content="",
                  website="", published="", post_url="", email="",
-                 download="", country="", btc="", eth="", price="",
-                 industry="", page=None):
+                 download=[], country="", btc="", eth="", price="",
+                 industry="", images=[], page=None):
         """
         将提取到的post添加到posts表中
         """
@@ -270,7 +274,7 @@ class webScrapy:
             "title": post_title,
             "crawl_time": page["crawl_time"],
             "source": "tor",
-            "images": [],
+            "images": images,
             "attachments": download,
             "email": email,
             "bitcoin_addresses": btc,

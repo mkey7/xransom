@@ -8,35 +8,43 @@ Rappel : def appender(post_title, group_name, description="", website="", publis
 Codé par @JMousqueton pour Ransomware.live
 """
 
-import os
 # from bs4 import BeautifulSoup
-from datetime import datetime
 from lxml import etree
 
-def main(scrapy,page,site):
+
+# 单独爬取一个post
+def get_post(scrapy, site, url):
+    try:
+        page = scrapy.scrape(site, url)
+
+        if page is None:
+            return None
+
+        # todo 提取相关字段
+        html = etree.HTML(page["page_source"])
+        post_title = html.xpath("//h3/text()")
+
+        contents = ""
+        bodys = html.xpath("//text()")
+        for body in bodys:
+            contents += body
+
+        images = html.xpath("//div[@class='row']//img/@src")
+
+        scrapy.appender(post_title, "meow", contents, "", post_url=url,
+                        images=images, page=page)
+    except Exception as e:
+        print('meow: ' + 'parsing fail: ' + url + f"{e}")
+
+
+def main(scrapy, page, site):
     url = page["domain"]
     try:
         html = etree.HTML(page["page_source"])
-        post_urls = html.xpath("//div[@class='card']/div[2]/a[1]/@href")
-        print(post_urls)
-#         soup=BeautifulSoup(page["page_source"],'html.parser')
-#         story_cards = soup.find_all('div', class_='MuiCard-root')
-#         for card in story_cards:
-#             # Extract information from each card
-#             card_link = card.find('a')['href']
-#             card_link = url + card_link
-#             title = card.find('div', class_='MuiTypography-h5').text.strip()
-#             
-#             # Convert date to desired format
-#             raw_date = card.find('p', class_='story-createdAt').text.strip()
-#             date_object = datetime.strptime(raw_date, '%d %B ,%Y')
-#             formatted_date = date_object.strftime('%Y-%m-%d %H:%M:%S.%f')
-# 
-# 
-#             #image_url = card.find('div', class_='MuiCardMedia-root')['style'].split('url("')[1].split('")')[0]
-#             leak_status = card.find('div', class_='MuiAlert-message').text.strip()
-# 
-        #            scrapy.appender(title, "meow", leak_status, "", formatted_date, card_link,page=page)
+        hrefs = html.xpath("//div[@class='card-body text-center']/a[1]/@href")
+        for href in hrefs:
+            post_url = "http://" + url + href
+            get_post(scrapy, site, post_url)
 
-    except:
-        print('meow: ' + 'parsing fail: '+url)
+    except Exception as e:
+        print('meow: ' + 'parsing fail: ' + url + f"{e}")
