@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
-from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
+from playwright.sync_api import sync_playwright
+from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from playwright_stealth import stealth_sync
 from datetime import datetime
 from PIL import Image
 from PIL import ImageDraw
 import json
-import hashlib #sha1
+import hashlib  # sha1
 import importlib
 from bs4 import BeautifulSoup
 import simhash
 
+
 class webScrapy:
+
     """
     爬虫模块：tor网络代理、爬虫、保存json数据
     """
-    def __init__(self,ip='43.154.195.176',port=9050) -> None:
+
+    def __init__(self, ip: str = '43.154.182.55', port: int = 9050) -> None:
         """
         初始化，设置代理(socks5)，读取数据表
         """
@@ -24,13 +28,13 @@ class webScrapy:
         self.proxies = {
             'http':  'socks5h://' + str(self.ip) + ':' + str(self.port),
             'https': 'socks5h://' + str(self.ip) + ':' + str(self.port)
-        } 
+        }
         self.sites = self.openjson('sites.json')
         self.posts = self.openjson('posts.json')
         self.pages = self.openjson('pages.json')
         self.users = self.openjson('users.json')
 
-    def torHttp(self,ip='43.154.195.176',port=9050):
+    def torHttp(self, ip='43.154.182.55', port=9050):
         """
         将代理协议设置为http
         """
@@ -40,7 +44,7 @@ class webScrapy:
         self.proxies = {
             'http':  'http://' + str(self.ip) + ':' + str(self.port),
             'https': 'https://' + str(self.ip) + ':' + str(self.port)
-        } 
+        }
 
     def browserInit(self):
         """
@@ -48,11 +52,14 @@ class webScrapy:
         """
         try:
             self.play = sync_playwright().start()
-            self.browser = self.play.chromium.launch(proxy={"server": self.proxy_path}, args=["--headless=new"])
-        except:
-            print("failed to launch playwright!")
+            self.browser = self.play.chromium.launch(proxy={
+                "server": self.proxy_path},
+                args=["--headless=new"]
+                )
+        except Exception as e:
+            print(f"failed to launch playwright! {e}")
 
-    def scrape(self,site,post_url=""):
+    def scrape(self, site, post_url=""):
         """
         爬取网页，并将截图保存到screenshot中，但是抓到的网页并不保存至page.json中
         """
@@ -60,21 +67,20 @@ class webScrapy:
         print("start scraping : " + site['label']['name'] + " : " + url)
 
         try:
-            context = self.browser.new_context(ignore_https_errors= True)
+            context = self.browser.new_context(ignore_https_errors=True)
             page = context.new_page()
             stealth_sync(page)
 
             try:
-                response = page.goto(url, wait_until='domcontentloaded', timeout = 60000)
+                response = page.goto(url, wait_until='domcontentloaded',
+                                     timeout=60000)
                 http_status_code = str(response.status)  # 获取页面状态码
+                print(http_status_code)
             except PlaywrightTimeoutError:
                 print(f"Attempt  failed: Timeout while loading the page {site['url']}")
                 return None
             except Exception as e:
                 print(f"Attempt  failed: {e}")
-                return None
-            except:
-                print("playwright fiald in page.goto")
                 return None
 
             page.bring_to_front()
@@ -99,23 +105,23 @@ class webScrapy:
             screenshots_name = 'screenshots/' + sha1_value + '.png'
             page.screenshot(path=screenshots_name, full_page=True)
             image = Image.open(screenshots_name)
-            
+
             # Format it in ISO format
             iso_formatted = current_datetime.isoformat()
-            
+
             draw = ImageDraw.Draw(image)
             draw.text((10, 10), iso_formatted, fill=(0, 0, 0))
-            
+
             image.save(screenshots_name)
-            
+
             # save page content
             # filename = 'source/' + sha1_value + '.html'
             # with open(filename, 'w', encoding='utf-8') as sitesource:
-             #    sitesource.write(page.content())
-              #   sitesource.close()
-            
+            #    sitesource.write(page.content())
+            #    sitesource.close()
+
             # content
-            soup = BeautifulSoup(page.content(),'html.parser')
+            soup = BeautifulSoup(page.content(), 'html.parser')
             text = soup.get_text()
 
             # meta
@@ -123,7 +129,7 @@ class webScrapy:
             meta_str = ""
             for meta in metas:
                 meta_str += meta + '\n'
-                    
+
             # 查找带有charset的meta标签
             encoding = ""
             meta_charset = soup.find('meta', charset=True)
@@ -131,49 +137,50 @@ class webScrapy:
                 encoding = meta_charset['charset']
 
             # 查找带有Content-Type的meta标签
-            meta_content_type = soup.find('meta', attrs={'http-equiv': 'Content-Type'})
+            meta_content_type = soup.find('meta', attrs={
+                'http-equiv': 'Content-Type'})
             if meta_content_type and 'charset' in meta_content_type['content']:
                 content_type = meta_content_type['content']
                 encoding = content_type.split('charset=')[-1]
-            
+
             # simhash
             hash1 = simhash.Simhash(text.split()).value
 
             apage = {
-                'platform' : site['label']['name'] ,
-                'uuid' : sha1_value,
-                'crawl_time' : str(current_timestamp),
-                'domain' : site['domain'],
-                'content_encode' : encoding,
-                'lang' : 'english',
-                'meta' : meta_str,
-                'net_type' : 'tor',
-                'page_source' : page.content(),
-                'title' : page.title(),
-                'url' : url,
-                'images' : [],
-                'publish_time' : str(current_timestamp),
-                'subject' : '勒索',
-                'content' : text,
-                'simhash_values' : hash1,
-                'label' : {
-                    'type':'勒索',
-                    'group_name':site["label"]["name"]
+                'platform': site['label']['name'],
+                'uuid': sha1_value,
+                'crawl_time': str(current_timestamp),
+                'domain': site['domain'],
+                'content_encode': encoding,
+                'lang': 'english',
+                'meta': meta_str,
+                'net_type': 'tor',
+                'page_source': page.content(),
+                'title': page.title(),
+                'url': url,
+                'images': [],
+                'publish_time': str(current_timestamp),
+                'subject': '勒索',
+                'content': text,
+                'simhash_values': hash1,
+                'label': {
+                    'type': '勒索',
+                    'group_name': site["label"]["name"]
                 },
-                'threaten_level' : '中危',
-                'snapshot' : {
-                    'name' : sha1_value + '.png',
-                    'path' : 'screenshots/' ,
-                    'image_id' : sha1_value
+                'threaten_level': '中危',
+                'snapshot': {
+                    'name': sha1_value + '.png',
+                    'path': 'screenshots/',
+                    'image_id': sha1_value
                 },
             }
 
             self.existingpage(apage)
-            self.writejson("pages.json",self.pages)
+            self.writejson("pages.json", self.pages)
             return apage
 
-        except:
-            print("failed to get page:" + site['url'])
+        except Exception as e:
+            print(f"failed to get page:{site['url']}, because of  {e}")
             return None
 
     def close(self):
@@ -186,7 +193,7 @@ class webScrapy:
             self.play.stop()
         print("playwright closed! mation complete!")
 
-    def run(self,group_name):
+    def run(self, group_name):
         """
         爬取指定组织的网站并调用解析模块实行解析
         """
@@ -200,31 +207,31 @@ class webScrapy:
                 # 更新site
                 site["last_status"] = False
                 site["is_recent_online"] = False
-                self.writejson("sites.json",self.sites)
+                self.writejson("sites.json", self.sites)
                 continue
 
             # 调用解析模块
-            self.parser(group_name,page,site)
-            
+            self.parser(group_name, page, site)
+
             # 更新site
             site["last_publish_time"] = page["publish_time"]
             if site["first_publish_time"] == "":
                 site["first_publish_time"] = site["last_publish_time"]
             site["last_status"] = True
             site["is_recent_online"] = True
-            site["snapshot"] = page["snapshot"] 
-            self.writejson("sites.json",self.sites)
-            
+            site["snapshot"] = page["snapshot"]
+            self.writejson("sites.json", self.sites)
+
             # 更新user
             for user in self.users:
                 if user["platform"] == group_name:
-                    user["last_active_time"] = page["publish_time"] 
-                    user["crawl_time"] = page["publish_time"] 
+                    user["last_active_time"] = page["publish_time"]
+                    user["crawl_time"] = page["publish_time"]
                     if user["register_time"] == "":
                         user["register_time"] = page["publish_time"] 
-            self.writejson("users.json",self.users)
+            self.writejson("users.json", self.users)
 
-    def parser(self,group_name,page,site):
+    def parser(self, group_name, page, site):
         """
         调用对应勒索组织的解析模块
         """
@@ -232,13 +239,17 @@ class webScrapy:
 
         try:
             module = importlib.import_module(parse_name)
-            module.main(self,page,site)
+            module.main(self, page, site)
         except ModuleNotFoundError:
             print(f"No script found for organization: {parse_name}")
         except AttributeError:
-            print(f"The script for organization: {parse_name} does not have a main function.")
+            print(f"The script for organization: {parse_name} does not have a \
+                main function.")
 
-    def appender(self,post_title="", group_name="", content="", website="", published="", post_url="",email="", download="", country="",btc="",eth="",price="",industry="",page=None):
+    def appender(self, post_title="", group_name="", content="",
+                 website="", published="", post_url="", email="",
+                 download="", country="", btc="", eth="", price="",
+                 industry="", page=None):
         """
         将提取到的post添加到posts表中
         """
@@ -248,39 +259,38 @@ class webScrapy:
         user_id = self.calculate_sha1(group_name)
 
         post = {
-            "platform" : group_name,
-            "ransom_name" : group_name,
-            "uuid" : uuid,
-            "user_id" : user_id,
-            "user_name" : group_name,
-            "publish_time" : published,
-            "content" : content,
-            "url" : post_url,
-            "title" : post_title,
-            "crawl_time" : page["crawl_time"],
-            "source" : "tor",
-            "images" : [],
-            "attachments" : download,
-            "email" : email,
-            "bitcoin_addresses" : btc,
-            "eth_addresses" : eth,
-            "lang" : "english",
-            "label" : {
-                "country" : country,
-                "victim" : website,
-                "pageid" : page["uuid"] if page else None,
-                "price" : price,
-                "industry" : industry,
+            "platform": group_name,
+            "ransom_name": group_name,
+            "uuid": uuid,
+            "user_id": user_id,
+            "user_name": group_name,
+            "publish_time": published,
+            "content": content,
+            "url": post_url,
+            "title": post_title,
+            "crawl_time": page["crawl_time"],
+            "source": "tor",
+            "images": [],
+            "attachments": download,
+            "email": email,
+            "bitcoin_addresses": btc,
+            "eth_addresses": eth,
+            "lang": "english",
+            "label": {
+                "country": country,
+                "victim": website,
+                "pageid": page["uuid"] if page else None,
+                "price": price,
+                "industry": industry,
             },
-            "extract_entity" : [],
-            "threaten_level" : "中危"
+            "extract_entity": [],
+            "threaten_level": "中危"
         }
 
         self.existingpost(post)
-        self.writejson("posts.json",self.posts)
+        self.writejson("posts.json", self.posts)
 
-
-    def existingpost(self,post):
+    def existingpost(self, post):
         '''
         check if a post already exists in posts.json
         '''
@@ -293,7 +303,7 @@ class webScrapy:
         self.posts.append(post)
         return False
 
-    def existingpage(self,page):
+    def existingpage(self, page):
         '''
         check if a page already exists in pages.json
         '''
@@ -307,7 +317,7 @@ class webScrapy:
         self.pages.append(page)
         return False
 
-    def openjson(self,file):
+    def openjson(self, file):
         '''
         opens a file and returns the json as a dict
         '''
@@ -315,14 +325,14 @@ class webScrapy:
             data = json.load(jsonfile)
         return data
 
-    def writejson(self,file,data):
+    def writejson(self, file, data):
         '''
         opens a file and write the json to a json file
         '''
-        with open(file,"w", encoding='utf-8') as jsonfile:
+        with open(file, "w", encoding='utf-8') as jsonfile:
             json.dump(data, jsonfile, indent=4, ensure_ascii=False)
-            
-    def calculate_sha1(self,data):
+
+    def calculate_sha1(self, data):
         # 创建一个新的sha1 hash对象
         hash_object = hashlib.sha1()
         # 提供需要散列的数据
