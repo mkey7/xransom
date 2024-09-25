@@ -13,7 +13,6 @@ import simhash
 
 
 class webScrapy:
-
     """
     爬虫模块：tor网络代理、爬虫、保存json数据
     """
@@ -33,6 +32,7 @@ class webScrapy:
         self.posts = self.openjson('posts.json')
         self.pages = self.openjson('pages.json')
         self.users = self.openjson('users.json')
+        self.cont = 0
 
     def torHttp(self, ip='43.154.182.55', port=9050):
         """
@@ -57,6 +57,7 @@ class webScrapy:
                 proxy={"server": self.proxy_path},
                 args=["--headless=new"]
                 )
+            print("browser init!")
         except Exception as e:
             print(f"failed to launch playwright! {e}")
 
@@ -64,6 +65,12 @@ class webScrapy:
         """
         爬取网页，并将截图保存到screenshot中，但是抓到的网页并不保存至page.json中
         """
+        self.cont += 1
+        if self.cont % 10 == 0:
+            print(f"xransom has try to crawl {self.cont} pages")
+            self.close()
+            self.browserInit()
+
         url = post_url if post_url else site["url"]
         print("start scraping : " + site['label']['name'] + " : " + url)
 
@@ -177,6 +184,7 @@ class webScrapy:
                 },
             }
 
+            page.close()
             context.close()
 
             self.existingpage(apage)
@@ -195,7 +203,7 @@ class webScrapy:
             self.browser.close()
         if hasattr(self, 'play') and self.play:
             self.play.stop()
-        print("playwright closed! mation complete!")
+        print("playwright closed!")
 
     def run(self, group_name):
         """
@@ -335,6 +343,7 @@ class webScrapy:
         '''
         with open(file, "w", encoding='utf-8') as jsonfile:
             json.dump(data, jsonfile, indent=4, ensure_ascii=False)
+            jsonfile.truncate()
 
     def calculate_sha1(self, data):
         # 创建一个新的sha1 hash对象

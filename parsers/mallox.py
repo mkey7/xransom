@@ -16,7 +16,7 @@ def get_post(scrapy,site,url):
     try:
         page = scrapy.scrape(site,url)
 
-        if page = None:
+        if page == None:
             return None
         html = etree.HTML(page["page_source"])
 
@@ -27,9 +27,9 @@ def get_post(scrapy,site,url):
         for c in content:
             contents += c
 
-        scrapy.appender(post_title[0], 'malllox', contents,post_url=url,page=page)
-    except:
-        print('mallox: ' + 'parsing fail: '+url)
+        scrapy.appender(post_title[0], 'malllox', contents, post_url=url, page=page)
+    except Exception as e:
+        print(f'mallox: parsing fail: {url} {e}')
 
 def main(scrapy,page,site):
     url = page["domain"]
@@ -39,7 +39,7 @@ def main(scrapy,page,site):
         hrefs = html.xpath("//div[@class='card']/div[2]/div[3]/a/@href")
 
         for href in hrefs:
-            post_url = "http://" url + href
+            post_url = "http://" + url + href
 
 #        soup=BeautifulSoup(page["page_source"],'html.parser')
 #        divs_name=soup.find_all('div', {"class": "card mb-4 box-shadow"})
