@@ -29,14 +29,22 @@ def get_post(scrapy, site, url):
 
         published = html.xpath("//div[@class='MuiBox-root css-4h4iek'][last()]/p[1]/text()")[0]
 
-        website = html.xpath("//div[@class='css-1j63rwj']//p[contains(@text,'website')]/text()")[0]
-        website = website.splite(" ")[-1]
+        ps = html.xpath("//div[@class='css-1j63rwj']//p/text()")
+        
+        website = ""
+        price = ""
+        for p in ps:
+            if p.lower().startwith("website"):
+                website = p.split(" ")[-1]
+
+            if p.lower().startwith("revenue"):
+                price = p.split(" ")[-1]
 
         download = html.xpath("//div[@class='MuiBox-root css-4h4iek']//a[contains(@text,'http')]/@href")
 
         scrapy.appender(post_title, "moneymessage", contents, website,
                         post_url=url, published=published, download=download,
-                        page=page)
+                        price =price, page=page)
     except Exception as e:
         print(f'moneymessage: parsing fail: {url} : {e}')
 
