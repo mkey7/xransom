@@ -7,7 +7,6 @@
 Rappel : def appender(post_title, group_name, description="", website="", published="", post_url=""):
 """
 
-from bs4 import BeautifulSoup
 from lxml import etree
 
 
@@ -28,15 +27,16 @@ def get_post(scrapy, site, url):
         for body in bodys:
             contents += body
 
-        published = html.xpath("//div[@class='css-1j63rwj']/p[last()]/text()")[0]
+        published = html.xpath("//div[@class='MuiBox-root css-4h4iek'][last()]/p[1]/text()")[0]
 
-        website = html.xpath("//div[@class='css-1j63rwj']//p[contains(@text,'website:')]/text()")[0]
-        website = website.splite(":")[-1]
+        website = html.xpath("//div[@class='css-1j63rwj']//p[contains(@text,'website')]/text()")[0]
+        website = website.splite(" ")[-1]
 
         download = html.xpath("//div[@class='MuiBox-root css-4h4iek']//a[contains(@text,'http')]/@href")
 
-        scrapy.appender(post_title, "meow", contents, website, post_url=url,
-                        published=published, download=download, page=page)
+        scrapy.appender(post_title, "moneymessage", contents, website,
+                        post_url=url, published=published, download=download,
+                        page=page)
     except Exception as e:
         print(f'moneymessage: parsing fail: {url} : {e}')
 
