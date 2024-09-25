@@ -21,25 +21,24 @@ def get_post(scrapy, site, url):
 
         # todo 提取相关字段
         html = etree.HTML(page["page_source"])
-        post_title = html.xpath("//h5/text()")
+        post_title = html.xpath("//h5/text()")[0]
 
         contents = ""
         bodys = html.xpath("//text()")
         for body in bodys:
             contents += body
 
-        published = html.xpath("//div[@class='css-1j63rwj']/p[last()]/text()")
+        published = html.xpath("//div[@class='css-1j63rwj']/p[last()]/text()")[0]
 
-        website = html.xpath("//div[@class='css-1j63rwj']//p[contains(@text,'website:')]/text()")
+        website = html.xpath("//div[@class='css-1j63rwj']//p[contains(@text,'website:')]/text()")[0]
         website = website.splite(":")[-1]
 
         download = html.xpath("//div[@class='MuiBox-root css-4h4iek']//a[contains(@text,'http')]/@href")
-        downloads = [download]
 
         scrapy.appender(post_title, "meow", contents, website, post_url=url,
-                        published=published, download=downloads, page=page)
+                        published=published, download=download, page=page)
     except Exception as e:
-        print('meow: ' + 'parsing fail: ' + url + f"{e}")
+        print(f'moneymessage: parsing fail: {url} : {e}')
 
 
 def main(scrapy, page, site):
@@ -48,7 +47,7 @@ def main(scrapy, page, site):
         html = etree.HTML(page["page_source"])
         hrefs = html.xpath("//div[@class='MuiBox-root css-16lsen3']/a/@href")
         for href in hrefs:
-            post_url = url+href
+            post_url = "http://"+url+href
             get_post(scrapy, site, post_url)
 
     except Exception as e:
