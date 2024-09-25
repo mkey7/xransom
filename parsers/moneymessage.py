@@ -34,11 +34,11 @@ def get_post(scrapy, site, url):
         website = ""
         price = ""
         for p in ps:
-            if p.lower().startwith("website"):
+            if p.lower().startswith("website"):
                 website = p.split(" ")[-1]
 
-            if p.lower().startwith("revenue"):
-                price = p.split(" ")[-1]
+            if p.lower().startswith("revenue"):
+                price = p[p.find(" ")+1:]
 
         download = html.xpath("//div[@class='MuiBox-root css-4h4iek']//a[contains(@text,'http')]/@href")
 
