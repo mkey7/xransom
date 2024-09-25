@@ -325,8 +325,8 @@ class webScrapy:
                 p = page
                 return True
         print('page does not exist: ' + page["title"])
-        del page["page_source"]
-        self.pages.append(page)
+        new_page = {k: v for k, v in page.items() if k != 'page_source'}
+        self.pages.append(new_page)
         return False
 
     def openjson(self, file):
