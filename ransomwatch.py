@@ -5,7 +5,7 @@ if __name__ == "__main__":
 
     print("start xransom!")
 
-    scrapy = scrape.webScrapy()
+    scrapy = scrape.webScrapy("127.0.0.1")
     # scrapy.torHttp()
     scrapy.browserInit()
 

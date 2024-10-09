@@ -10,6 +10,7 @@ import hashlib  # sha1
 import importlib
 from bs4 import BeautifulSoup
 import simhash
+from datetime import datetime
 
 
 class webScrapy:
@@ -188,7 +189,6 @@ class webScrapy:
             context.close()
 
             self.existingpage(apage)
-            self.writejson("pages.json", self.pages)
             return apage
 
         except Exception as e:
@@ -204,6 +204,9 @@ class webScrapy:
         if hasattr(self, 'play') and self.play:
             self.play.stop()
         print("playwright closed!")
+        self.writejson("pages.json", self.pages)
+        self.writejson("posts.json", self.posts)
+        print("print pages and posts!")
 
     def run(self, group_name):
         """
@@ -226,7 +229,11 @@ class webScrapy:
             self.parser(group_name, page, site)
 
             # 更新site
-            site["last_publish_time"] = page["publish_time"]
+            # 转换为 datetime 对象
+            dt_object = datetime.utcfromtimestamp(float(page["publish_time"]))
+            last_publish_time = dt_object.strftime('%Y-%m-%d %H:%M:%S.%f')
+
+            site["last_publish_time"] = last_publish_time
             if site["first_publish_time"] == "":
                 site["first_publish_time"] = site["last_publish_time"]
             site["last_status"] = True
@@ -300,7 +307,6 @@ class webScrapy:
         }
 
         self.existingpost(post)
-        self.writejson("posts.json", self.posts)
 
     def existingpost(self, post):
         '''
