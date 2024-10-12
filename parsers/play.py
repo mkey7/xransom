@@ -6,7 +6,6 @@
 +------------------------------+------------------+----------+
 Rappel : def appender(post_title, group_name, description="", website="", published="", post_url=""):
 """
-from bs4 import BeautifulSoup
 from lxml import etree
 
 

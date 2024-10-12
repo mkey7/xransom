@@ -58,7 +58,7 @@ class webScrapy:
                 proxy={"server": self.proxy_path},
                 args=["--headless=new"]
                 )
-            print("browser init!")
+            print(f"browser init! Tor: {self.proxy_path}")
         except Exception as e:
             print(f"failed to launch playwright! {e}")
 

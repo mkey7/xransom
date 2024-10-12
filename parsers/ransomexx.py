@@ -6,21 +6,47 @@
 +------------------------------+------------------+----------+
 Rappel : def appender(post_title, group_name, description="", website="", published="", post_url=""):
 """
-import os
-from bs4 import BeautifulSoup
+from lxml import etree
 
-def main(scrapy,page,site):
+
+# 单独爬取一个post
+def get_post(scrapy, site, url):
+    try:
+        page = scrapy.scrape(site, url)
+
+        if page is None:
+            return None
+
+        # todo 提取相关字段
+        html = etree.HTML(page["page_source"])
+        post_title = html.xpath("//h1/text()")[0]
+
+        all_text = html.xpath("//text()")
+        contents = " ".join(text.strip() for text in all_text if text.strip())
+
+        published = html.xpath("//time/text()")[0]
+
+# 提取下载链接
+        downloads = html.xpath("//div[@class='entry-content']//a/@href")
+
+        scrapy.appender(post_title, "ransomexx", contents, '', post_url=url,
+                        published=published, download=downloads, page=page)
+    except Exception as e:
+        print(f'ransomexx: parsing fail: {url} : {e}')
+
+
+def main(scrapy, page, site):
     url = page["domain"]
     try:
-        soup=BeautifulSoup(page["page_source"],'html.parser')
-        divs_name=soup.find_all('div', {"class": "card-body"})
-        for div in divs_name:
-            title = div.find('h5').text.strip()
-            description = div.find_all('p', {"class", "card-text"})[1].text.strip()
-            link = div.find('a', {"class", "btn btn-outline-primary"})
-            link = link.get('href')
-            post_url = url + link
-            scrapy.appender(title, 'ransomexx', description,"","",post_url,page=page)
 
-    except:
-        print('ransomexx: ' + 'parsing fail: '+url)
+        html = etree.HTML(page["page_source"])
+        post_urls = html.xpath("//h2/a/@href")
+
+        for post_url in post_urls:
+            post_url = "http://" + url + post_url
+            get_post(scrapy, site, post_url)
+
+    except Exception as e:
+        print(f'ransomexx: parsing fail: {url} : {e}')
+
+
