@@ -206,7 +206,7 @@ class webScrapy:
         print("playwright closed!")
         self.writejson("pages.json", self.pages)
         self.writejson("posts.json", self.posts)
-        print("print pages and posts!")
+        print("write pages and posts to json!")
 
     def run(self, group_name):
         """
