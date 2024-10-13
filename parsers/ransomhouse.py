@@ -6,17 +6,17 @@
 +------------------------------+------------------+----------+
 Rappel : def appender(post_title, group_name, description="", website="", published="", post_url=""):
 """
-import os
 import re
 from bs4 import BeautifulSoup
 import json
 
-def main(scrapy,page,site):
+
+def main(scrapy, page, site):
     url = page["domain"]
     try:
-        soup=BeautifulSoup(page["page_source"],'html.parser')
-        jsonpart= soup.pre.contents 
-        data = json.loads(jsonpart[0]) 
+        soup = BeautifulSoup(page["page_source"], 'html.parser')
+        jsonpart = soup.pre.contents
+        data = json.loads(jsonpart[0])
         for element in data['data']:
             title = element['header']
             link = element['id']
@@ -26,7 +26,8 @@ def main(scrapy,page,site):
                 date_string = element['actionDate']
             except:
                 formated_date = ''
-            description = re.sub(r'<[^>]*>', '',element['info'])
-            scrapy.appender(title, 'ransomhouse', description,website,"",post_url,page=page)
+            description = re.sub(r'<[^>]*>', '', element['info'])
+            scrapy.appender(title, 'ransomhouse', description, website, "",
+                            post_url, page=page)
     except:
         print('ransomhouse: ' + 'parsing fail: '+url)

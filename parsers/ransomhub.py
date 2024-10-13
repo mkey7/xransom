@@ -7,27 +7,43 @@
 +------------------------------+------------------+----------+
 Rappel : def appender(post_title, group_name, description="", website="", published="", post_url=""):
 """
-import os
-from bs4 import BeautifulSoup
-import re
+from lxml import etree
 
-def main(scrapy,page,site):
+
+# 单独爬取一个post
+def get_post(scrapy, site, url, published):
+    try:
+        page = scrapy.scrape(site, url)
+
+        if page is None:
+            return None
+
+        # todo 提取相关字段
+        html = etree.HTML(page["page_source"])
+        post_title = html.xpath("//h1/text()")[0]
+
+        all_text = html.xpath("//text()")
+        contents = " ".join(text.strip() for text in all_text if text.strip())
+
+# 提取下载链接
+        downloads = html.xpath("//div@[class='card-body']/p/text()")
+
+        scrapy.appender(post_title, "ransomhub", contents, post_title,
+                        post_url=url, published=published, download=downloads,
+                        page=page)
+    except Exception as e:
+        print(f'ransomhub: parsing fail: {url} : {e}')
+
+
+def main(scrapy, page, site):
     url = page["domain"]
     try:
-        soup=BeautifulSoup(page["page_source"],'html.parser')
-        posts = soup.find_all('div', class_='timeline-item')
-        for post in posts:
-            title_element = post.find('h5', class_='card-title').find('a')
-            match = re.match(r"^(.*?)<([^>]*)>", title_element.text)
-            title = match.group(1).strip()  # Group 1: String before '<'
-            website = match.group(2).strip()  # Group 2: String between '<' and '>'
-            post_url = url + title_element['href']
+        html = etree.HTML(page["page_source"])
+        post_urls = html.xpath("//div[@class='row']//a/@href")
+        published = html.xpath("//div[@class='row']//div[@class='card-footer']/text()")
+        for i in range(post_urls):
+            post_url = "http://"+url+'/'+post_urls[i]
+            get_post(scrapy, site, post_url, published[i])
 
-            # date_element = post.find('div', class_='countdown-date')
-            # description = date_element.text
-
-            scrapy.appender(title, 'ransomhub', '',website,'',post_url,page=page)
-
-
-    except:
-        print('ransomhub: ' + 'parsing fail: '+ url)
+    except Exception as e:
+        print(f'ransomhub: parsing fail: {url} : {e}')
