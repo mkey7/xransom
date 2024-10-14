@@ -3,14 +3,11 @@ from playwright.sync_api import sync_playwright
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from playwright_stealth import stealth_sync
 from datetime import datetime
-from PIL import Image
-from PIL import ImageDraw
 import json
 import hashlib  # sha1
 import importlib
 from bs4 import BeautifulSoup
 import simhash
-from datetime import datetime
 
 
 class webScrapy:
@@ -67,7 +64,7 @@ class webScrapy:
         爬取网页，并将截图保存到screenshot中，但是抓到的网页并不保存至page.json中
         """
         self.cont += 1
-        if self.cont % 10 == 0:
+        if self.cont % 5 == 0:
             print(f"xransom has try to crawl {self.cont} pages")
             self.close()
             self.browserInit()
@@ -79,6 +76,7 @@ class webScrapy:
             context = self.browser.new_context(ignore_https_errors=True)
             page = context.new_page()
             stealth_sync(page)
+            page.set_viewport_size({"width": 1280, "height": 5000})
 
             try:
                 response = page.goto(url, wait_until='load',
@@ -112,46 +110,11 @@ class webScrapy:
 
             current_datetime = datetime.now()
             current_timestamp = current_datetime.timestamp()
-            screenshots_name = 'screenshots/' + sha1_value + '.png'
-            page.screenshot(path=screenshots_name, full_page=True)
-            image = Image.open(screenshots_name)
 
-            # Format it in ISO format
-            iso_formatted = current_datetime.isoformat()
+            # 获取截图
+            screenshots = self.get_screenshot(page, sha1_value)
 
-            draw = ImageDraw.Draw(image)
-            draw.text((10, 10), iso_formatted, fill=(0, 0, 0))
-
-            image.save(screenshots_name)
-
-            # save page content
-            # filename = 'source/' + sha1_value + '.html'
-            # with open(filename, 'w', encoding='utf-8') as sitesource:
-            #    sitesource.write(page.content())
-            #    sitesource.close()
-
-            # content
-            soup = BeautifulSoup(page.content(), 'html.parser')
-            text = soup.get_text()
-
-            # meta
-            metas = soup.find_all('meta')
-            meta_str = ""
-            for meta in metas:
-                meta_str += str(meta) + '\n'
-
-            # 查找带有charset的meta标签
-            encoding = ""
-            meta_charset = soup.find('meta', charset=True)
-            if meta_charset:
-                encoding = meta_charset['charset']
-
-            # 查找带有Content-Type的meta标签
-            meta_content_type = soup.find('meta', attrs={
-                'http-equiv': 'Content-Type'})
-            if meta_content_type and 'charset' in meta_content_type['content']:
-                content_type = meta_content_type['content']
-                encoding = content_type.split('charset=')[-1]
+            text, meta_str, encoding = self.get_soup(page)
 
             # simhash
             hash1 = simhash.Simhash(text.split()).value
@@ -178,11 +141,7 @@ class webScrapy:
                     'group_name': site["label"]["name"]
                 },
                 'threaten_level': '中危',
-                'snapshot': {
-                    'name': sha1_value + '.png',
-                    'path': 'screenshots/',
-                    'image_id': sha1_value
-                },
+                'snapshot': screenshots
             }
 
             page.close()
@@ -192,7 +151,7 @@ class webScrapy:
             return apage
 
         except Exception as e:
-            print(f"failed to get page:{site['url']}, because of  {e}")
+            print(f"ERROR: failed to get page:{site['url']}, because of  {e}")
             return None
 
     def close(self):
@@ -283,7 +242,7 @@ class webScrapy:
             "uuid": uuid,
             "user_id": user_id,
             "user_name": group_name,
-            "publish_time": published,
+            "publish_time": published if published else page["publish_time"],
             "content": content,
             "url": post_url,
             "title": post_title,
@@ -315,6 +274,7 @@ class webScrapy:
         for p in self.posts:
             if p['uuid'] == post["uuid"]:
                 print('post already exists: ' + post["title"])
+                post["publish_time"] = p["publish_time"]
                 p = post
                 return True
         print('post does not exist: ' + post["title"])
@@ -358,3 +318,79 @@ class webScrapy:
         hash_object.update(data.encode())
         # 获取十六进制格式的散列值
         return hash_object.hexdigest()
+
+    def get_screenshot(self, page, sha1_value, section_height=2000):
+        """
+        抓取网页截图
+        """
+        screenshots = []
+        try:
+            screenshot_path = f'screenshots/{sha1_value}.png'
+
+            page.screenshot(path=screenshot_path, full_page=True)
+
+            screenshot = {
+                'name': f'{sha1_value}.png',
+                'path': 'screenshots/',
+                'image_id': f'{sha1_value}',
+            }
+            screenshots.append(screenshot)
+
+        except Exception as e:
+            print(f"ERROR screenshot: {e}")
+            # NOTE 分段截图
+            total_height = page.evaluate("document.body.scrollHeight")
+            viewport_width = page.viewport_size["width"]
+
+            for i in range(0, total_height, section_height):
+                clip_area = {"x": 0, "y": i, "width": viewport_width,
+                             "height": min(section_height, total_height - i)}
+
+                # 如果超出页面范围则跳过截图
+                if clip_area["height"] <= 0:
+                    continue
+
+                # 截取当前部分的截图
+                screenshot_path = f'screenshots/{sha1_value}-{i/section_height}.png'
+
+                page.screenshot(path=screenshot_path, clip=clip_area,
+                                full_page=False)
+
+                screenshot = {
+                    'name': f'{sha1_value}-{i/section_height}.png',
+                    'path': 'screenshots/',
+                    'image_id': f'{sha1_value}-{i/section_height}',
+                }
+                screenshots.append(screenshot)
+
+        finally:
+            return screenshots
+
+    def get_soup(self, page):
+        """
+        从html网页中提取相关内容
+        """
+        # content
+        soup = BeautifulSoup(page.content(), 'html.parser')
+        text = soup.get_text()
+
+        # meta
+        metas = soup.find_all('meta')
+        meta_str = ""
+        for meta in metas:
+            meta_str += str(meta) + '\n'
+
+        # 查找带有charset的meta标签
+        encoding = ""
+        meta_charset = soup.find('meta', charset=True)
+        if meta_charset:
+            encoding = meta_charset['charset']
+
+        # 查找带有Content-Type的meta标签
+        meta_content_type = soup.find('meta', attrs={
+            'http-equiv': 'Content-Type'})
+        if meta_content_type and 'charset' in meta_content_type['content']:
+            content_type = meta_content_type['content']
+            encoding = content_type.split('charset=')[-1]
+
+        return text, meta_str, encoding
