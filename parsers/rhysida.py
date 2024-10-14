@@ -7,25 +7,43 @@
 +------------------------------+------------------+----------+
 Rappel : def appender(post_title, group_name, description="", website="", published="", post_url=""):
 """
-from bs4 import BeautifulSoup
+from lxml import etree
 
-def main(scrapy,page,site):
+
+# 单独爬取一个post
+def get_post(scrapy, site, url):
+    try:
+        page = scrapy.scrape(site, url)
+
+        if page is None:
+            return None
+
+        # todo 提取相关字段
+        html = etree.HTML(page["page_source"])
+        post_title = html.xpath("//div[@class='col-8']/p[@class='h4']/a/text()")[0]
+        website = html.xpath("//div[@class='col-8']//a/@href")[0]
+
+        all_text = html.xpath("//text()")
+        contents = " ".join(text.strip() for text in all_text if text.strip())
+
+        downloads = html.xpath(
+            "//div[@class='col-8']//a[contains(text(), 'Documents')]/@href")
+
+        scrapy.appender(post_title, "rhysida", contents, website, post_url=url,
+                        download=downloads, page=page)
+    except Exception as e:
+        print(f'ERROR rhysida: parsing fail: {url} : {e}')
+
+
+def main(scrapy, page, site):
     url = page["domain"]
     try:
-        soup=BeautifulSoup(page["page_source"],'html.parser')
-        div_containers = soup.find_all('div', class_='border m-2 p-2')
-        for div in div_containers:
-            title_div = div.find('div', class_='m-2 h4')
-            title = title_div.text.strip() if title_div else ''
-            description_div = div.find('div', class_='m-2')
-            description = description_div.text.strip().replace('\n',' ') if description_div else ''
-            post_url=''
-            try:
-                post_url = url + '/archive.php?company=' + div.find('button')['data-company']
-            except:
-                pass
-            if len(title) != 0: 
-                scrapy.appender(title, 'rhysida', description,"","",post_url,page=page)
+        html = etree.HTML(page["page_source"])
+        post_urls = html.xpath("//div[@class='row m-2']//button/@data-company")
 
-    except:
-        print('rhysida: ' + 'parsing fail: '+url)
+        for post_url in post_urls:
+            post_url = 'http://' + url + '/archive.php?company=' + post_url
+            get_post(scrapy, site, post_url)
+
+    except Exception as e:
+        print(f'ERROR rhysida: parsing fail: {url} : {e}')
