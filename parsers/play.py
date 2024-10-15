@@ -32,8 +32,7 @@ def get_post(scrapy, site, url):
 
 # 提取下载链接
         downloads = html.xpath("//div[contains(text(), 'DOWNLOAD LINKS:')]/text()")
-        for download_link in downloads:
-            download_link.replace("\xa0DOWNLOAD LINKS: ", "")
+        downloads = [link.replace("\xa0DOWNLOAD LINKS: ", "") for link in downloads]
 
         scrapy.appender(post_title, "play", contents, website, post_url=url,
                         published=published, download=downloads, country=country, page=page)

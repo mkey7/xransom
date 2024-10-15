@@ -6,11 +6,11 @@
 +------------------------------+------------------+----------+
 Rappel : def appender(post_title, group_name, description="", website="", published="", post_url=""):
 """
-import os
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-def main(scrapy,page,site):
+
+def main(scrapy, page, site):
     url = page["domain"]
     try:
         soup=BeautifulSoup(page["page_source"],'html.parser')
