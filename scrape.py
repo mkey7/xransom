@@ -8,6 +8,8 @@ import hashlib  # sha1
 import importlib
 from bs4 import BeautifulSoup
 import simhash
+import minioUpdate
+import MQ
 
 
 class webScrapy:
@@ -31,6 +33,8 @@ class webScrapy:
         self.pages = self.openjson('pages.json')
         self.users = self.openjson('users.json')
         self.cont = 0
+        self.minio = minioUpdate.minio_client_setup()
+        self.mq = MQ.mqinit()
 
     def torHttp(self, ip='43.154.182.55', port=9050):
         """
@@ -112,7 +116,8 @@ class webScrapy:
             current_timestamp = current_datetime.timestamp()
 
             # 获取截图
-            screenshots = self.get_screenshot(page, sha1_value)
+            screenshots = self.get_screenshot(page, sha1_value,
+                                              site['label']['name'])
 
             text, meta_str, encoding = self.get_soup(page)
 
@@ -148,6 +153,7 @@ class webScrapy:
             context.close()
 
             self.existingpage(apage)
+            MQ.mqSend(self.mq, apage, 'page')
             return apage
 
         except Exception as e:
@@ -199,6 +205,7 @@ class webScrapy:
             site["is_recent_online"] = True
             site["snapshot"] = page["snapshot"]
             self.writejson("sites.json", self.sites)
+            MQ.mqSend(self.mq, site, 'site')
 
             # 更新user
             for user in self.users:
@@ -206,8 +213,9 @@ class webScrapy:
                     user["last_active_time"] = page["publish_time"]
                     user["crawl_time"] = page["publish_time"]
                     if user["register_time"] == "":
-                        user["register_time"] = page["publish_time"] 
+                        user["register_time"] = page["publish_time"]
             self.writejson("users.json", self.users)
+            MQ.mqSend(self.mq, user, 'user')
 
     def parser(self, group_name, page, site):
         """
@@ -266,6 +274,7 @@ class webScrapy:
         }
 
         self.existingpost(post)
+        MQ.mqSend(self.mq, post, 'ransom')
 
     def existingpost(self, post):
         '''
@@ -319,7 +328,7 @@ class webScrapy:
         # 获取十六进制格式的散列值
         return hash_object.hexdigest()
 
-    def get_screenshot(self, page, sha1_value, section_height=2000):
+    def get_screenshot(self, page, sha1_value, siteName, section_height=2000):
         """
         抓取网页截图
         """
@@ -334,7 +343,6 @@ class webScrapy:
                 'path': 'screenshots/',
                 'image_id': f'{sha1_value}',
             }
-            screenshots.append(screenshot)
 
         except Exception as e:
             print(f"ERROR screenshot: {e}")
@@ -361,9 +369,12 @@ class webScrapy:
                     'path': 'screenshots/',
                     'image_id': f'{sha1_value}-{i/section_height}',
                 }
-                screenshots.append(screenshot)
 
         finally:
+            minioPath = siteName + "/" + screenshot["name"]
+            minioUpdate.upload_to_minio(self.minio, screenshot_path, minioPath,
+                                        "xransoms")
+            screenshots.append(screenshot)
             return screenshots
 
     def get_soup(self, page):
