@@ -1,6 +1,3 @@
-# docker build --network host -t ran .
-# docker run -it --network host --name ran1 -v /mnt/e/work/ransomware:/home/ransomwatch ran
-
 FROM debian:12
 
 RUN apt-get update -y
@@ -21,3 +18,6 @@ RUN playwright install
 RUN playwright install-deps
 
 # CMD /etc/init.d/cron start
+
+# docker build -t xran .
+# docker run -it --network host --name xran1 -v /path/to/xransomware:/home/xransomware xran
