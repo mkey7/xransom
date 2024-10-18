@@ -10,6 +10,8 @@ from bs4 import BeautifulSoup
 import simhash
 import minioUpdate
 import MQ
+import os
+from dotenv import load_dotenv
 
 
 class webScrapy:
@@ -17,36 +19,51 @@ class webScrapy:
     爬虫模块：tor网络代理、爬虫、保存json数据
     """
 
-    def __init__(self, ip: str = '43.154.182.55', port: int = 9050) -> None:
+    def __init__(self) -> None:
         """
         初始化，设置代理(socks5)，读取数据表
         """
-        self.ip = ip
-        self.port = port
-        self.proxy_path = "socks5://"+self.ip+":"+str(self.port)
-        self.proxies = {
-            'http':  'socks5h://' + str(self.ip) + ':' + str(self.port),
-            'https': 'socks5h://' + str(self.ip) + ':' + str(self.port)
-        }
+        load_dotenv()
+
+        self.ip = os.getenv('TOR_IP')
+        print(self.ip)
+        print(type((self.ip)))
+        self.port = os.getenv('TOR_PORT')
+
+        # tor的代理
+        socks = os.getenv('TOR_SOCKS5')
+        if socks:
+            self.proxy_path = "socks5://"+self.ip+":"+str(self.port)
+            self.proxies = {
+                'http':  'socks5h://' + str(self.ip) + ':' + str(self.port),
+                'https': 'socks5h://' + str(self.ip) + ':' + str(self.port)
+            }
+        else:
+            self.proxy_path = "http://"+self.ip+":"+str(self.port)
+            self.proxies = {
+                'http':  'http://' + str(self.ip) + ':' + str(self.port),
+                'https': 'https://' + str(self.ip) + ':' + str(self.port)
+            }
+
+        self.mq_ip = os.getenv('MQ_IP')
+        self.mq_port = os.getenv('MQ_PORT')
+        self.mq_username = os.getenv('MQ_USERNAME')
+        self.mq_password = os.getenv('MQ_PASSWORD')
+        self.mq = MQ.mqinit(self.mq_ip, self.mq_username,
+                            self.mq_password, self.mq_port)
+
+        self.minio_ip = os.getenv('MINIO_IP')
+        self.minio_access_key = os.getenv('MINIO_ACCESS_KEY')
+        self.minio_secret_key = os.getenv('MINIO_SECRET_KEY')
+        self.minio = minioUpdate.minio_client_setup(self.minio_ip,
+                                                    self.minio_access_key,
+                                                    self.minio_secret_key)
+
         self.sites = self.openjson('sites.json')
         self.posts = self.openjson('posts.json')
         self.pages = self.openjson('pages.json')
         self.users = self.openjson('users.json')
         self.cont = 0
-        self.minio = minioUpdate.minio_client_setup()
-        self.mq = MQ.mqinit()
-
-    def torHttp(self, ip='43.154.182.55', port=9050):
-        """
-        将代理协议设置为http
-        """
-        self.ip = ip
-        self.port = port
-        self.proxy_path = "http://"+self.ip+":"+str(self.port)
-        self.proxies = {
-            'http':  'http://' + str(self.ip) + ':' + str(self.port),
-            'https': 'https://' + str(self.ip) + ':' + str(self.port)
-        }
 
     def browserInit(self):
         """
