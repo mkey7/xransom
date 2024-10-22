@@ -26,8 +26,6 @@ class webScrapy:
         load_dotenv()
 
         self.ip = os.getenv('TOR_IP')
-        print(self.ip)
-        print(type((self.ip)))
         self.port = os.getenv('TOR_PORT')
 
         # tor的代理
@@ -75,7 +73,7 @@ class webScrapy:
             self.browser = self.play.firefox.launch(
                 proxy={"server": self.proxy_path},
                 args=["--headless=new"]
-                )
+            )
             print(f"browser init! Tor: {self.proxy_path}")
         except Exception as e:
             print(f"failed to launch playwright! {e}")
