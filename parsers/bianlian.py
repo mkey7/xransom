@@ -12,8 +12,6 @@ from bs4 import BeautifulSoup
 def get_description(scrapy,site,url,title,published):
     page = scrapy.scrape(site,url)
 
-    print("fetching bianlian-"+title)
-    
     # todo 提取相关字段
     soup=BeautifulSoup(page["page_source"],'html.parser')
     post_title = soup.title.string

@@ -9,23 +9,46 @@ Rappel : def appender(post_title, group_name, description="", website="", publis
 """
 from datetime import datetime
 from bs4 import BeautifulSoup
+from lxml import etree
 
 
-def main(scrapy,page,site):
+# 单独爬取一个post
+def get_post(scrapy, site, url):
     try:
-        soup=BeautifulSoup(page["page_source"],'html.parser')
-        divs_name=soup.find_all('div', class_='list-group-item')
-        for div in divs_name:
-            link = div.find('a')['href']
-            name = div.find('a').text.strip()
-            tmp = div.find('div', class_='d-flex gap-2 small mt-1 opacity-25').text.strip()
-            date_string = tmp.splitlines()[0].replace("Downloaded: ","")
-            try: 
-                published = datetime.strptime(date_string, "%d.%m.%Y").strftime("%Y-%m-%d %H:%M:%S.%f")
-            except: 
-                published = datetime.strptime(date_string, "%d.%m.%y").strftime("%Y-%m-%d %H:%M:%S.%f")
-            description = div.find('div', class_='small opacity-50').text.strip()
-            scrapy.appender(name, '8base', description.replace('\n',' '),"",published,link,page=page)
-    except:
-       print('8base : ' + 'parsing fail')
-       pass    
+        page = scrapy.scrape(site, url)
+
+        if page is None:
+            return None
+
+        # todo 提取相关字段
+        html = etree.HTML(page["page_source"])
+        post_title = html.xpath("//div[@class='list-group-item rounded-3 py-3 bg-body-secondary text-bg-dark mb-2 position-relative']/text()")[0]
+
+        all_text = html.xpath("//text()")
+        contents = " ".join(text.strip() for text in all_text if text.strip())
+
+        website = html.xpath("//div[@class='list-group-item rounded-3 py-3 bg-body-secondary text-bg-dark mb-2 position-relative']//p/a/@href")[0]
+
+        published = html.xpath("//div[@class='d-flex gap-2 small mt-1 opacity-25']/div/2/b/text()")[0]
+
+# 提取下载链接
+        download = html.xpath("//div[@class='list-group-item rounded-3 py-3 bg-body-secondary text-bg-dark mb-2 position-relative']//p/a/@href")[1]
+        downloads = [download]
+
+        scrapy.appender(post_title, "8base", contents, website, post_url=url,
+                        published=published, download=downloads, page=page)
+    except Exception as e:
+        print(f'8base: parsing fail: {url} : {e}')
+
+
+def main(scrapy, page, site):
+    url = page["domain"]
+    try:
+        html = etree.HTML(page["page_source"])
+        post_urls = html.xpath("//div[@div='list-group d-grid gap-2 border-0 mt-5']/a")
+        for post_url in post_urls:
+
+            get_post(scrapy, site, url)
+
+    except Exception as e:
+        print(f'8base: parsing fail: {url} : {e}')

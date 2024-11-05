@@ -21,6 +21,7 @@ class minioClient:
             file_size = os.path.getsize(file_path)
         except FileNotFoundError:
             print(f"Minio file {file_path} not exist")
+            return
 
         try:
             with open(file_path, "rb") as file_data:
