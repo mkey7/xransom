@@ -70,7 +70,7 @@ class webScrapy:
 
     def scrape(self, site, post_url=""):
         """
-        爬取网页，并将截图保存到screenshot中，但是抓到的网页并不保存至page.json中
+        爬取网页，并将截图保存到screenshot中，上传page数据到mq
         """
         self.cont += 1
         if self.cont % 5 == 0:
@@ -82,6 +82,7 @@ class webScrapy:
         print("start scraping : " + site['label']['name'] + " : " + url)
 
         try:
+            # NOTE 开始抓取网页
             context = self.browser.new_context(ignore_https_errors=True)
             page = context.new_page()
             stealth_sync(page)
@@ -113,6 +114,8 @@ class webScrapy:
             page.wait_for_load_state('networkidle')
             page.wait_for_timeout(15000)
 
+            # NOTE 后面开始对抓到的网页进行解析，生成page
+
             # uuid
             e = url+page.title()
             sha1_value = self.calculate_sha1(e)
@@ -124,6 +127,7 @@ class webScrapy:
             screenshots = self.get_screenshot(page, sha1_value,
                                               site['label']['name'])
 
+            # NOTE 通过get_soup 函数，解析爬到的网页提取有关内容
             text, meta_str, encoding = self.get_soup(page)
 
             # simhash
@@ -168,6 +172,7 @@ class webScrapy:
     def close(self):
         """
         playwright运行完毕后关闭
+        写入pages.json posts.json
         """
         if hasattr(self, 'browser') and self.browser:
             self.browser.close()

@@ -15,6 +15,17 @@ class minioClient:
     def minio_client_setup(self):
         self.minio = Minio(self.minio_ip, access_key=self.minio_access_key, secret_key=self.minio_secret_key, secure=False)
 
+    def push_minio(self, file_path, object_name, bucket_name):
+        with open(file_path, "rb") as file_data:
+            self.minio.put_object(
+                bucket_name=bucket_name,
+                object_name=object_name,
+                data=file_data,
+                length=file_size,
+                content_type="image/png",
+            )
+        print(f"File {file_path} has been successfully uploaded to {object_name}.")
+
     # 上传文件到MinIO
     def upload_to_minio(self, file_path, object_name, bucket_name, retry=True):
         try:
@@ -24,20 +35,12 @@ class minioClient:
             return
 
         try:
-            with open(file_path, "rb") as file_data:
-                self.minio.put_object(
-                    bucket_name=bucket_name,
-                    object_name=object_name,
-                    data=file_data,
-                    length=file_size,
-                    content_type="image/png",
-                )
-            print(f"File {file_path} has been successfully uploaded to {object_name}.")
+            self.push_minio(file_path, object_name, bucket_name)
         except Exception as e:
             print("Minio Error occurred: ", e)
             self.minio_client_setup()
             if retry:
-                self.upload_to_minio(file_path, object_name, bucket_name, False)
+                self.push_minio(file_path, object_name, bucket_name, False)
 
 
 # 主函数

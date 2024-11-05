@@ -16,10 +16,12 @@ class mqClient:
         self.mqinit()
 
     def mqinit(self):
+        """
+        创建mq连接
+        """
         credentials = pika.PlainCredentials(self.mq_username, self.mq_password)
         connection = pika.BlockingConnection(pika.ConnectionParameters(self.mq_ip, self.mq_port, '/', credentials))
         self.channel = connection.channel()
-
 
     def mqSend(self, data, routing_key):
         # 将 JSON 数据转换为字符串
@@ -28,8 +30,8 @@ class mqClient:
         try:
             # 发布消息到队列
             self.channel.basic_publish(exchange='',
-                                  routing_key=routing_key,
-                                  body=message)
+                                       routing_key=routing_key,
+                                       body=message)
         except Exception as e:
             print("mq通道关闭" + str(e))
             self.mqinit()
