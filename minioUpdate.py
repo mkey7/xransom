@@ -16,7 +16,7 @@ class minioClient:
         self.minio = Minio(self.minio_ip, access_key=self.minio_access_key, secret_key=self.minio_secret_key, secure=False)
 
     # 上传文件到MinIO
-    def upload_to_minio(self, file_path, object_name, bucket_name):
+    def upload_to_minio(self, file_path, object_name, bucket_name, retry=True):
         try:
             file_size = os.path.getsize(file_path)
         except FileNotFoundError:
@@ -35,7 +35,8 @@ class minioClient:
         except Exception as e:
             print("Minio Error occurred: ", e)
             self.minio_client_setup()
-            self.upload_to_minio(file_path,object_name,bucket_name)
+            if retry:
+                self.upload_to_minio(file_path, object_name, bucket_name, False)
 
 
 # 主函数
