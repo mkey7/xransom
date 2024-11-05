@@ -43,19 +43,9 @@ class webScrapy:
                 'https': 'https://' + str(self.ip) + ':' + str(self.port)
             }
 
-        self.mq_ip = os.getenv('MQ_IP')
-        self.mq_port = os.getenv('MQ_PORT')
-        self.mq_username = os.getenv('MQ_USERNAME')
-        self.mq_password = os.getenv('MQ_PASSWORD')
-        self.mq = MQ.mqinit(self.mq_ip, self.mq_username,
-                            self.mq_password, self.mq_port)
+        self.mq = MQ.mqClient()
 
-        self.minio_ip = os.getenv('MINIO_IP')
-        self.minio_access_key = os.getenv('MINIO_ACCESS_KEY')
-        self.minio_secret_key = os.getenv('MINIO_SECRET_KEY')
-        self.minio = minioUpdate.minio_client_setup(self.minio_ip,
-                                                    self.minio_access_key,
-                                                    self.minio_secret_key)
+        self.minio = minioUpdate.minioClient()
 
         self.sites = self.openjson('sites.json')
         self.posts = self.openjson('posts.json')
@@ -167,12 +157,12 @@ class webScrapy:
             page.close()
             context.close()
 
-            self.existingpage(apage)
-            MQ.mqSend(self.mq, apage, 'page')
+            # self.existingpage(apage)
+            self.mq.mqSend(apage, 'page')
             return apage
 
         except Exception as e:
-            print(f"ERROR: failed to get page:{site['url']}, because of  {e}")
+            print(f"ERROR: failed to get page:{url}, because of  {e}")
             return None
 
     def close(self):
@@ -184,8 +174,8 @@ class webScrapy:
         if hasattr(self, 'play') and self.play:
             self.play.stop()
         print("playwright closed!")
-        self.writejson("pages.json", self.pages)
-        self.writejson("posts.json", self.posts)
+        # self.writejson("pages.json", self.pages)
+        # self.writejson("posts.json", self.posts)
         print("write pages and posts to json!")
 
     def run(self, group_name):
@@ -220,7 +210,7 @@ class webScrapy:
             site["is_recent_online"] = True
             site["snapshot"] = page["snapshot"]
             self.writejson("sites.json", self.sites)
-            MQ.mqSend(self.mq, site, 'site')
+            self.mq.mqSend(site, 'site')
 
             # 更新user
             for user in self.users:
@@ -230,7 +220,7 @@ class webScrapy:
                     if user["register_time"] == "":
                         user["register_time"] = page["publish_time"]
             self.writejson("users.json", self.users)
-            MQ.mqSend(self.mq, user, 'user')
+            self.mq.mqSend(user, 'user')
 
     def parser(self, group_name, page, site):
         """
@@ -288,8 +278,8 @@ class webScrapy:
             "threaten_level": "中危"
         }
 
-        self.existingpost(post)
-        MQ.mqSend(self.mq, post, 'ransom')
+        # self.existingpost(post)
+        self.mq.mqSend(post, 'ransom')
 
     def existingpost(self, post):
         '''
@@ -358,6 +348,7 @@ class webScrapy:
                 'path': 'screenshots/',
                 'image_id': f'{sha1_value}',
             }
+            screenshots.append(screenshot)
 
         except Exception as e:
             print(f"ERROR screenshot: {e}")
@@ -381,15 +372,16 @@ class webScrapy:
 
                 screenshot = {
                     'name': f'{sha1_value}-{i/section_height}.png',
-                    'path': 'screenshots/',
+                    'path': siteName,
                     'image_id': f'{sha1_value}-{i/section_height}',
                 }
+                screenshots.append(screenshot)
 
         finally:
-            minioPath = siteName + "/" + screenshot["name"]
-            minioUpdate.upload_to_minio(self.minio, screenshot_path, minioPath,
-                                        "xransoms")
-            screenshots.append(screenshot)
+            for screenshot in screenshots:
+                minioPath = siteName + "/" + screenshot["name"]
+                screenshot_path =  "screenshots/" + screenshot["name"]
+                self.minio.upload_to_minio(screenshot_path, minioPath, "xransoms")
             return screenshots
 
     def get_soup(self, page):
