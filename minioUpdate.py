@@ -8,7 +8,7 @@ class minioClient:
     def __init__(self) -> None:
         load_dotenv()
         self.minio_ip = os.getenv('MINIO_IP')
-        self.minio_access_key = int(os.getenv('MINIO_ACCESS_KEY'))
+        self.minio_access_key = os.getenv('MINIO_ACCESS_KEY')
         self.minio_secret_key = os.getenv('MINIO_SECRET_KEY')
 
     # 配置MinIO客户端
