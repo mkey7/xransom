@@ -1,6 +1,6 @@
 import os
 from minio import Minio
-from minio.error import S3Error
+# from minio.error import S3Error
 from dotenv import load_dotenv
 
 

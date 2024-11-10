@@ -46,6 +46,7 @@ class webScrapy:
         self.mq = MQ.mqClient()
 
         self.minio = minioUpdate.minioClient()
+        self.minio.minio_client_setup()
 
         self.sites = self.openjson('sites.json')
         self.posts = self.openjson('posts.json')
@@ -179,8 +180,8 @@ class webScrapy:
         if hasattr(self, 'play') and self.play:
             self.play.stop()
         print("playwright closed!")
-        # self.writejson("pages.json", self.pages)
-        # self.writejson("posts.json", self.posts)
+        self.writejson("pages.json", self.pages)
+        self.writejson("posts.json", self.posts)
         print("write pages and posts to json!")
 
     def run(self, group_name):
