@@ -15,7 +15,7 @@ class minioClient:
     def minio_client_setup(self):
         self.minio = Minio(self.minio_ip, access_key=self.minio_access_key, secret_key=self.minio_secret_key, secure=False)
 
-    def push_minio(self, file_path, object_name, bucket_name):
+    def push_minio(self, file_path, file_size, object_name, bucket_name):
         with open(file_path, "rb") as file_data:
             self.minio.put_object(
                 bucket_name=bucket_name,
@@ -35,7 +35,7 @@ class minioClient:
             return
 
         try:
-            self.push_minio(file_path, object_name, bucket_name)
+            self.push_minio(file_path, file_size, object_name, bucket_name)
         except Exception as e:
             print("Minio Error occurred: ", e)
             self.minio_client_setup()
