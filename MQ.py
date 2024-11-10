@@ -29,10 +29,10 @@ class mqClient:
 
         try:
             # 检查队列是否存在
-            if not channel.queue_declare(queue=routing_key, durable=True).method.queue:
+            if not self.channel.queue_declare(queue=routing_key, durable=True).method.queue:
                 print(f"Queue '{routing_key}' does not exist. Creating it.")
                 # 创建队列，durable=True 表示队列将在 broker 重启后依然存在
-                channel.queue_declare(queue=routing_key, durable=True)
+                self.channel.queue_declare(queue=routing_key, durable=True)
 
             # 发布消息到队列
             self.channel.basic_publish(exchange='',
