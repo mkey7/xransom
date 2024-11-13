@@ -162,7 +162,7 @@ class webScrapy:
             page.close()
             context.close()
 
-            # self.existingpage(apage)
+            self.existingpage(apage)
             self.mq.mqSend(apage, 'page')
             return apage
 
@@ -284,7 +284,7 @@ class webScrapy:
             "threaten_level": "中危"
         }
 
-        # self.existingpost(post)
+        self.existingpost(post)
         self.mq.mqSend(post, 'ransom')
 
     def existingpost(self, post):
