@@ -210,11 +210,22 @@ class webScrapy:
             last_publish_time = dt_object.strftime('%Y-%m-%d %H:%M:%S.%f')
 
             site["last_publish_time"] = last_publish_time
+            site["update_at"] = last_publish_time
+
             if site["first_publish_time"] == "":
                 site["first_publish_time"] = site["last_publish_time"]
+            if site["created_at"] == "":
+                site["created_at"] = site["last_publish_time"]
+
             site["last_status"] = True
             site["is_recent_online"] = True
+
             site["snapshot"] = page["snapshot"]
+            site["name"] = page["snapshot"]["name"]
+            site["image_hash"] = page["snapshot"]["image_id"]
+            site["path"] = page["snapshot"]["path"]
+
+
             self.writejson("sites.json", self.sites)
             self.mq.mqSend(site, 'site')
 
@@ -281,7 +292,8 @@ class webScrapy:
                 "industry": industry,
             },
             "extract_entity": [],
-            "threaten_level": "中危"
+            "threaten_level": "中危",
+            'snapshot': page["snapshot"],
         }
 
         self.existingpost(post)
@@ -351,7 +363,7 @@ class webScrapy:
 
             screenshot = {
                 'name': f'{sha1_value}.png',
-                'path': 'screenshots/',
+                'path': "xransoms/" + siteName + "/" + f'{sha1_value}.png',
                 'image_id': f'{sha1_value}',
             }
             screenshots.append(screenshot)
@@ -378,7 +390,7 @@ class webScrapy:
 
                 screenshot = {
                     'name': f'{sha1_value}-{i/section_height}.png',
-                    'path': siteName,
+                    'path': "xransoms/" + siteName + "/" + f'{sha1_value}-{i/section_height}.png',
                     'image_id': f'{sha1_value}-{i/section_height}',
                 }
                 screenshots.append(screenshot)
@@ -386,8 +398,8 @@ class webScrapy:
         finally:
             for screenshot in screenshots:
                 minioPath = siteName + "/" + screenshot["name"]
-                screenshot_path =  "screenshots/" + screenshot["name"]
-                self.minio.upload_to_minio(screenshot_path, minioPath, "xransoms")
+                screenshot_path1 = "screenshots/" + screenshot["name"]
+                self.minio.upload_to_minio(screenshot_path1, minioPath, "xransoms")
             return screenshots
 
     def get_soup(self, page):

@@ -61,34 +61,42 @@ for i in data:
     
     for l in i["locations"]:
         site = {
+                "site_name" : i["name"],
                 "uuid" : calculate_sha1(l["fqdn"]+i["name"]),
                 "domain" : l["fqdn"],
                 "net_type" : "tor",
                 "url" : l["slug"],
+                "index_url" : l["slug"],
                 "title" : l["title"],
-                "description" : str(i["profile"]),
+                "description" : i["profile"],
                 "lang" : "en",
                 "snapshot" : {
                     "name" : "",
                     "path" : "",
                     "image_id" : "",
                 },
+                "name" : "",
+                "path" : "",
+                "image_hash" : "",
                 "last_status" : l["enabled"],
                 "first_publish_time" : l["lastscrape"],
                 "last_publish_time" : l["lastscrape"],
                 "service_type" : "勒索",
                 "is_recent_online" : l["enabled"],
-                "scale" : 5,
-                "active_level" : 5,
+                "scale" : {},
+                "active_level" : [],
                 "label" : {
                     "type" : "勒索",
                     "name" : i["name"]
                 },
-                "site_hazard" : "高危",
+                "site_hazard" : [],
                 "goods_label" : "data",
-                "goods_count" : 0,
+                "goods_count" : -1,
                 "pay_methods" : "",
                 "goods_user_count" : 0,
+                "user_info" : {},
+                "created_at" : l["lastscrape"],
+                "update_at" : l["lastscrape"],
         }
         sites.append(site)
 
