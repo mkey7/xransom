@@ -157,7 +157,10 @@ class webScrapy:
                     'group_name': site["label"]["name"]
                 },
                 'threaten_level': '中危',
-                'snapshot': screenshots
+                'snapshot': screenshots,
+                'snapshot_name': screenshots[0]["name"],
+                'snapshot_oss_path': screenshots[0]["path"],
+                'snapshot_hash': screenshots[0]["image_id"]
             }
 
             page.close()
