@@ -12,7 +12,7 @@ import minioUpdate
 import MQ
 import os
 from dotenv import load_dotenv
-import re
+import getCountry
 
 
 class webScrapy:
@@ -269,7 +269,7 @@ class webScrapy:
         e = group_name + post_title
         uuid = self.calculate_sha1(e)
         user_id = self.calculate_sha1(group_name)
-        content = re.sub(r'\n+', '\n', content)
+        country = getCountry.main(content, website, post_title, country)
 
         post = {
             "platform": group_name,
