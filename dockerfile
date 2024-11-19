@@ -6,7 +6,7 @@ RUN apt-get install -y \
     g++ gcc libxml2-dev \
     libxslt-dev libffi-dev \
     make curl python3 pip \
-    vim cron
+    vim cron whois
 
 
 COPY requirements.txt /home/requirements.txt

@@ -17,3 +17,4 @@ pycountry==23.12.11
 minio
 python-dotenv
 simhash
+python-whois
