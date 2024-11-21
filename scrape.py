@@ -149,7 +149,7 @@ class webScrapy:
                 'url': url,
                 'images': [],
                 'publish_time': str(current_timestamp),
-                'subject': '勒索',
+                'subject': '[勒索]',
                 'content': text,
                 'simhash_values': hash1,
                 'label': {
@@ -160,7 +160,10 @@ class webScrapy:
                 'snapshot': screenshots,
                 'snapshot_name': screenshots[0]["name"],
                 'snapshot_oss_path': screenshots[0]["path"],
-                'snapshot_hash': screenshots[0]["image_id"]
+                'snapshot_hash': screenshots[0]["image_id"],
+                'warn_topics': "[]",
+                'extract_entity': "[]",
+                'url_and_address': "[]",
             }
 
             page.close()
@@ -225,9 +228,9 @@ class webScrapy:
             site["is_recent_online"] = True
 
             site["snapshot"] = page["snapshot"]
-            site["name"] = page["snapshot"]["name"]
-            site["image_hash"] = page["snapshot"]["image_id"]
-            site["path"] = page["snapshot"]["path"]
+            site["name"] = page["snapshot"][0]["name"]
+            site["image_hash"] = page["snapshot"][0]["image_id"]
+            site["path"] = page["snapshot"][0]["path"]
 
 
             self.writejson("sites.json", self.sites)
@@ -414,6 +417,7 @@ class webScrapy:
         # content
         soup = BeautifulSoup(page.content(), 'html.parser')
         text = soup.get_text()
+        text = re.sub(r'\n+', '\n', text)
 
         # meta
         metas = soup.find_all('meta')
