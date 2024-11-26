@@ -13,6 +13,7 @@ import MQ
 import os
 from dotenv import load_dotenv
 import getCountry
+import re
 
 
 class webScrapy:
@@ -281,7 +282,7 @@ class webScrapy:
             "user_id": user_id,
             "user_name": group_name,
             "publish_time": published if published else page["publish_time"],
-            "content": content,
+            "content": page["content"],
             "url": post_url,
             "title": post_title,
             "crawl_time": page["crawl_time"],
@@ -301,7 +302,7 @@ class webScrapy:
             },
             "extract_entity": [],
             "threaten_level": "中危",
-            'snapshot': page["snapshot"],
+            # 'snapshot': page["snapshot"],
         }
 
         self.existingpost(post)

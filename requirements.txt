@@ -18,3 +18,4 @@ minio
 python-dotenv
 simhash
 python-whois
+whois
