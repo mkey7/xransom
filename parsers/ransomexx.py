@@ -43,7 +43,7 @@ def main(scrapy, page, site):
         post_urls = html.xpath("//h2/a/@href")
 
         for post_url in post_urls:
-            post_url = "http://" + url + post_url
+            post_url = url + post_url
             get_post(scrapy, site, post_url)
 
     except Exception as e:

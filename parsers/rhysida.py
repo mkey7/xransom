@@ -42,7 +42,7 @@ def main(scrapy, page, site):
         post_urls = html.xpath("//div[@class='row m-2']//button/@data-company")
 
         for post_url in post_urls:
-            post_url = 'http://' + url + '/archive.php?company=' + post_url
+            post_url = url + '/archive.php?company=' + post_url
             get_post(scrapy, site, post_url)
 
     except Exception as e:

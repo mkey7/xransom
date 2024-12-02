@@ -10,11 +10,11 @@ services:
       - ./:/home/xransom
     working_dir: /home/xransom
 
-  tor:
-    image: sinom0on/tor
-    ports:
-      - "9050:9050"
-      - "9051:9051"
-    volumes:
-      - ./torrc:/etc/tor/torrc
+  # tor:
+  #   image: sinom0on/tor
+  #   ports:
+  #     - "9050:9050"
+  #     - "9051:9051"
+  #   volumes:
+  #     - ./torrc:/etc/tor/torrc
 

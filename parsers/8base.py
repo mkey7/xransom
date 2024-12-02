@@ -7,8 +7,6 @@
 +------------------------------+------------------+----------+
 Rappel : def appender(post_title, group_name, description="", website="", published="", post_url=""):
 """
-from datetime import datetime
-from bs4 import BeautifulSoup
 from lxml import etree
 
 
@@ -48,7 +46,7 @@ def main(scrapy, page, site):
         post_urls = html.xpath("//div[@div='list-group d-grid gap-2 border-0 mt-5']/a")
         for post_url in post_urls:
 
-            get_post(scrapy, site, url)
+            get_post(scrapy, site, post_url)
 
     except Exception as e:
         print(f'8base: parsing fail: {url} : {e}')

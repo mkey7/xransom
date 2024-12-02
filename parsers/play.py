@@ -46,7 +46,7 @@ def main(scrapy, page, site):
         html = etree.HTML(page["page_source"])
         args = html.xpath("//th[@class='News']/@onclick")
         for arg in args:
-            post_url = 'http://' + url + '/topic.php?id=' + arg.split("'")[1]
+            post_url = url + '/topic.php?id=' + arg.split("'")[1]
             get_post(scrapy, site, post_url)
 
     except Exception as e:

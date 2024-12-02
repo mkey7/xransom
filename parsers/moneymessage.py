@@ -55,7 +55,7 @@ def main(scrapy, page, site):
         html = etree.HTML(page["page_source"])
         hrefs = html.xpath("//div[@class='MuiBox-root css-16lsen3']/a/@href")
         for href in hrefs:
-            post_url = "http://"+url+href
+            post_url = url+href
             get_post(scrapy, site, post_url)
 
     except Exception as e:

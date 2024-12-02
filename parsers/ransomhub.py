@@ -42,7 +42,7 @@ def main(scrapy, page, site):
         post_urls = html.xpath("//div[@class='row']//a/@href")
         published = html.xpath("//div[@class='row']//div[@class='card-footer']/text()")
         for i in range(post_urls):
-            post_url = "http://"+url+'/'+post_urls[i]
+            post_url = url+'/'+post_urls[i]
             get_post(scrapy, site, post_url, published[i])
 
     except Exception as e:

@@ -17,10 +17,9 @@ def main(scrapy,page,site):
         divs_name=soup.find_all('div', {"class": "sm:w-1/2 mb-10 px-4"})
         for div in divs_name:
             title = div.find('h2').text.strip()
-            url = "powerj7kmpzkdhjg4szvcxxgktgk36ezpjxvtosylrpey7svpmrjyuyd"
             website = div.find('a')
             website = website.attrs['href']
-            post_url = 'http://' + url + '.onion/' + website
+            post_url = url + website
             scrapy.appender(title,'darkpower','','', '', post_url,page=page)
     except:
         print('darkpower: ' + 'parsing fail: '+url)

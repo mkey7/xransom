@@ -49,7 +49,7 @@ def main(scrapy,page,site):
             read_more_link = item.find("a", text="Read More")
             if read_more_link and read_more_link.has_attr('href'):
                 post_url = read_more_link['href']
-                post_url = "http://" + site["domain"] + post_url 
+                post_url = url + post_url 
                 get_post(scrapy,site,post_url)
             #   scrapy.appender(date_text, 'malekteam', description,"","",post_url,page=page)
 

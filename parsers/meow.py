@@ -43,7 +43,7 @@ def main(scrapy, page, site):
         html = etree.HTML(page["page_source"])
         hrefs = html.xpath("//div[@class='card-body text-center']/a[1]/@href")
         for href in hrefs:
-            post_url = "http://" + url + href
+            post_url = url + href
             get_post(scrapy, site, post_url)
 
     except Exception as e:

@@ -19,7 +19,6 @@ def main(scrapy,page,site):
         for div in divs_name:
             tmp = div.find('a',{"class":"h5"})
             title = tmp.text 
-            print('Title : ' + title)
             post = tmp.get('href')
             url =  url + post
             description = div.find("p").text.strip()

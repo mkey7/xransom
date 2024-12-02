@@ -43,7 +43,7 @@ def main(scrapy, page, site):
         hrefs = html.xpath("//a[@class='leak-card p-3']/@href")
         publisheds = html.xpath("//a[@class='leak-card p-3']//div[@class='col-auto published']")
         for href in range(0, len(hrefs)):
-            post_url = "http://" + url + hrefs[href]
+            post_url = url + hrefs[href]
             published = publisheds[href]
 
             get_post(scrapy, site, post_url, published)

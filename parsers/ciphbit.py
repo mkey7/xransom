@@ -25,7 +25,6 @@ def convert_date_format(date):
 
 def main(scrapy,page,site):
     url = page["domain"]
-    post_url = "http://"+url
     try:
         soup=BeautifulSoup(page["page_source"],'html.parser')
         row = soup.find('div', class_="row")
@@ -42,9 +41,8 @@ def main(scrapy,page,site):
             except:
                 published = ''
 
-            
-            down = "http://"+url + h5[1].find('a')['id']
+            down = url + h5[1].find('a')['id']
 
-            scrapy.appender(title, 'ciphbit', description,website,published,post_url,download=down,page=page)
+            scrapy.appender(title, 'ciphbit', description,website,published,url,download=down,page=page)
     except:
         print('ciphbit: ' + 'parsing fail: '+url)

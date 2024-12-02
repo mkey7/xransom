@@ -77,7 +77,7 @@ def main(scrapy,page,site):
                 encryption = item['encrypted_data']
                 published = item['updated_at']
                 description = "Country : " +  country + " - Exfiltraded data : " + convert_text(exfiltration) +  " - Encrypted data : " + convert_text(encryption)
-                post_url = "https://hunters55rdxciehoqzwv7vgyv6nt37tbwax2reroyzxhou7my5ejyid.onion/companies/" + id 
+                post_url = url + "/companies/" + id 
                 try:
                     apage = scrapy.scrape(site,post_url)
                 except:

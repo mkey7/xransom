@@ -139,7 +139,7 @@ class webScrapy:
                 'platform': site['site_name'],
                 'uuid': sha1_value,
                 'crawl_time': current_time,
-                'domain': "http://" + site['domain'],
+                'domain': site['domain'],
                 'content_encode': encoding,
                 'lang': 'en_us',
                 'meta': meta_str,
