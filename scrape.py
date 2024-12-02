@@ -82,7 +82,7 @@ class webScrapy:
             self.browserInit()
 
         url = post_url if post_url else site["url"]
-        print("start scraping : " + site['label']['name'] + " : " + url)
+        print("start scraping : " + site['site_name'] + " : " + url)
 
         try:
             # NOTE 开始抓取网页
@@ -124,11 +124,10 @@ class webScrapy:
             sha1_value = self.calculate_sha1(e)
 
             current_datetime = datetime.now()
-            current_timestamp = current_datetime.timestamp()
+            current_time = current_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')
 
             # 获取截图
-            screenshots = self.get_screenshot(page, sha1_value,
-                                              site['label']['name'])
+            screenshots = self.get_screenshot(page, sha1_value, site['site_name'])
 
             # NOTE 通过get_soup 函数，解析爬到的网页提取有关内容
             text, meta_str, encoding = self.get_soup(page)
@@ -137,34 +136,33 @@ class webScrapy:
             hash1 = simhash.Simhash(text.split()).value
 
             apage = {
-                'platform': site['label']['name'],
+                'platform': site['site_name'],
                 'uuid': sha1_value,
-                'crawl_time': str(current_timestamp),
-                'domain': site['domain'],
+                'crawl_time': current_time,
+                'domain': "http://" + site['domain'],
                 'content_encode': encoding,
-                'lang': 'english',
+                'lang': 'en_us',
                 'meta': meta_str,
                 'net_type': 'tor',
                 'page_source': page.content(),
                 'title': page.title(),
                 'url': url,
-                'images': [],
-                'publish_time': str(current_timestamp),
-                'subject': '[勒索]',
+                'publish_time': current_time,
+                'subject': ["勒索软件"],
                 'content': text,
                 'simhash_values': hash1,
                 'label': {
-                    'type': '勒索',
-                    'group_name': site["label"]["name"]
+                    'type': '勒索软件',
                 },
-                'threaten_level': '中危',
                 'snapshot': screenshots,
                 'snapshot_name': screenshots[0]["name"],
                 'snapshot_oss_path': screenshots[0]["path"],
                 'snapshot_hash': screenshots[0]["image_id"],
-                'warn_topics': "[]",
-                'extract_entity': "[]",
-                'url_and_address': "[]",
+                'warn_topics': [],
+                'extract_entity': [],
+                'url_and_address': [],
+                'images_obs': {},
+                'field_name': [],
             }
 
             page.close()
@@ -197,15 +195,15 @@ class webScrapy:
         爬取指定组织的网站并调用解析模块实行解析
         """
         for site in self.sites:
-            if site["label"]["name"] != group_name:
+            if site["site_name"] != group_name:
                 continue
 
             page = self.scrape(site)
 
             if not page:
                 # 更新site
-                site["last_status"] = False
-                site["is_recent_online"] = False
+                site["last_status"] = "offline"
+                site["is_recent_online"] = "offline"
                 self.writejson("sites.json", self.sites)
                 continue
 
@@ -213,26 +211,19 @@ class webScrapy:
             self.parser(group_name, page, site)
 
             # 更新site
-            # 转换为 datetime 对象
-            dt_object = datetime.utcfromtimestamp(float(page["publish_time"]))
-            last_publish_time = dt_object.strftime('%Y-%m-%d %H:%M:%S.%f')
 
-            site["last_publish_time"] = last_publish_time
-            site["update_at"] = last_publish_time
+            site["last_publish_time"] = page["publish_time"]
 
             if site["first_publish_time"] == "":
-                site["first_publish_time"] = site["last_publish_time"]
-            if site["created_at"] == "":
-                site["created_at"] = site["last_publish_time"]
+                site["first_publish_time"] = page["publish_time"]
 
-            site["last_status"] = True
-            site["is_recent_online"] = True
+            site["last_status"] = "online"
+            site["is_recent_online"] = "online"
 
             site["snapshot"] = page["snapshot"]
             site["name"] = page["snapshot"][0]["name"]
             site["image_hash"] = page["snapshot"][0]["image_id"]
             site["path"] = page["snapshot"][0]["path"]
-
 
             self.writejson("sites.json", self.sites)
             self.mq.mqSend(site, 'site')
