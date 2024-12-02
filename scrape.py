@@ -148,21 +148,19 @@ class webScrapy:
                 'title': page.title(),
                 'url': url,
                 'publish_time': current_time,
-                'subject': ["勒索软件"],
+                'subject': "['勒索软件']",
                 'content': text,
                 'simhash_values': hash1,
-                'label': {
-                    'type': '勒索软件',
-                },
-                'snapshot': screenshots,
+                'label': "{'type': '勒索软件'}",
+                'snapshot': str(screenshots[0]),
                 'snapshot_name': screenshots[0]["name"],
                 'snapshot_oss_path': screenshots[0]["path"],
                 'snapshot_hash': screenshots[0]["image_id"],
-                'warn_topics': [],
-                'extract_entity': [],
-                'url_and_address': [],
-                'images_obs': {},
-                'field_name': [],
+                'warn_topics': "[]",
+                'extract_entity': "[]",
+                'url_and_address': "[]",
+                'images_obs': "{}",
+                'field_name': "[]",
             }
 
             page.close()
@@ -207,11 +205,7 @@ class webScrapy:
                 self.writejson("sites.json", self.sites)
                 continue
 
-            # 调用解析模块
-            self.parser(group_name, page, site)
-
             # 更新site
-
             site["last_publish_time"] = page["publish_time"]
 
             if site["first_publish_time"] == "":
@@ -221,12 +215,13 @@ class webScrapy:
             site["is_recent_online"] = "online"
 
             site["snapshot"] = page["snapshot"]
-            site["name"] = page["snapshot"][0]["name"]
-            site["image_hash"] = page["snapshot"][0]["image_id"]
-            site["path"] = page["snapshot"][0]["path"]
+            site["name"] = page["snapshot_name"]
+            site["image_hash"] = page["snapshot_hash"]
+            site["path"] = page["snapshot_oss_path"]
 
             self.writejson("sites.json", self.sites)
             self.mq.mqSend(site, 'site')
+            print(f"send site {site}")
 
             # 更新user
             for user in self.users:
@@ -237,6 +232,9 @@ class webScrapy:
                         user["register_time"] = page["publish_time"]
             self.writejson("users.json", self.users)
             self.mq.mqSend(user, 'user')
+
+            # 调用解析模块
+            self.parser(group_name, page, site)
 
     def parser(self, group_name, page, site):
         """

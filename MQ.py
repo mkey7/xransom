@@ -34,7 +34,7 @@ class mqClient:
                 # 创建队列，durable=True 表示队列将在 broker 重启后依然存在
                 self.channel.exchange_declare(exchange="scrapy", exchange_type="direct", durable=True)
                 self.channel.queue_declare(queue=routing_key, durable=True)
-                self.channel.queue_bind(exchange="scrapy",queue=routing_key, routing_key=routing_key)
+                self.channel.queue_bind(exchange="scrapy", queue=routing_key, routing_key=routing_key)
 
             # 发布消息到队列
             self.channel.basic_publish(exchange='scrapy',
