@@ -221,7 +221,6 @@ class webScrapy:
 
             self.writejson("sites.json", self.sites)
             self.mq.mqSend(site, 'site')
-            print(f"send site {site}")
 
             # 更新user
             for user in self.users:
