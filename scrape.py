@@ -290,7 +290,7 @@ class webScrapy:
                 "industry": industry,
             },
             "extract_entity": [],
-            "threaten_level": "中危",
+            "threaten_level": "低危",
             # 'snapshot': page["snapshot"],
         }
 
