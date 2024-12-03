@@ -262,7 +262,7 @@ class webScrapy:
         e = group_name + post_title
         uuid = self.calculate_sha1(e)
         user_id = self.calculate_sha1(group_name)
-        country = getCountry.main(content, website, post_title, country)
+        country = getCountry.main(page["content"], website, post_title, country)
 
         post = {
             "platform": group_name,
