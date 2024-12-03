@@ -148,19 +148,19 @@ class webScrapy:
                 'title': page.title(),
                 'url': url,
                 'publish_time': current_time,
-                'subject': "['勒索软件']",
+                'subject': str(['勒索软件']),
                 'content': text,
                 'simhash_values': hash1,
-                'label': "{'type': '勒索软件'}",
+                'label': str({'type': '勒索软件'}),
                 'snapshot': str(screenshots[0]),
                 'snapshot_name': screenshots[0]["name"],
                 'snapshot_oss_path': screenshots[0]["path"],
                 'snapshot_hash': screenshots[0]["image_id"],
-                'warn_topics': "[]",
-                'extract_entity': "[]",
-                'url_and_address': "[]",
-                'images_obs': "{}",
-                'field_name': "[]",
+                'warn_topics': str([]),
+                'extract_entity': str([]),
+                'url_and_address': str([]),
+                'images_obs': str({}),
+                'field_name': str([]),
             }
 
             page.close()
@@ -411,12 +411,15 @@ class webScrapy:
 
         # meta
         metas = soup.find_all('meta')
-        meta_str = ""
+        meta_info = {}
         for meta in metas:
-            meta_str += str(meta) + '\n'
+            for key, value in meta.attrs.items():
+                meta_info[key] = value
+
+        meta_str = str(meta_info)
 
         # 查找带有charset的meta标签
-        encoding = ""
+        encoding = "utf-8"
         meta_charset = soup.find('meta', charset=True)
         if meta_charset:
             encoding = meta_charset['charset']
