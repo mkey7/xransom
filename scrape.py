@@ -221,11 +221,17 @@ class webScrapy:
                 site["path"] = page["snapshot_oss_path"]
 
             else:
-                apage = self.scrape(site, site["domain"])
-                site["snapshot"] = apage["snapshot"]
-                site["name"] = apage["snapshot_name"]
-                site["image_hash"] = apage["snapshot_hash"]
-                site["path"] = apage["snapshot_oss_path"]
+                try:
+                    apage = self.scrape(site, site["domain"])
+                    site["snapshot"] = apage["snapshot"]
+                    site["name"] = apage["snapshot_name"]
+                    site["image_hash"] = apage["snapshot_hash"]
+                    site["path"] = apage["snapshot_oss_path"]
+                except Exception as e:
+                    site["snapshot"] = page["snapshot"]
+                    site["name"] = page["snapshot_name"]
+                    site["image_hash"] = page["snapshot_hash"]
+                    site["path"] = page["snapshot_oss_path"]
 
             self.writejson("sites.json", self.sites)
             self.mq.mqSend(site, 'site')
