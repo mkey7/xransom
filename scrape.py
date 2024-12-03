@@ -214,10 +214,18 @@ class webScrapy:
             site["last_status"] = "online"
             site["is_recent_online"] = "online"
 
-            site["snapshot"] = page["snapshot"]
-            site["name"] = page["snapshot_name"]
-            site["image_hash"] = page["snapshot_hash"]
-            site["path"] = page["snapshot_oss_path"]
+            if site["url"] == site["domain"] or site["url"][:-1] == site["domain"] or site["url"] == site["domain"][:-1]:
+                site["snapshot"] = page["snapshot"]
+                site["name"] = page["snapshot_name"]
+                site["image_hash"] = page["snapshot_hash"]
+                site["path"] = page["snapshot_oss_path"]
+
+            else:
+                apage = self.scrape(site, site["domain"])
+                site["snapshot"] = apage["snapshot"]
+                site["name"] = apage["snapshot_name"]
+                site["image_hash"] = apage["snapshot_hash"]
+                site["path"] = apage["snapshot_oss_path"]
 
             self.writejson("sites.json", self.sites)
             self.mq.mqSend(site, 'site')
