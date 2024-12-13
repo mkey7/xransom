@@ -24,7 +24,8 @@ def get_description(scrapy, site, url):
     div_description = paragraphs[0]
     lines = div_description.get_text(separator='\n').split('\n')
     website = lines[0].strip()
-    description = ' '.join(line.strip() for line in lines[1:]).strip()
+    description = lines[0].strip()+" "+lines[1].strip()
+
 
     div_published = soup.find('span', class_='entry-date')
     published_time = div_published.find('time', class_='published')
@@ -34,10 +35,13 @@ def get_description(scrapy, site, url):
     email = 'AlexanderPushkin@exploit.im'
 
     download = []
-    mark_tags = soup.find_all('mark', style="background-color:rgba(0, 0, 0, 0)", class_="has-inline-color has-vivid-red-color")
+    mark_tags = soup.find_all('mark')
     for mark_tag in mark_tags:
         text = mark_tag.get_text(strip=True)
-        if text.startswith("http"):
+        http_index = text.find('http')
+        # 如果找到了 'http'，返回包括 'http' 在内及其后的所有字符串
+        if http_index != -1:
+            text = text[http_index:]
             download.append(text)
     scrapy.appender(title, 'arcusmedia', description, website, published, url, email, download, page=page)
 
@@ -49,7 +53,7 @@ def main(scrapy, page, site):
         soup = BeautifulSoup(page["page_source"], 'html.parser')
         divs_name = soup.select('div.card-wrapper.w-full')
         for div in divs_name:
-            link = soup.find('a', class_='kenta-button kenta-button-right entry-read-more')
+            link = div.find('a', class_='kenta-button kenta-button-right entry-read-more')
             post = link['href']
             print(post)
 
