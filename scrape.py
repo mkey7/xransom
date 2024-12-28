@@ -150,7 +150,7 @@ class webScrapy:
                 'publish_time': current_time,
                 'subject': str(['勒索软件']),
                 'content': text,
-                'simhash_values': hash1,
+                'simhash_values': str(hash1),
                 'label': str({'type': '勒索软件'}),
                 'snapshot': str(screenshots[0]),
                 'snapshot_name': screenshots[0]["name"],
