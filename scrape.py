@@ -14,7 +14,7 @@ import os
 from dotenv import load_dotenv
 import getCountry
 import re
-
+from site2user import s2user
 
 class webScrapy:
     """
@@ -53,7 +53,7 @@ class webScrapy:
         self.sites = self.openjson('sites.json')
         self.posts = self.openjson('posts.json')
         self.pages = self.openjson('pages.json')
-        self.users = self.openjson('users.json')
+        # self.users = self.openjson('users.json')
         self.cont = 0
 
     def browserInit(self):
@@ -124,7 +124,7 @@ class webScrapy:
             sha1_value = self.calculate_sha1(e)
 
             current_datetime = datetime.now()
-            current_time = current_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')
+            current_time = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
 
             # 获取截图
             screenshots = self.get_screenshot(page, sha1_value, site['site_name'])
@@ -237,13 +237,16 @@ class webScrapy:
             self.mq.mqSend(site, 'site')
 
             # 更新user
-            for user in self.users:
-                if user["platform"] == group_name:
-                    user["last_active_time"] = page["publish_time"]
-                    user["crawl_time"] = page["publish_time"]
-                    if user["register_time"] == "":
-                        user["register_time"] = page["publish_time"]
-            self.writejson("users.json", self.users)
+            # for user in self.users:
+            #     if user["platform"] == group_name:
+            #         user["last_active_time"] = page["publish_time"]
+            #         user["crawl_time"] = page["publish_time"]
+            #         if user["register_time"] == "":
+            #             user["register_time"] = page["publish_time"]
+            # self.writejson("users.json", self.users)
+
+            user = s2user(site)
+
             self.mq.mqSend(user, 'user')
 
             # 调用解析模块
