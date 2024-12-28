@@ -73,10 +73,10 @@ for i in data:
             "site_name": i["name"],
             "index_url": l["slug"],
             "description": str(i["profile"]),
-            "uuid": calculate_sha1(l["fqdn"]+i["name"]),
+            # "uuid": calculate_sha1(l["fqdn"]+i["name"]),
             "net_type": "tor",
             "lang": "en_us",
-            "snapshot": str({}),
+            # "snapshot": str({}),
             "name": "",
             "path": "",
             "image_hash": "",
@@ -99,8 +99,8 @@ for i in data:
 
 with open("sites.json", "w", encoding='utf-8') as jsonfile:
     json.dump(sites, jsonfile, indent=4, ensure_ascii=False)
-with open("users.json", "w", encoding='utf-8') as jsonfile:
-    json.dump(users, jsonfile, indent=4, ensure_ascii=False)
+# with open("users.json", "w", encoding='utf-8') as jsonfile:
+#     json.dump(users, jsonfile, indent=4, ensure_ascii=False)
 
 if not os.path.exists("pages.json"):
     pages = []
