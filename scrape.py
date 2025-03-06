@@ -165,8 +165,9 @@ class webScrapy:
             page.close()
             context.close()
 
-            self.existingpage(apage)
+            # self.existingpage(apage)
             self.mq.mqSend(apage, 'page')
+            
             return apage
 
         except Exception as e:
@@ -309,7 +310,7 @@ class webScrapy:
             # 'snapshot': page["snapshot"],
         }
 
-        self.existingpost(post)
+        # self.existingpost(post)
         self.mq.mqSend(post, 'ransom')
 
     def existingpost(self, post):
@@ -331,6 +332,10 @@ class webScrapy:
         check if a page already exists in pages.json
         '''
         for p in self.pages:
+            print(f'p:')
+            print(p['uuid'])
+            print(f'page:')
+            print(page["uuid"])
             if p['uuid'] == page["uuid"]:
                 print('page already exists: ' + page["title"])
                 p = page
