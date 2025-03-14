@@ -14,7 +14,7 @@ import os
 from dotenv import load_dotenv
 import getCountry
 import re
-
+from site2user import s2user
 
 class webScrapy:
     """
@@ -53,7 +53,7 @@ class webScrapy:
         self.sites = self.openjson('sites.json')
         self.posts = self.openjson('posts.json')
         self.pages = self.openjson('pages.json')
-        self.users = self.openjson('users.json')
+        # self.users = self.openjson('users.json')
         self.cont = 0
 
     def browserInit(self):
@@ -124,7 +124,7 @@ class webScrapy:
             sha1_value = self.calculate_sha1(e)
 
             current_datetime = datetime.now()
-            current_time = current_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')
+            current_time = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
 
             # 获取截图
             screenshots = self.get_screenshot(page, sha1_value, site['site_name'])
@@ -137,7 +137,7 @@ class webScrapy:
 
             apage = {
                 'platform': site['site_name'],
-                'uuid': sha1_value,
+                # 'uuid': sha1_value,
                 'crawl_time': current_time,
                 'domain': site['domain'],
                 'content_encode': encoding,
@@ -150,9 +150,8 @@ class webScrapy:
                 'publish_time': current_time,
                 'subject': str(['勒索软件']),
                 'content': text,
-                'simhash_values': hash1,
                 'label': str({'type': '勒索软件'}),
-                'snapshot': str(screenshots[0]),
+                # 'snapshot': str(screenshots[0]),
                 'snapshot_name': screenshots[0]["name"],
                 'snapshot_oss_path': screenshots[0]["path"],
                 'snapshot_hash': screenshots[0]["image_id"],
@@ -166,8 +165,9 @@ class webScrapy:
             page.close()
             context.close()
 
-            self.existingpage(apage)
+            # self.existingpage(apage)
             self.mq.mqSend(apage, 'page')
+            
             return apage
 
         except Exception as e:
@@ -215,7 +215,7 @@ class webScrapy:
             site["is_recent_online"] = "online"
 
             if site["url"] == site["domain"] or site["url"][:-1] == site["domain"] or site["url"] == site["domain"][:-1]:
-                site["snapshot"] = page["snapshot"]
+                # site["snapshot"] = page["snapshot"]
                 site["name"] = page["snapshot_name"]
                 site["image_hash"] = page["snapshot_hash"]
                 site["path"] = page["snapshot_oss_path"]
@@ -223,12 +223,12 @@ class webScrapy:
             else:
                 try:
                     apage = self.scrape(site, site["domain"])
-                    site["snapshot"] = apage["snapshot"]
+                    # site["snapshot"] = apage["snapshot"]
                     site["name"] = apage["snapshot_name"]
                     site["image_hash"] = apage["snapshot_hash"]
                     site["path"] = apage["snapshot_oss_path"]
                 except Exception as e:
-                    site["snapshot"] = page["snapshot"]
+                    # site["snapshot"] = page["snapshot"]
                     site["name"] = page["snapshot_name"]
                     site["image_hash"] = page["snapshot_hash"]
                     site["path"] = page["snapshot_oss_path"]
@@ -237,13 +237,16 @@ class webScrapy:
             self.mq.mqSend(site, 'site')
 
             # 更新user
-            for user in self.users:
-                if user["platform"] == group_name:
-                    user["last_active_time"] = page["publish_time"]
-                    user["crawl_time"] = page["publish_time"]
-                    if user["register_time"] == "":
-                        user["register_time"] = page["publish_time"]
-            self.writejson("users.json", self.users)
+            # for user in self.users:
+            #     if user["platform"] == group_name:
+            #         user["last_active_time"] = page["publish_time"]
+            #         user["crawl_time"] = page["publish_time"]
+            #         if user["register_time"] == "":
+            #             user["register_time"] = page["publish_time"]
+            # self.writejson("users.json", self.users)
+
+            user = s2user(site)
+
             self.mq.mqSend(user, 'user')
 
             # 调用解析模块
@@ -298,7 +301,7 @@ class webScrapy:
             "label": {
                 "country": country,
                 "victim": website,
-                "pageid": page["uuid"] if page else None,
+                # "pageid": page["uuid"] if page else None,
                 "price": price,
                 "industry": industry,
             },
@@ -307,7 +310,7 @@ class webScrapy:
             # 'snapshot': page["snapshot"],
         }
 
-        self.existingpost(post)
+        # self.existingpost(post)
         self.mq.mqSend(post, 'ransom')
 
     def existingpost(self, post):
@@ -329,6 +332,10 @@ class webScrapy:
         check if a page already exists in pages.json
         '''
         for p in self.pages:
+            print(f'p:')
+            print(p['uuid'])
+            print(f'page:')
+            print(page["uuid"])
             if p['uuid'] == page["uuid"]:
                 print('page already exists: ' + page["title"])
                 p = page

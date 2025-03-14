@@ -11,6 +11,7 @@ class mqClient:
         self.mq_ip = os.getenv('MQ_IP')
         self.mq_port = int(os.getenv('MQ_PORT'))
         self.mq_username = os.getenv('MQ_USERNAME')
+        self.mq_virtualhost = os.getenv('MQ_VIRTUALHOST')
         self.mq_password = os.getenv('MQ_PASSWORD')
 
         self.mqinit()
@@ -20,7 +21,7 @@ class mqClient:
         创建mq连接
         """
         credentials = pika.PlainCredentials(self.mq_username, self.mq_password)
-        connection = pika.BlockingConnection(pika.ConnectionParameters(self.mq_ip, self.mq_port, '/', credentials))
+        connection = pika.BlockingConnection(pika.ConnectionParameters(self.mq_ip, self.mq_port, self.mq_virtualhost , credentials))
         self.channel = connection.channel()
 
     def mqSend(self, data, routing_key):
