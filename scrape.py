@@ -14,7 +14,7 @@ import os
 from dotenv import load_dotenv
 import getCountry
 import re
-from site2user import s2user
+import common 
 
 class webScrapy:
     """
@@ -136,7 +136,7 @@ class webScrapy:
             hash1 = simhash.Simhash(text.split()).value
 
             apage = {
-                'platform': site['site_name'],
+                'platform': site['platform'],
                 # 'uuid': sha1_value,
                 'crawl_time': current_time,
                 'domain': site['domain'],
@@ -202,50 +202,14 @@ class webScrapy:
                 # 更新site
                 site["last_status"] = "offline"
                 site["is_recent_online"] = "offline"
-                self.writejson("sites.json", self.sites)
+                # self.writejson("sites.json", self.sites)
                 continue
 
-            # 更新site
-            site["last_publish_time"] = page["publish_time"]
-
-            if site["first_publish_time"] == "":
-                site["first_publish_time"] = page["publish_time"]
-
-            site["last_status"] = "online"
-            site["is_recent_online"] = "online"
-
-            if site["url"] == site["domain"] or site["url"][:-1] == site["domain"] or site["url"] == site["domain"][:-1]:
-                # site["snapshot"] = page["snapshot"]
-                site["name"] = page["snapshot_name"]
-                site["image_hash"] = page["snapshot_hash"]
-                site["path"] = page["snapshot_oss_path"]
-
-            else:
-                try:
-                    apage = self.scrape(site, site["domain"])
-                    # site["snapshot"] = apage["snapshot"]
-                    site["name"] = apage["snapshot_name"]
-                    site["image_hash"] = apage["snapshot_hash"]
-                    site["path"] = apage["snapshot_oss_path"]
-                except Exception as e:
-                    # site["snapshot"] = page["snapshot"]
-                    site["name"] = page["snapshot_name"]
-                    site["image_hash"] = page["snapshot_hash"]
-                    site["path"] = page["snapshot_oss_path"]
-
-            self.writejson("sites.json", self.sites)
+            common.siteUpdate(site,page,self)
+            # self.writejson("sites.json", self.sites)
             self.mq.mqSend(site, 'site')
 
-            # 更新user
-            # for user in self.users:
-            #     if user["platform"] == group_name:
-            #         user["last_active_time"] = page["publish_time"]
-            #         user["crawl_time"] = page["publish_time"]
-            #         if user["register_time"] == "":
-            #             user["register_time"] = page["publish_time"]
-            # self.writejson("users.json", self.users)
-
-            user = s2user(site)
+            user = common.s2user(site)
 
             self.mq.mqSend(user, 'user')
 
@@ -277,7 +241,7 @@ class webScrapy:
         # uuid
         e = group_name + post_title
         uuid = self.calculate_sha1(e)
-        user_id = self.calculate_sha1(group_name)
+        user_id = self.calculate_sha1(page["platform"])
         country = getCountry.main(page["content"], website, post_title, country)
 
         post = {
