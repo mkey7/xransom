@@ -12,7 +12,7 @@ def s2user(site):
         "uuid": calculate_sha1(site["platform"]),
         "domain": site["domain"],
         "net_type": "tor",
-        "user_name": site["name"],
+        "user_name": site["platform"],
         "user_description": site["description"],
         "user_id": calculate_sha1(site["name"]),
         "url": site["url"],
